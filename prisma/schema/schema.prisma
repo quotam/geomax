@@ -1,0 +1,39 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LikeType {
+  LIKE
+  DISLIKE
+  UNSTATUS
+}
+
+enum UserRole {
+  DEFAULT
+  EXECUTIVE
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  cover         String?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+
+  about String?
+  role  UserRole @default(DEFAULT)
+  slug  String   @unique
+}

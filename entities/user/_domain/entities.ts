@@ -1,0 +1,26 @@
+class UserEntity {
+	fullUser = {
+		id: true,
+		createdAt: true,
+		updatedAt: true,
+
+		name: true,
+		email: true,
+		emailVerified: true,
+		cover: true,
+
+		image: true,
+		slug: true,
+		role: true
+	}
+
+	strictUser = {
+		id: true,
+		name: true,
+		image: true,
+		role: true,
+		slug: true
+	}
+}
+
+export const UserEntitys = new UserEntity()
