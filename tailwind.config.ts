@@ -62,6 +62,7 @@ const config: Config = {
 			heading: ['3.4rem', '3.6rem']
 		},
 		colors: {
+			transparent: 'transparent',
 			background: 'hsl(var(--background))',
 			foreground: 'hsl(var(--foreground))',
 			card: {
@@ -92,6 +93,7 @@ const config: Config = {
 				DEFAULT: 'hsl(var(--destructive))',
 				foreground: 'hsl(var(--destructive-foreground))'
 			},
+			black: 'hsl(0, 0%, 0%)',
 			border: 'hsl(var(--border))',
 			input: 'hsl(var(--input))',
 			ring: 'hsl(var(--ring))',
@@ -104,7 +106,9 @@ const config: Config = {
 			}
 		},
 		borderColor: {
-			DEFAULT: 'hsl(var(--border))'
+			DEFAULT: 'hsl(var(--border))',
+			foreground: 'hsl(var(--foreground))',
+			secondary: 'hsl(var(--secondary))'
 		},
 		borderRadius: {
 			lg: 'var(--radius)',

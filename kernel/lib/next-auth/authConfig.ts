@@ -57,19 +57,7 @@ export const authConfig: NextAuthOptions = {
 		GoogleProvider({
 			clientId: privateConfig.GOOGLE_CLIENT_ID,
 			clientSecret: privateConfig.GOOGLE_SECRET
-		}),
-		privateConfig.VK_CLIENT_ID &&
-			privateConfig.VK_CLIENT_SECRET &&
-			VkProvider({
-				clientId: privateConfig.VK_CLIENT_ID,
-				clientSecret: privateConfig.VK_CLIENT_SECRET
-			}),
-		privateConfig.OSU_CLIENT_ID &&
-			privateConfig.OSU_CLIENT_SECRET &&
-			OsuProvider({
-				clientId: privateConfig.OSU_CLIENT_ID,
-				clientSecret: privateConfig.OSU_CLIENT_SECRET
-			})
+		})
 	]),
 	pages: {
 		signIn: '/auth',

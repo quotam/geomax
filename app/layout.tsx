@@ -1,9 +1,10 @@
+import { getAppSessionServer } from '@front/kernel/lib/next-auth/getAppSessionServer'
 import type { Metadata, Viewport } from 'next'
 import { Nunito } from 'next/font/google'
-import './globals.css'
 import AppProvider from './_providers/appPrivider'
-import { getAppSessionServer } from '@front/kernel/lib/next-auth/getAppSessionServer'
-import { ThemeSwither } from '@front/kernel/lib/next-theme/themeSwither'
+import './globals.css'
+import Header from './_widgets/header'
+import Footer from './_widgets/footer'
 
 const nunito = Nunito({
 	subsets: ['cyrillic'],
@@ -33,10 +34,11 @@ export default async function RootLayout({
 		<html lang="ru">
 			<body className={nunito.className}>
 				<AppProvider session={session}>
-					{children}
-					<footer>
-						<ThemeSwither />
-					</footer>
+					<div className="min-h-screen flex flex-col">
+						<Header />
+						{children}
+						<Footer />
+					</div>
 				</AppProvider>
 			</body>
 		</html>
