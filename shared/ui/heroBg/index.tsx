@@ -1,7 +1,11 @@
 'use client'
+
 import React, { useEffect } from 'react'
 import './style.css'
 import { useInView } from 'react-intersection-observer'
+
+//NOTE : AI GENERATED module
+//
 
 const Hero = ({ className }: { className?: string }) => {
 	const { ref, inView } = useInView({

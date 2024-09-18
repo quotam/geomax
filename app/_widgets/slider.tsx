@@ -6,10 +6,8 @@ import {
 	CarouselNext,
 	CarouselPrevious
 } from '@front/shared/ui/carousel'
-import Hero from '@front/shared/ui/heroBg/hero'
+import Hero from '@front/shared/ui/heroBg'
 import Image from 'next/image'
-import Link from 'next/link'
-//import Autoplay from "embla-carousel-autoplay"
 
 const HeroSlider = () => {
 	return (

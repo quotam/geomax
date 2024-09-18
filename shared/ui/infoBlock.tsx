@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React, { ReactNode } from 'react'
 import { cn } from '../lib/utils'
+import AnchorLink from './anchorLink'
 
 const InfoBlock = ({
 	className,
@@ -43,9 +44,18 @@ const InfoBlock = ({
 					</React.Fragment>
 				))}
 			</dd>
-			<Link href={data.href} className="font-bold underline hover:no-underline">
-				{data.link}
-			</Link>
+			{data.href.includes('#') ? (
+				<AnchorLink
+					className="font-bold underline hover:no-underline"
+					href={data.href}
+				>
+					{data.link}
+				</AnchorLink>
+			) : (
+				<Link href={data.href} className="font-bold underline hover:no-underline">
+					{data.link}
+				</Link>
+			)}
 		</article>
 	)
 }

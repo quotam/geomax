@@ -29,7 +29,7 @@ export function SearchLayout() {
 				variant="ghost"
 				size="lg"
 				onClick={() => setOpen(true)}
-				className=" text-secondary-foreground/70 hover:bg-secondary hover:text-secondary-foreground cursor-pointer transition-colors flex items-center justify-between rounded-lg font-bold bg-secondary/60  w-52 py-2 text-left px-4"
+				className="border-[.1rem] border-foreground/10 text-secondary-foreground/70 hover:bg-secondary hover:text-secondary-foreground cursor-pointer transition-colors flex items-center justify-between rounded-lg font-bold bg-secondary/60  w-52 py-2 text-left px-4"
 			>
 				<span>Поиск..</span>
 				<span>Ctrl + /</span>

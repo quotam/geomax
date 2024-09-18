@@ -19,6 +19,36 @@ const components: { title: string; href: string; description: string }[] = [
 		href: '/docs/primitives/alert-dialog',
 		description:
 			'A modal dialog that interrupts the user with important content and expects a response.'
+	},
+	{
+		title: 'Alert Dialog',
+		href: '/docs/primitives/alert-dialog',
+		description:
+			'A modal dialog that interrupts the user with important content and expects a response.'
+	},
+	{
+		title: 'Alert Dialog',
+		href: '/docs/primitives/alert-dialog',
+		description:
+			'A modal dialog that interrupts the user with important content and expects a response.'
+	},
+	{
+		title: 'Alert Dialog',
+		href: '/docs/primitives/alert-dialog',
+		description:
+			'A modal dialog that interrupts the user with important content and expects a response.'
+	},
+	{
+		title: 'Alert Dialog',
+		href: '/docs/primitives/alert-dialog',
+		description:
+			'A modal dialog that interrupts the user with important content and expects a response.'
+	},
+	{
+		title: 'Alert Dialog',
+		href: '/docs/primitives/alert-dialog',
+		description:
+			'A modal dialog that interrupts the user with important content and expects a response.'
 	}
 ]
 
@@ -30,14 +60,14 @@ const Header = () => {
 					<LogoIcon />
 					<h1 className="text-2xl font-medium uppercase">Геомакс</h1>
 				</Link>
-				<NavigationMenu className="bg-secondary/70 p-1 rounded-lg">
+				<NavigationMenu className="bg-secondary/70 p-1 border-[.1rem] border-foreground/10 rounded-lg">
 					<NavigationMenuList>
 						<NavigationMenuItem>
 							<NavigationMenuTrigger className="bg-secondary text-secondary-foreground">
 								О компании
 							</NavigationMenuTrigger>
 							<NavigationMenuContent>
-								<ul className="flex gap-3 p-6 justify-between w-[60rem]">
+								<ul className="flex gap-3 p-6 justify-between w-[64rem]">
 									<li className="w-[60rem]">
 										<NavigationMenuLink asChild>
 											<a
@@ -70,7 +100,7 @@ const Header = () => {
 						<NavigationMenuItem>
 							<NavigationMenuTrigger>Каталог</NavigationMenuTrigger>
 							<NavigationMenuContent>
-								<ul className="w-[60rem] box-content p-6 flex flex-wrap gap-3 justify-between items-start">
+								<ul className="w-[64rem] p-6 flex flex-wrap gap-3 justify-between items-start">
 									{components.map(component => (
 										<ListItem
 											key={component.title}
