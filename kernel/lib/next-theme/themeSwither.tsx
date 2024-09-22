@@ -20,7 +20,6 @@ export function ThemeSwither() {
 					variant="ghost"
 					aria-label="Change theme"
 					aria-labelledby="Change theme"
-					className="border"
 					size="icon"
 				>
 					<SunIcon className="h-4 w-4 rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />

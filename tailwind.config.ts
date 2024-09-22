@@ -108,12 +108,16 @@ const config: Config = {
 		borderColor: {
 			DEFAULT: 'hsl(var(--border))',
 			foreground: 'hsl(var(--foreground))',
+			primary: 'hsl(var(--primary))',
 			secondary: 'hsl(var(--secondary))'
 		},
 		borderRadius: {
+			0: '0',
+			full: '100%',
+			xl: 'calc(var(--radius) + 0.4rem)',
 			lg: 'var(--radius)',
-			md: 'calc(var(--radius) - 2px)',
-			sm: 'calc(var(--radius) - 4px)'
+			md: 'calc(var(--radius) - 0.2rem)',
+			sm: 'calc(var(--radius) - 0.4rem)'
 		},
 		extend: {
 			spacing: Object.fromEntries(

@@ -8,6 +8,7 @@ import {
 } from '@front/shared/ui/carousel'
 import Hero from '@front/shared/ui/heroBg'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const HeroSlider = () => {
 	return (
@@ -28,7 +29,12 @@ const HeroSlider = () => {
 							key={index}
 						>
 							<div className="p-1 flex flex-col items-center">
-								<Button>Заявка на консультацию</Button>
+								<Link
+									className="bg-primary text-primary-foreground shadow hover:bg-primary/90 py-2 rounded-sm px-8 font-medium"
+									href="/?modal"
+								>
+									Задать вопрос
+								</Link>
 								<br />
 								<br />
 								<h2 className="text-[4.8rem] text-center">

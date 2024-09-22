@@ -27,6 +27,18 @@ const components: { title: string; href: string; description: string }[] = [
 			'A modal dialog that interrupts the user with important content and expects a response.'
 	},
 	{
+		title: 'Alesdrt Dialog',
+		href: '/docs/primitives/alert-dialog',
+		description:
+			'A modal dialog that interrupts the user with important content and expects a response.'
+	},
+	{
+		title: 'Alert Dialog',
+		href: '/docs/primitives/alert-dialog',
+		description:
+			'A modal dialog that interrupts the user with important content and expects a response.'
+	},
+	{
 		title: 'Alert Dialog',
 		href: '/docs/primitives/alert-dialog',
 		description:
@@ -54,7 +66,7 @@ const components: { title: string; href: string; description: string }[] = [
 
 const Header = () => {
 	return (
-		<header className="sticky top-0 z-50 w-full  p-1 backdrop-blur supports-[backdrop-filter]:bg-transparent">
+		<header className="sticky top-0 z-50 w-full pt-1 backdrop-blur supports-[backdrop-filter]:bg-transparent">
 			<div className="container flex justify-between items-center text-secondary-foreground">
 				<Link href="/" className="text-primary flex items-center gap-3">
 					<LogoIcon />
@@ -75,7 +87,7 @@ const Header = () => {
 												href="/"
 											>
 												<LogoIcon className="text-primary" />
-												<div className="mb-2 mt-4 text-lg font-medium">Geomax</div>
+												<div className="mb-2 mt-4 text-lg font-medium">Геомакс</div>
 												<p className="text-sm leading-tight text-muted-foreground">
 													Сельское хозяйство нового поколения.
 												</p>
@@ -90,7 +102,7 @@ const Header = () => {
 											В этом разделе примеры наших успешных проектов, иллюстрирующие
 											профессионализм и индивидуальный подход.
 										</ListItem>
-										<ListItem href="/docs/primitives/typography" title="Реквизиты">
+										<ListItem href="/legal" title="Реквизиты">
 											Юридическая информация.
 										</ListItem>
 									</div>
@@ -98,7 +110,11 @@ const Header = () => {
 							</NavigationMenuContent>
 						</NavigationMenuItem>
 						<NavigationMenuItem>
-							<NavigationMenuTrigger>Каталог</NavigationMenuTrigger>
+							<NavigationMenuTrigger>
+								<Link href="/catalog" legacyBehavior passHref>
+									Каталог
+								</Link>
+							</NavigationMenuTrigger>
 							<NavigationMenuContent>
 								<ul className="w-[64rem] p-6 flex flex-wrap gap-3 justify-between items-start">
 									{components.map(component => (
@@ -115,7 +131,7 @@ const Header = () => {
 							</NavigationMenuContent>
 						</NavigationMenuItem>
 						<NavigationMenuItem>
-							<Link href="/docs" legacyBehavior passHref>
+							<Link href="/calc" legacyBehavior passHref>
 								<NavigationMenuLink className={navigationMenuTriggerStyle()}>
 									Калькулятор экономии
 								</NavigationMenuLink>
@@ -136,7 +152,7 @@ const Header = () => {
 							</Link>
 						</NavigationMenuItem>
 						<NavigationMenuItem>
-							<Link href="/docs" legacyBehavior passHref>
+							<Link href="/contacts" legacyBehavior passHref>
 								<NavigationMenuLink className={navigationMenuTriggerStyle()}>
 									Контакты
 								</NavigationMenuLink>
