@@ -39,7 +39,7 @@ const sheetVariants = cva(
 				bottom:
 					'inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
 				left:
-					'inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm',
+					'inset-y-0 left-0 h-full w-2/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:w-2/3',
 				right:
 					'inset-y-0 right-0 h-full w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm'
 			}
@@ -71,11 +71,13 @@ const SheetContent = React.forwardRef<
 		>
 			<SheetPrimitive.Close
 				className={cn(
-					'absolute right-4 top-4 rounded-sm text-background opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary',
+					'absolute right-4 top-4 rounded-sm  text-foreground opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary',
 					side === 'top' && '-bottom-14 h-10 w-10 top-auto'
 				)}
 			>
-				<Cross2Icon className={cn('h-5 w-5', side === 'top' && 'h-10 w-10')} />
+				<Cross2Icon
+					className={cn('h-5 w-5', side === 'top' && 'h-10 text-background w-10')}
+				/>
 
 				<span className="sr-only">Close</span>
 			</SheetPrimitive.Close>

@@ -75,6 +75,7 @@
 
 @layer base {
 	html {
+		scrollbar-gutter: stable;
 		font-size: calc(100vw / 1920 * 10);
 		@media (max-width: 1366px) {
 			font-size: calc(100vw / 1366 * 10);

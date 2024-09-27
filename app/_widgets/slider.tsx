@@ -19,16 +19,16 @@ const HeroSlider = () => {
 				//     delay: 2000,
 				//   }),
 				// ]}
-				className="w-full h-[90rem]"
+				className="w-full"
 			>
-				<Hero className="w-full text-background/10 h-3/4 absolute left-0 bottom-5" />
+				<Hero className="w-full object-cover aspect-video text-background/10 h-3/4 md:h-1/2  absolute left-0 bottom-5" />
 				<CarouselContent>
 					{Array.from({ length: 5 }).map((_, index) => (
 						<CarouselItem
-							className="flex z-20 items-end justify-center w-full p-3 h-[90rem]"
+							className="flex z-20 items-center justify-center w-full  mt-40"
 							key={index}
 						>
-							<div className="p-1 flex flex-col items-center">
+							<div className="flex flex-col items-center">
 								<Link
 									className="bg-primary text-primary-foreground shadow hover:bg-primary/90 py-2 rounded-sm px-8 font-medium"
 									href="/?modal"
@@ -37,7 +37,7 @@ const HeroSlider = () => {
 								</Link>
 								<br />
 								<br />
-								<h2 className="text-[4.8rem] text-center">
+								<h2 className="text-[4.8rem] leading-[4.8rem] text-center">
 									Чем мы можем <span className="text-primary">помочь?</span>
 								</h2>
 								<br />
@@ -48,7 +48,13 @@ const HeroSlider = () => {
 									для максимальной эффективности вашей сельскохозяйственной техники.
 								</p>
 								<br />
-								<Image src="/main.png" alt="geomax" width={690} height={490} />
+								<Image
+									src="/main.png"
+									alt="geomax"
+									className=" object-cover max-w-full"
+									width={690}
+									height={490}
+								/>
 							</div>
 						</CarouselItem>
 					))}

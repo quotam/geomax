@@ -5,8 +5,8 @@ import Link from 'next/link'
 const Footer = () => {
 	return (
 		<footer className="mt-auto p-1 bg-foreground text-background">
-			<div className="container flex justify-between items-center">
-				<ul className="flex gap-6 text-xs text-muted-foreground">
+			<div className="container md:flex-col md:gap-3 flex justify-between sm:items-start items-center">
+				<ul className="flex gap-6  md:mt-3 xs:flex-col xs:gap-3 text-xs text-muted-foreground">
 					<li>
 						<Link href="/privacy">Политика конфиденциальности </Link>
 					</li>
@@ -14,7 +14,7 @@ const Footer = () => {
 						<Link href="/terms">Пользовательское соглашение </Link>
 					</li>
 				</ul>
-				<div className="flex items-center gap-6">
+				<div className="flex xs:items-start xs:flex-col items-center sm:gap-3 gap-6 ">
 					<div className="flex items-center gap-4">
 						<Phone className="w-4 h-4 text-primary" />
 						<ul className="flex gap-4">

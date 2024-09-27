@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { Button } from '@front/shared/ui/button'
 import {
 	Card,
 	CardContent,
@@ -10,29 +10,30 @@ import {
 } from '@front/shared/ui/card'
 import { Input } from '@front/shared/ui/input'
 import { Label } from '@front/shared/ui/label'
-import { Button } from '@front/shared/ui/button'
 import { Slider } from '@front/shared/ui/slider'
-import { Calculator, Info } from 'lucide-react'
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger
 } from '@front/shared/ui/tooltip'
+import { Calculator, Info } from 'lucide-react'
+import { useState } from 'react'
+
+import CountUp from 'react-countup'
 
 const CalcPage = () => {
 	const [fieldSize, setFieldSize] = useState(100)
 	const [currentCoverage, setCurrentCoverage] = useState(80)
 	const [newCoverage, setNewCoverage] = useState(95)
 	const [costPerHectare, setCostPerHectare] = useState(5000)
-
 	const calculateSavings = () => {
 		const currentProcessedArea = fieldSize * (currentCoverage / 100)
 		const newProcessedArea = fieldSize * (newCoverage / 100)
 		const additionalProcessedArea = newProcessedArea - currentProcessedArea
-		const savings = additionalProcessedArea * costPerHectare
-		return savings.toFixed(2)
+		return additionalProcessedArea * costPerHectare
 	}
+
 	return (
 		<main className="container mx-auto px-4 py-20">
 			<h2 className="text-3xl font-bold mb-12 text-center">
@@ -121,7 +122,14 @@ const CalcPage = () => {
 					</Button>
 					<div className="text-center">
 						<p className="text-lg font-semibold">Потенциальная экономия:</p>
-						<p className="text-3xl font-bold text-primary">{calculateSavings()} ₽</p>
+						<p className="text-3xl font-bold text-primary">
+							<CountUp
+								start={calculateSavings() - calculateSavings() / 2}
+								end={calculateSavings()}
+								decimals={2}
+							/>{' '}
+							₽
+						</p>
 					</div>
 				</CardFooter>
 			</Card>

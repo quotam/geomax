@@ -9,10 +9,10 @@ import Link from 'next/link'
 
 const Faq = () => {
 	return (
-		<section className="py-45">
-			<div className="container flex gap-30">
-				<div className="flex w-2/5 flex-col gap-10 items-start">
-					<h4 className="font-bold text-[6.4rem] leading-[6.4rem]">
+		<section className="py-45 md:py-30">
+			<div className="container flex gap-30 md:gap-18 md:flex-col">
+				<div className="flex w-2/5 md:w-full flex-col gap-10 items-start">
+					<h4 className="font-bold text-[6.4rem] md:text-heading leading-[6.4rem]">
 						Часто задаваемые вопросы FAQ{' '}
 					</h4>
 					<span className="text-muted-foreground">
@@ -27,7 +27,7 @@ const Faq = () => {
 						Задать вопрос
 					</Link>
 				</div>
-				<Accordion type="multiple" className="w-3/5">
+				<Accordion type="multiple" className="w-3/5 md:w-full">
 					{Array.from({ length: 6 }).map((_, index) => (
 						<AccordionItem value={index.toString()} key={index}>
 							<AccordionTrigger>Is it accessible?</AccordionTrigger>

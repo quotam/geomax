@@ -83,7 +83,9 @@ const FaqPage = () => {
 								className="pl-10"
 							/>
 						</div>
-						<Button onClick={() => setSearchTerm('')}>Очистить</Button>
+						<Button variant="secondary" onClick={() => setSearchTerm('')}>
+							Очистить
+						</Button>
 					</div>
 				</CardContent>
 			</Card>

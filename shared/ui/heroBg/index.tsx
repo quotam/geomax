@@ -20,8 +20,6 @@ const Hero = ({ className }: { className?: string }) => {
 		<svg
 			id="hero"
 			ref={ref}
-			width="100%"
-			height="100%"
 			className={className}
 			viewBox="0 0 2293 1301"
 			fill="none"
