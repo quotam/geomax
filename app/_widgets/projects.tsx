@@ -66,12 +66,10 @@ const Projects = () => {
 				</h4>
 				<span className="text-center block text-muted-foreground mb-20">
 					Откройте для себя наши достижения и успешные решения. <br />
-					<Link
-						href="/projects"
-						className="underline hover:no-underline hover:text-background"
-					>
-						Архив проектов
-					</Link>
+					<Button variant="ghost" className="mt-4">
+						<Link href="/projects">Архив проектов</Link>
+						<ArrowRight className="ml-2 h-4 w-4" />
+					</Button>
 				</span>
 
 				<div className="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-3 gap-16">

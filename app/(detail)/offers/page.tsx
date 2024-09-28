@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { Badge } from '@front/shared/ui/badge'
 import { Button } from '@front/shared/ui/button'
 import {
 	Card,
@@ -9,8 +9,8 @@ import {
 	CardHeader,
 	CardTitle
 } from '@front/shared/ui/card'
-import { Badge } from '@front/shared/ui/badge'
 import Image from 'next/image'
+import { useState } from 'react'
 
 const seasonalOffers = [
 	{
@@ -59,54 +59,6 @@ const seasonalOffers = [
 
 const seasons = ['Все', 'Весна', 'Лето', 'Осень', 'Зима']
 
-function CountdownTimer({ endDate }: { endDate: string }) {
-	const [timeLeft, setTimeLeft] = useState<any>(calculateTimeLeft())
-
-	function calculateTimeLeft() {
-		const difference = +new Date(endDate) - +new Date()
-		let timeLeft = {}
-
-		if (difference > 0) {
-			timeLeft = {
-				days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-				hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-				minutes: Math.floor((difference / 1000 / 60) % 60),
-				seconds: Math.floor((difference / 1000) % 60)
-			}
-		}
-
-		return timeLeft
-	}
-
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			setTimeLeft(calculateTimeLeft())
-		}, 1000)
-
-		return () => clearTimeout(timer)
-	})
-
-	const timerComponents: JSX.Element[] = []
-
-	Object.keys(timeLeft).forEach(interval => {
-		if (!timeLeft[interval]) {
-			return
-		}
-
-		timerComponents.push(
-			<span key={interval}>
-				{timeLeft[interval]} {interval}{' '}
-			</span>
-		)
-	})
-
-	return (
-		<div>
-			{timerComponents.length ? timerComponents : <span>Время истекло!</span>}
-		</div>
-	)
-}
-
 export default function SeasonalOffers() {
 	const [selectedSeason, setSelectedSeason] = useState('Все')
 
@@ -116,10 +68,10 @@ export default function SeasonalOffers() {
 			: seasonalOffers.filter(offer => offer.season === selectedSeason)
 
 	return (
-		<div className="container mx-auto px-4 py-8">
-			<h1 className="text-3xl font-bold mb-8">Сезонные предложения</h1>
+		<main className="container px-4 py-20">
+			<h2 className="text-3xl font-bold mb-8 text-center">Сезонные предложения</h2>
 
-			<div className="flex flex-wrap gap-2 mb-6">
+			<div className="flex flex-wrap justify-center gap-2 mb-12">
 				{seasons.map(season => (
 					<Button
 						key={season}
@@ -155,10 +107,6 @@ export default function SeasonalOffers() {
 								<span className="font-bold">Код акции: </span>
 								{offer.code}
 							</div>
-							<div className="mt-4">
-								<span className="font-bold">До конца акции: </span>
-								<CountdownTimer endDate={offer.endDate} />
-							</div>
 						</CardContent>
 						<CardFooter className="mt-auto">
 							<Button className="w-full">Воспользоваться предложением</Button>
@@ -166,6 +114,6 @@ export default function SeasonalOffers() {
 					</Card>
 				))}
 			</div>
-		</div>
+		</main>
 	)
 }

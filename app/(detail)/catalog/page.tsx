@@ -268,137 +268,132 @@ export default function ProductCatalog() {
 	}
 
 	return (
-		<main className="px-4 py-20">
-			<div className="container mx-auto ">
-				<h2 className="text-3xl font-bold mb-12 text-center">Каталог товаров</h2>
-				<div className="flex sm:flex-col flex-row items-start gap-8">
-					<motion.aside
-						className={`min-w-80 sm:w-full border-[.1rem] bg-white p-6 rounded-lg shadow-md ${
-							isSidebarOpen ? 'block' : 'hidden'
-						}`}
-					>
-						<h3 className="text-xl font-bold mb-4">Фильтры</h3>
+		<main className="container px-4 py-20">
+			<h2 className="text-3xl font-bold mb-12 text-center">Каталог товаров</h2>
+			<div className="flex sm:flex-col flex-row items-start gap-8">
+				<motion.aside
+					className={`min-w-80 sm:w-full border-[.1rem] bg-white p-6 rounded-lg shadow-md ${
+						isSidebarOpen ? 'block' : 'hidden'
+					}`}
+				>
+					<h3 className="text-xl font-bold mb-4">Фильтры</h3>
 
-						<div className="mb-6">
-							<h3 className="font-bold mb-2">Категории</h3>
-							{categories.map(category => (
-								<div key={category.id} className="flex items-center space-x-2 mb-2">
-									<Checkbox
-										id={`category-${category.id}`}
-										checked={selectedCategories.includes(category.id)}
-										onCheckedChange={checked => {
-											if (checked) {
-												setSelectedCategories([...selectedCategories, category.id])
-											} else {
-												setSelectedCategories(
-													selectedCategories.filter(id => id !== category.id)
-												)
-											}
-										}}
-									/>
-									<Label htmlFor={`category-${category.id}`}>{category.name}</Label>
-								</div>
-							))}
-						</div>
-
-						<div className="mb-6">
-							<h3 className="font-bold mb-2">Производители</h3>
-							{manufacturers.map(manufacturer => (
-								<div key={manufacturer.id} className="flex items-center space-x-2 mb-2">
-									<Checkbox
-										id={`manufacturer-${manufacturer.id}`}
-										checked={selectedManufacturers.includes(manufacturer.id)}
-										onCheckedChange={checked => {
-											if (checked) {
-												setSelectedManufacturers([
-													...selectedManufacturers,
-													manufacturer.id
-												])
-											} else {
-												setSelectedManufacturers(
-													selectedManufacturers.filter(id => id !== manufacturer.id)
-												)
-											}
-										}}
-									/>
-									<Label htmlFor={`manufacturer-${manufacturer.id}`}>
-										{manufacturer.name}
-									</Label>
-								</div>
-							))}
-						</div>
-
-						<div className="mb-6">
-							<h3 className="font-bold mb-2">Цена</h3>
-							<div className="flex justify-between mb-2">
-								<span>${priceRange[0]}</span>
-								<span>${priceRange[1]}</span>
+					<div className="mb-6">
+						<h3 className="font-bold mb-2">Категории</h3>
+						{categories.map(category => (
+							<div key={category.id} className="flex items-center space-x-2 mb-2">
+								<Checkbox
+									id={`category-${category.id}`}
+									checked={selectedCategories.includes(category.id)}
+									onCheckedChange={checked => {
+										if (checked) {
+											setSelectedCategories([...selectedCategories, category.id])
+										} else {
+											setSelectedCategories(
+												selectedCategories.filter(id => id !== category.id)
+											)
+										}
+									}}
+								/>
+								<Label htmlFor={`category-${category.id}`}>{category.name}</Label>
 							</div>
-							<Slider
-								min={0}
-								max={1500}
-								step={10}
-								value={priceRange}
-								onValueChange={setPriceRange}
+						))}
+					</div>
+
+					<div className="mb-6">
+						<h3 className="font-bold mb-2">Производители</h3>
+						{manufacturers.map(manufacturer => (
+							<div key={manufacturer.id} className="flex items-center space-x-2 mb-2">
+								<Checkbox
+									id={`manufacturer-${manufacturer.id}`}
+									checked={selectedManufacturers.includes(manufacturer.id)}
+									onCheckedChange={checked => {
+										if (checked) {
+											setSelectedManufacturers([...selectedManufacturers, manufacturer.id])
+										} else {
+											setSelectedManufacturers(
+												selectedManufacturers.filter(id => id !== manufacturer.id)
+											)
+										}
+									}}
+								/>
+								<Label htmlFor={`manufacturer-${manufacturer.id}`}>
+									{manufacturer.name}
+								</Label>
+							</div>
+						))}
+					</div>
+
+					<div className="mb-6">
+						<h3 className="font-bold mb-2">Цена</h3>
+						<div className="flex justify-between mb-2">
+							<span>${priceRange[0]}</span>
+							<span>${priceRange[1]}</span>
+						</div>
+						<Slider
+							min={0}
+							max={1500}
+							step={10}
+							value={priceRange}
+							onValueChange={setPriceRange}
+						/>
+					</div>
+				</motion.aside>
+
+				{/* Основная область */}
+				<div className="flex-1">
+					<div className="flex sm:flex-col flex-row gap-4 mb-6">
+						<div className="relative flex-1">
+							<SearchIcon className="absolute left-2 top-2.5 h-4 w-4 text-gray-500" />
+							<Input
+								type="search"
+								placeholder="Поиск товаров..."
+								className="pl-8"
+								value={searchTerm}
+								onChange={e => setSearchTerm(e.target.value)}
 							/>
 						</div>
-					</motion.aside>
-
-					{/* Основная область */}
-					<div className="flex-1">
-						<div className="flex sm:flex-col flex-row gap-4 mb-6">
-							<div className="relative flex-1">
-								<SearchIcon className="absolute left-2 top-2.5 h-4 w-4 text-gray-500" />
-								<Input
-									type="search"
-									placeholder="Поиск товаров..."
-									className="pl-8"
-									value={searchTerm}
-									onChange={e => setSearchTerm(e.target.value)}
-								/>
-							</div>
-							<Button
-								variant="secondary"
-								onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-							>
-								<MenuIcon className="h-4 w-4 mr-2" />
-								Фильтры
-							</Button>
-						</div>
-
-						<div className="mb-6">
-							<h3 className="font-bold mb-2">Вариант отображения</h3>
-							<RadioGroup
-								value={displayVariant}
-								onValueChange={setDisplayVariant}
-								className="flex space-x-4"
-							>
-								<div className="flex items-center space-x-2">
-									<RadioGroupItem value="grid" id="grid" />
-									<Label htmlFor="grid" className="flex items-center">
-										<GridIcon className="h-4 w-4 mr-1" />
-										Сетка
-									</Label>
-								</div>
-								<div className="flex items-center space-x-2">
-									<RadioGroupItem value="list" id="list" />
-									<Label htmlFor="list" className="flex items-center">
-										<ListIcon className="h-4 w-4 mr-1" />
-										Список
-									</Label>
-								</div>
-								<div className="flex items-center space-x-2">
-									<RadioGroupItem value="compact" id="compact" />
-									<Label htmlFor="compact" className="flex items-center">
-										<LayoutListIcon className="h-4 w-4 mr-1" />
-										Компактный
-									</Label>
-								</div>
-							</RadioGroup>
-						</div>
-
-						{renderProducts()}
+						<Button
+							variant="secondary"
+							onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+						>
+							<MenuIcon className="h-4 w-4 mr-2" />
+							Фильтры
+						</Button>
 					</div>
+
+					<div className="mb-6">
+						<h3 className="font-bold mb-2">Вариант отображения</h3>
+						<RadioGroup
+							value={displayVariant}
+							onValueChange={setDisplayVariant}
+							className="flex space-x-4"
+						>
+							<div className="flex items-center space-x-2">
+								<RadioGroupItem value="grid" id="grid" />
+								<Label htmlFor="grid" className="flex items-center">
+									<GridIcon className="h-4 w-4 mr-1" />
+									Сетка
+								</Label>
+							</div>
+							<div className="flex items-center space-x-2">
+								<RadioGroupItem value="list" id="list" />
+								<Label htmlFor="list" className="flex items-center">
+									<ListIcon className="h-4 w-4 mr-1" />
+									Список
+								</Label>
+							</div>
+							<div className="flex items-center space-x-2">
+								<RadioGroupItem value="compact" id="compact" />
+								<Label htmlFor="compact" className="flex items-center">
+									<LayoutListIcon className="h-4 w-4 mr-1" />
+									Компактный
+								</Label>
+							</div>
+						</RadioGroup>
+					</div>
+
+					{renderProducts()}
 				</div>
 			</div>
 		</main>

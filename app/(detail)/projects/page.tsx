@@ -81,10 +81,10 @@ export default function CompletedProjects() {
 			: projects.filter(project => project.category === selectedCategory)
 
 	return (
-		<div className="container mx-auto px-4 py-8">
-			<h1 className="text-3xl font-bold mb-8">Выполненные проекты</h1>
+		<main className="container px-4 py-20">
+			<h2 className="text-3xl font-bold mb-8 text-center">Выполненные проекты</h2>
 
-			<div className="flex flex-wrap gap-2 mb-6">
+			<div className="flex flex-wrap gap-2 justify-center mb-12">
 				{categories.map(category => (
 					<Button
 						key={category}
@@ -156,6 +156,6 @@ export default function CompletedProjects() {
 					</Card>
 				))}
 			</div>
-		</div>
+		</main>
 	)
 }

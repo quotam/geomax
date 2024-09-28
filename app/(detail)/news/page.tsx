@@ -100,19 +100,19 @@ export default function NewsPage() {
 	}
 
 	return (
-		<div className="container mx-auto px-4 py-8">
-			<h1 className="text-3xl font-bold mb-8">Новости</h1>
+		<main className="container px-4 py-20">
+			<h2 className="text-3xl font-bold mb-8 text-center">Новости</h2>
 
-			<div className="flex md:flex-col flex-row gap-4 mb-6">
+			<div className="flex md:flex-col justify-center flex-row gap-4 mb-12">
 				<Input
 					type="search"
 					placeholder="Поиск новостей..."
 					value={searchTerm}
 					onChange={e => setSearchTerm(e.target.value)}
-					className="md:w-1/3"
+					className=""
 				/>
 				<Select value={selectedCategory} onValueChange={setSelectedCategory}>
-					<SelectTrigger className="md:w-1/3">
+					<SelectTrigger className="w-1/3">
 						<SelectValue placeholder="Выберите категорию" />
 					</SelectTrigger>
 					<SelectContent>
@@ -168,6 +168,6 @@ export default function NewsPage() {
 					))}
 				</div>
 			)}
-		</div>
+		</main>
 	)
 }

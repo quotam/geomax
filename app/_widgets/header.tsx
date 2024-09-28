@@ -39,7 +39,7 @@ const Header = () => {
 	return (
 		<header className="sticky top-0 z-50 w-full pt-1 backdrop-blur supports-[backdrop-filter]:bg-transparent">
 			<div className="container flex justify-between items-center text-secondary-foreground">
-				<Logo className="md:hidden" />
+				<Logo className="md:hidden w-52 lg:w-auto" />
 				<Sheet>
 					<SheetTrigger asChild>
 						<Button
@@ -104,7 +104,7 @@ const Header = () => {
 										</NavigationMenuTrigger>
 										<NavigationMenuContent className="flex justify-between w-[64rem]">
 											{item.main && (
-												<div className="w-1/2 ">
+												<div className="w-1/2 py-6 pl-6">
 													<NavigationMenuLink asChild>
 														<a
 															className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
