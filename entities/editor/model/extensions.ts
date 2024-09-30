@@ -1,0 +1,136 @@
+import {
+	TiptapImage,
+	TiptapLink,
+	UpdatedImage,
+	TaskList,
+	TextStyle,
+	TaskItem,
+	HorizontalRule,
+	StarterKit,
+	Placeholder,
+	TiptapUnderline,
+	//AIHighlight,
+	Color
+} from 'novel/extensions'
+
+import { mergeAttributes } from '@tiptap/react'
+import { TextAlign } from '@tiptap/extension-text-align'
+import { UploadImagesPlugin } from 'novel/plugins'
+
+import { cx } from 'class-variance-authority'
+
+const underline = TiptapUnderline
+//const aiHighlight = AIHighlight
+const placeholder = Placeholder
+const color = Color
+const textStyle = TextStyle
+
+const tiptapLink = TiptapLink.configure({
+	HTMLAttributes: {
+		class: cx(
+			'text-muted-foreground underline underline-offset-[3px] hover:text-primary transition-colors cursor-pointer'
+		)
+	}
+})
+
+const tiptapImage = TiptapImage.extend({
+	addProseMirrorPlugins() {
+		return [
+			UploadImagesPlugin({
+				imageClass: cx('opacity-40 rounded-lg border')
+			})
+		]
+	},
+	defaultOptions: {
+		...TiptapImage.options,
+		sizes: ['inline', 'block', 'left', 'right']
+	},
+	renderHTML({ HTMLAttributes }) {
+		const { style } = HTMLAttributes
+		return [
+			'figure',
+			{ style },
+			['img', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)]
+		]
+	}
+}).configure({
+	allowBase64: true,
+	HTMLAttributes: {
+		class: cx('rounded-lg border border-muted')
+	}
+})
+
+const taskList = TaskList.configure({
+	HTMLAttributes: {
+		class: cx('not-prose pl-2 ')
+	}
+})
+const taskItem = TaskItem.configure({
+	HTMLAttributes: {
+		class: cx('flex gap-2 items-start my-4')
+	},
+	nested: true
+})
+
+const horizontalRule = HorizontalRule.configure({
+	HTMLAttributes: {
+		class: cx('mt-4 mb-6 border-t border-muted-foreground')
+	}
+})
+
+const starterKit = StarterKit.configure({
+	bulletList: {
+		HTMLAttributes: {
+			class: cx('list-disc list-outside leading-3 -mt-2')
+		}
+	},
+	orderedList: {
+		HTMLAttributes: {
+			class: cx('list-decimal list-outside leading-3 -mt-2')
+		}
+	},
+	listItem: {
+		HTMLAttributes: {
+			class: cx('leading-normal -mb-2')
+		}
+	},
+	blockquote: {
+		HTMLAttributes: {
+			class: cx('border-l-4 border-primary')
+		}
+	},
+	codeBlock: {
+		HTMLAttributes: {
+			class: cx(
+				'rounded-md bg-muted text-muted-foreground border p-5 font-mono font-medium'
+			)
+		}
+	},
+	code: {
+		HTMLAttributes: {
+			class: cx('rounded-md bg-muted  px-1.5 py-1 font-mono font-medium'),
+			spellcheck: 'false'
+		}
+	},
+	horizontalRule: false,
+	dropcursor: {
+		color: '#DBEAFE',
+		width: 4
+	}
+})
+
+export const defaultExtensions = [
+	starterKit,
+	placeholder,
+	tiptapLink,
+	tiptapImage,
+	taskList,
+	taskItem,
+	underline,
+	horizontalRule,
+	UpdatedImage,
+	//aiHighlight,
+	color,
+	textStyle,
+	TextAlign.configure({ types: ['heading', 'paragraph', 'image'] })
+]
