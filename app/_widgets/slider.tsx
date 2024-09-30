@@ -21,11 +21,11 @@ const HeroSlider = () => {
 				// ]}
 				className="w-full"
 			>
-				<Hero className="w-full object-cover aspect-video text-background/10 h-3/4 md:h-1/2  absolute left-0 bottom-5" />
+				<Hero className="w-full object-cover aspect-video text-background/10 h-3/4 md:h-1/2 absolute left-0 bottom-12" />
 				<CarouselContent>
 					{Array.from({ length: 5 }).map((_, index) => (
 						<CarouselItem
-							className="flex z-20 items-center justify-center w-full  mt-40"
+							className="flex z-20 items-center justify-center w-full mb-12 mt-48"
 							key={index}
 						>
 							<div className="flex flex-col items-center">
@@ -37,9 +37,9 @@ const HeroSlider = () => {
 								</Link>
 								<br />
 								<br />
-								<h2 className="text-[4.8rem] leading-[4.8rem] text-center">
+								<h1 className="text-[4.8rem] leading-[4.8rem] text-center">
 									Чем мы можем <span className="text-primary">помочь?</span>
-								</h2>
+								</h1>
 								<br />
 								<br />
 								<p className="text-center">
@@ -61,13 +61,13 @@ const HeroSlider = () => {
 				</CarouselContent>
 
 				<div className="container relative">
-					<aside className="absolute z-20 bottom-4 right-0 flex gap-4">
+					<aside className="absolute z-20 bottom-12 right-0 flex gap-6">
 						<CarouselPrevious variant="ghost" className="rounded-lg" />
 						<CarouselNext variant="ghost" className="rounded-lg" />
 					</aside>
 				</div>
 
-				<div className="h-3 absolute bottom-0 w-full rounded-t-lg bg-background"></div>
+				<div className="h-12 absolute bottom-0 w-full rounded-t-[6.4rem] bg-background"></div>
 			</Carousel>
 		</section>
 	)

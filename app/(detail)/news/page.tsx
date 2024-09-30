@@ -101,7 +101,7 @@ export default function NewsPage() {
 
 	return (
 		<main className="container px-4 py-20">
-			<h2 className="text-3xl font-bold mb-8 text-center">Новости</h2>
+			<h1 className="text-3xl font-bold mb-8 text-center">Новости</h1>
 
 			<div className="flex md:flex-col justify-center flex-row gap-4 mb-12">
 				<Input

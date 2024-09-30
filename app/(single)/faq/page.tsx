@@ -63,9 +63,9 @@ const FaqPage = () => {
 	)
 	return (
 		<main className="container mx-auto w-[90%] px-4 py-20">
-			<h2 className="text-3xl font-bold mb-12 text-center">
+			<h1 className="text-3xl font-bold mb-12 text-center">
 				Ответы на часто задаваемые вопросы
-			</h2>
+			</h1>
 
 			<Card className="mb-8">
 				<CardHeader>

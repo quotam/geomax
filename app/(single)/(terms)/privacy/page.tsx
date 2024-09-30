@@ -128,12 +128,13 @@ export default function PrivacyPolicyPage() {
 							<p>
 								Если у вас есть какие-либо вопросы относительно нашей Политики
 								конфиденциальности, пожалуйста, свяжитесь с нами, наши контакты доступны
-								по ссылке:{' '}
+								по{' '}
 								<Button variant="link" className="p-0">
-									<Link href="/contact" legacyBehavior passHref>
-										Контакты
+									<Link href="/contacts" legacyBehavior passHref>
+										ссылке
 									</Link>
 								</Button>
+								.
 							</p>
 						}
 					/>

@@ -269,7 +269,7 @@ export default function ProductCatalog() {
 
 	return (
 		<main className="container px-4 py-20">
-			<h2 className="text-3xl font-bold mb-12 text-center">Каталог товаров</h2>
+			<h1 className="text-3xl font-bold mb-12 text-center">Каталог товаров</h1>
 			<div className="flex sm:flex-col flex-row items-start gap-8">
 				<motion.aside
 					className={`min-w-80 sm:w-full border-[.1rem] bg-white p-6 rounded-lg shadow-md ${

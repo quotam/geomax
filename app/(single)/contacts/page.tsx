@@ -8,7 +8,7 @@ import { Mail, MapPin, Phone } from 'lucide-react'
 const ContactPage = () => {
 	return (
 		<main className="flex-grow container px-4 py-20">
-			<h2 className="text-3xl text-center font-bold mb-12">Контакты</h2>
+			<h1 className="text-3xl text-center font-bold mb-12">Контакты</h1>
 
 			<div className="grid sm:grid-cols-1 w-[90%] mx-auto grid-cols-2 gap-8">
 				<Card>

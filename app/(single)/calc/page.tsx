@@ -36,9 +36,9 @@ const CalcPage = () => {
 
 	return (
 		<main className="container px-4 py-20">
-			<h2 className="text-3xl font-bold mb-12 text-center">
+			<h1 className="text-3xl font-bold mb-12 text-center">
 				Калькулятор экономии{' '}
-			</h2>
+			</h1>
 
 			<Card className="w-full max-w-[60rem] mx-auto">
 				<CardHeader>

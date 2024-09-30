@@ -69,7 +69,7 @@ export default function SeasonalOffers() {
 
 	return (
 		<main className="container px-4 py-20">
-			<h2 className="text-3xl font-bold mb-8 text-center">Сезонные предложения</h2>
+			<h1 className="text-3xl font-bold mb-8 text-center">Сезонные предложения</h1>
 
 			<div className="flex flex-wrap justify-center gap-2 mb-12">
 				{seasons.map(season => (

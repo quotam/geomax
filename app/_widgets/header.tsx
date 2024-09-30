@@ -30,7 +30,7 @@ const Logo = ({ className }: { className?: string }) => {
 			className={cn('text-primary  flex items-center gap-3', className)}
 		>
 			<LogoIcon className="h-7 w-7" />
-			<h1 className="text-2xl font-medium uppercase">Геомакс</h1>
+			<span className="text-2xl font-medium uppercase">Геомакс</span>
 		</Link>
 	)
 }

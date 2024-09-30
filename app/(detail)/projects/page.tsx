@@ -82,7 +82,7 @@ export default function CompletedProjects() {
 
 	return (
 		<main className="container px-4 py-20">
-			<h2 className="text-3xl font-bold mb-8 text-center">Выполненные проекты</h2>
+			<h1 className="text-3xl font-bold mb-8 text-center">Выполненные проекты</h1>
 
 			<div className="flex flex-wrap gap-2 justify-center mb-12">
 				{categories.map(category => (

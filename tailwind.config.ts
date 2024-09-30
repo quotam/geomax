@@ -36,6 +36,9 @@ const config: Config = {
 	corePlugins: {
 		container: false
 	},
+	experimental: {
+		optimizeUniversalDefaults: true
+	},
 	theme: {
 		screens: {
 			lg: { raw: 'screen and (max-width: 1366px)' },

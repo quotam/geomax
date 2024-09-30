@@ -4,9 +4,9 @@ import { Building2, FileText, Globe, Mail, MapPin, Phone } from 'lucide-react'
 const LegalPage = () => {
 	return (
 		<main className="container px-4 py-20">
-			<h2 className="text-3xl font-bold mb-12 text-center">
+			<h1 className="text-3xl font-bold mb-12 text-center">
 				Реквизиты ООО ГЕОМАКС
-			</h2>
+			</h1>
 			<div className="w-[90%] mx-auto">
 				<Card className="mb-8">
 					<CardHeader>
