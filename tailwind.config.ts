@@ -115,6 +115,7 @@ const config: Config = {
 			secondary: 'hsl(var(--secondary))'
 		},
 		borderRadius: {
+			DEFAULT: 'var(--radius)',
 			0: '0',
 			full: '100%',
 			xl: 'calc(var(--radius) + 0.4rem)',

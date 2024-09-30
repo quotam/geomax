@@ -112,4 +112,93 @@
 	::-webkit-scrollbar-track {
 		@apply bg-background;
 	}
+	.typ h1 {
+		@apply scroll-m-20 text-heading font-bold tracking-tight;
+	}
+
+	.typ h2 {
+		@apply scroll-m-20 border-b pb-2 text-3xl font-bold tracking-tight first:mt-0;
+	}
+
+	.typ h3 {
+		@apply scroll-m-20 text-2xl font-bold tracking-tight;
+	}
+
+	.typ h4 {
+		@apply scroll-m-20 text-xl font-bold tracking-tight;
+	}
+
+	/* Paragraphs */
+	.typ p {
+		@apply leading-7 [&:not(:first-child)]:mt-6;
+	}
+
+	/* Large text */
+	.typ .lead {
+		@apply text-xl text-muted-foreground;
+	}
+
+	/* Small text */
+	.typ small {
+		@apply text-xs font-medium leading-none;
+	}
+
+	/* Muted text */
+	.typ .muted {
+		@apply text-xs text-muted-foreground;
+	}
+
+	/* Blockquotes */
+	.typ blockquote {
+		@apply mt-6 border-l-2 pl-6 italic;
+	}
+
+	/* Lists */
+	.typ ul {
+		@apply my-6 ml-6 list-disc [&>li]:mt-2;
+	}
+
+	.typ ol {
+		@apply my-6 ml-6 list-decimal [&>li]:mt-2;
+	}
+
+	/* Links */
+	.typ a {
+		@apply font-medium text-primary underline underline-offset-4;
+	}
+
+	/* Code */
+	.typ code {
+		@apply relative bg-muted px-[0.3rem] py-[0.2rem] text-xs font-bold;
+	}
+
+	/* Pre (for code blocks) */
+	.typ pre {
+		@apply mb-4 mt-6 overflow-x-auto rounded-lg border bg-black py-4;
+	}
+
+	.typ pre code {
+		@apply relative bg-transparent px-[0.3rem] py-[0.2rem] text-xs;
+	}
+
+	/* Table */
+	.typ .table {
+		@apply w-full overflow-auto;
+	}
+
+	.typ .table table {
+		@apply w-full;
+	}
+
+	.typ .table th {
+		@apply border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right;
+	}
+
+	.typ .table td {
+		@apply border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right;
+	}
+
+	.typ .table tr:nth-child(even) {
+		@apply bg-muted;
+	}
 }

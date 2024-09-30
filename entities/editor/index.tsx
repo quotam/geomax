@@ -6,59 +6,64 @@ import {
 	useEditor
 } from '@tiptap/react'
 
-import Placeholder from '@tiptap/extension-placeholder'
 import { Color } from '@tiptap/extension-color'
 import TextStyle from '@tiptap/extension-text-style'
 import StarterKit from '@tiptap/starter-kit'
+import { cn } from '@front/shared/lib/utils'
+import { BoldIcon, CodeIcon, ItalicIcon, StrikethroughIcon } from 'lucide-react'
 
-export default ({ placeholder }: { placeholder: string }) => {
+export default () => {
 	const editor = useEditor({
-		extensions: [
-			StarterKit,
-			TextStyle,
-			Color,
-			Placeholder.configure({
-				placeholder,
-				emptyNodeClass:
-					'first:before:text-secondary first:before:float-left first:before:content-[attr(data-placeholder)] first:before:pointer-events-none'
-			})
-		],
+		extensions: [StarterKit, TextStyle, Color],
 		injectCSS: false,
 		editorProps: {
 			attributes: {
 				class:
-					'min-h-40 focus-visible:outline-none rounded-md  px-3 py-1 focus-visible:ring-1 focus-visible:ring-ring border border-input typ'
+					'min-h-40 focus-visible:outline-none rounded-md  p-3  focus-visible:ring-1 focus-visible:ring-ring border border-input typ'
 			}
-		},
-		content: `
-      <p>
-        Hey, try to select some text here. There will popup a menu for selecting some inline styles. Remember: you have full control about content and styling of this menu.
-      </p>
-    `
+		}
 	})
 
 	return (
 		<>
 			{editor && (
 				<BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
-					<div className="bubble-menu">
+					<div className="px-2 py-1 shadow border bg-background rounded-sm mt-12 flex ">
 						<button
-							onClick={() => editor.chain().focus().toggleBold().run()}
-							className={editor.isActive('bold') ? 'is-active' : ''}
+							onClick={e => {
+								e.preventDefault()
+								editor.chain().focus().toggleBold().run()
+							}}
+							className={cn(
+								'px-2 py-1 rounded-md',
+								editor.isActive('bold') ? 'text-primary bg-accent  font-bold' : ''
+							)}
 						>
-							Bold
+							<BoldIcon />
 						</button>
 						<button
-							onClick={() => editor.chain().focus().toggleItalic().run()}
-							className={editor.isActive('italic') ? 'is-active' : ''}
+							onClick={e => {
+								e.preventDefault()
+								editor.chain().focus().toggleItalic().run()
+							}}
+							className={cn(
+								'px-2 py-1 rounded-md',
+								editor.isActive('italic') ? 'text-primary bg-accent  font-bold' : ''
+							)}
 						>
-							Italic
+							<ItalicIcon />
 						</button>
 						<button
-							onClick={() => editor.chain().focus().toggleStrike().run()}
-							className={editor.isActive('strike') ? 'is-active' : ''}
+							onClick={e => {
+								e.preventDefault()
+								editor.chain().focus().toggleStrike().run()
+							}}
+							className={cn(
+								'px-2 py-1 rounded-md',
+								editor.isActive('strike') ? 'text-primary bg-accent font-bold' : ''
+							)}
 						>
-							Strike
+							<StrikethroughIcon />
 						</button>
 					</div>
 				</BubbleMenu>
@@ -100,7 +105,7 @@ export default ({ placeholder }: { placeholder: string }) => {
 					</div>
 				</FloatingMenu>
 			)}
-			<EditorContent editor={editor} />
+			<EditorContent className="typ" editor={editor} />
 		</>
 	)
 }
