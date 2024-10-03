@@ -1,5 +1,6 @@
 'use client'
 
+import { Separator } from '@front/shared/ui/separator'
 import {
 	EditorBubble,
 	EditorCommand,
@@ -10,18 +11,16 @@ import {
 	EditorRoot,
 	JSONContent
 } from 'novel'
-import React, { useState } from 'react'
-import { Separator } from '@front/shared/ui/separator'
-import { LinkSelector } from './ui/linkSelector'
-import { TextButtons } from './ui/text-buttons'
-import { ColorSelector } from './ui/colorSelector'
-import { NodeSelector } from './ui/nodeSelector'
+import { handleCommandNavigation } from 'novel/extensions'
+import { handleImageDrop, handleImagePaste } from 'novel/plugins'
+import { useState } from 'react'
 import { defaultExtensions } from './model/extensions'
 import { slashCommand, suggestionItems } from './model/suggestionItems'
-import { handleCommandNavigation, ImageResizer } from 'novel/extensions'
-import { handleImageDrop, handleImagePaste } from 'novel/plugins'
+import { ColorSelector } from './ui/colorSelector'
+import { LinkSelector } from './ui/linkSelector'
+import { NodeSelector } from './ui/nodeSelector'
+import { TextButtons } from './ui/text-buttons'
 import { uploadFn } from './vm/uploadImage'
-import AlignButtons from './ui/alignButtons'
 
 const extensions = [...defaultExtensions, slashCommand]
 
@@ -37,7 +36,7 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
 	return (
 		<EditorRoot>
 			<EditorContent
-				className="min-h-50"
+				className="min-h-50 border border-input rounded-md"
 				{...(initialValue && { initialContent: initialValue })}
 				extensions={extensions}
 				editorProps={{
@@ -48,13 +47,12 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
 					handleDrop: (view, event, _slice, moved) =>
 						handleImageDrop(view, event, moved, uploadFn),
 					attributes: {
-						class: `prose prose-lg dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full border border-input rounded-md min-h-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 p-4`
+						class: `prose prose-lg dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full rounded-md min-h-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 p-4`
 					}
 				}}
 				onUpdate={({ editor }) => {
 					onChange(editor.getHTML())
 				}}
-				slotAfter={<ImageResizer />}
 			>
 				<EditorCommand className="z-50 h-auto max-h-[330px] overflow-y-auto rounded-md border border-muted bg-background px-1 py-2 shadow-md transition-all">
 					<EditorCommandEmpty className="px-2 text-muted-foreground">
@@ -79,12 +77,11 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
 						))}
 					</EditorCommandList>
 				</EditorCommand>
-				<AlignButtons />
 				<EditorBubble
 					tippyOptions={{
 						placement: 'top'
 					}}
-					className="flex w-fit max-w-[90vw] overflow-hidden rounded-md border border-muted bg-background shadow-xl"
+					className="flex w-fit max-w-[50vw] overflow-hidden rounded-md border border-muted bg-background shadow-xl"
 				>
 					<Separator orientation="vertical" />
 					<NodeSelector open={openNode} onOpenChange={setOpenNode} />

@@ -2,7 +2,6 @@
 
 import AppEditor from '@front/entities/editor'
 import { Button } from '@front/shared/ui/button'
-import { Card, CardContent } from '@front/shared/ui/card'
 import { ArrowLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
@@ -25,11 +24,7 @@ export default function SlideEditor({
 
 			<h1 className="text-2xl font-bold mb-4">Редактирование слайда</h1>
 
-			<Card className="p-3">
-				<CardContent>
-					<AppEditor onChange={e => console.log(e)} />
-				</CardContent>
-			</Card>
+			<AppEditor onChange={e => console.log(e)} />
 		</div>
 	)
 }

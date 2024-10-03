@@ -7,18 +7,16 @@ import {
 	ImageIcon,
 	List,
 	ListOrdered,
-	MessageSquarePlus,
 	Text,
 	TextQuote
 } from 'lucide-react'
-import { createSuggestionItems } from 'novel/extensions'
-import { Command, renderItems } from 'novel/extensions'
+import { Command, createSuggestionItems, renderItems } from 'novel/extensions'
 import { uploadFn } from '../vm/uploadImage'
 
 export const suggestionItems = createSuggestionItems([
 	{
-		title: 'Text',
-		description: 'Just start typing with plain text.',
+		title: 'Текст',
+		description: 'Просто начните вводить обычный текст.',
 		searchTerms: ['p', 'paragraph'],
 		icon: <Text size={18} />,
 		command: ({ editor, range }) => {
@@ -31,18 +29,18 @@ export const suggestionItems = createSuggestionItems([
 		}
 	},
 	{
-		title: 'To-do List',
-		description: 'Track tasks with a to-do list.',
-		searchTerms: ['todo', 'task', 'list', 'check', 'checkbox'],
+		title: 'Список дел',
+		description: 'Отслеживайте задачи с помощью списка дел.',
+		searchTerms: ['todo', 'задача', 'список', 'галочка', 'чекбокс'],
 		icon: <CheckSquare size={18} />,
 		command: ({ editor, range }) => {
 			editor.chain().focus().deleteRange(range).toggleTaskList().run()
 		}
 	},
 	{
-		title: 'Heading 1',
-		description: 'Big section heading.',
-		searchTerms: ['title', 'big', 'large'],
+		title: 'Заголовок 1',
+		description: 'Большой заголовок раздела.',
+		searchTerms: ['название', 'большой', 'крупный'],
 		icon: <Heading1 size={18} />,
 		command: ({ editor, range }) => {
 			editor
@@ -54,9 +52,9 @@ export const suggestionItems = createSuggestionItems([
 		}
 	},
 	{
-		title: 'Heading 2',
-		description: 'Medium section heading.',
-		searchTerms: ['subtitle', 'medium'],
+		title: 'Заголовок 2',
+		description: 'Средний заголовок раздела.',
+		searchTerms: ['подзаголовок', 'средний'],
 		icon: <Heading2 size={18} />,
 		command: ({ editor, range }) => {
 			editor
@@ -68,9 +66,9 @@ export const suggestionItems = createSuggestionItems([
 		}
 	},
 	{
-		title: 'Heading 3',
-		description: 'Small section heading.',
-		searchTerms: ['subtitle', 'small'],
+		title: 'Заголовок 3',
+		description: 'Маленький заголовок раздела.',
+		searchTerms: ['подзаголовок', 'маленький'],
 		icon: <Heading3 size={18} />,
 		command: ({ editor, range }) => {
 			editor
@@ -82,26 +80,26 @@ export const suggestionItems = createSuggestionItems([
 		}
 	},
 	{
-		title: 'Bullet List',
-		description: 'Create a simple bullet list.',
-		searchTerms: ['unordered', 'point'],
+		title: 'Маркеры',
+		description: 'Создайте простой список с маркерами.',
+		searchTerms: ['неупорядоченный', 'точка'],
 		icon: <List size={18} />,
 		command: ({ editor, range }) => {
 			editor.chain().focus().deleteRange(range).toggleBulletList().run()
 		}
 	},
 	{
-		title: 'Numbered List',
-		description: 'Create a list with numbering.',
-		searchTerms: ['ordered'],
+		title: 'Нумерованный список',
+		description: 'Создайте список с нумерацией.',
+		searchTerms: ['упорядоченный'],
 		icon: <ListOrdered size={18} />,
 		command: ({ editor, range }) => {
 			editor.chain().focus().deleteRange(range).toggleOrderedList().run()
 		}
 	},
 	{
-		title: 'Quote',
-		description: 'Capture a quote.',
+		title: 'Цитата',
+		description: 'Запишите цитату.',
 		searchTerms: ['blockquote'],
 		icon: <TextQuote size={18} />,
 		command: ({ editor, range }) =>
@@ -114,21 +112,20 @@ export const suggestionItems = createSuggestionItems([
 				.run()
 	},
 	{
-		title: 'Code',
-		description: 'Capture a code snippet.',
+		title: 'Код',
+		description: 'Запишите фрагмент кода.',
 		searchTerms: ['codeblock'],
 		icon: <Code size={18} />,
 		command: ({ editor, range }) =>
 			editor.chain().focus().deleteRange(range).toggleCodeBlock().run()
 	},
 	{
-		title: 'Image',
-		description: 'Upload an image from your computer.',
+		title: 'Изображение',
+		description: 'Загрузите изображение с вашего компьютера.',
 		searchTerms: ['photo', 'picture', 'media'],
 		icon: <ImageIcon size={18} />,
 		command: ({ editor, range }) => {
 			editor.chain().focus().deleteRange(range).run()
-			// upload image
 			const input = document.createElement('input')
 			input.type = 'file'
 			input.accept = 'image/*'

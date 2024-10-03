@@ -1,7 +1,6 @@
 import { UserRole } from '@prisma/client'
 
 export type userID = string
-export type userRole = UserRole
 
 export type UserEntity = {
 	id: userID

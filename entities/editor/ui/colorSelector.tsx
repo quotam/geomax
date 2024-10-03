@@ -131,7 +131,7 @@ export const ColorSelector = ({ open, onOpenChange }: ColorSelectorProps) => {
 				align="start"
 			>
 				<div className="flex flex-col">
-					<div className="my-1 px-2 text-sm font-semibold text-muted-foreground">
+					<div className="my-1 px-2 text-sm font-bold text-muted-foreground">
 						Color
 					</div>
 					{TEXT_COLORS.map(({ name, color }, index) => (

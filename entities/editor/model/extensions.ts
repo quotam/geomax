@@ -1,19 +1,18 @@
 import {
-	TiptapImage,
-	TiptapLink,
-	UpdatedImage,
+	//AIHighlight,
+	Color,
+	HorizontalRule,
+	Placeholder,
+	StarterKit,
+	TaskItem,
 	TaskList,
 	TextStyle,
-	TaskItem,
-	HorizontalRule,
-	StarterKit,
-	Placeholder,
-	TiptapUnderline,
-	//AIHighlight,
-	Color
+	TiptapLink,
+	TiptapUnderline
 } from 'novel/extensions'
 
-import { mergeAttributes } from '@tiptap/react'
+import ImageResize from 'tiptap-extension-resize-image'
+
 import { TextAlign } from '@tiptap/extension-text-align'
 import { UploadImagesPlugin } from 'novel/plugins'
 
@@ -21,7 +20,14 @@ import { cx } from 'class-variance-authority'
 
 const underline = TiptapUnderline
 //const aiHighlight = AIHighlight
-const placeholder = Placeholder
+//
+
+const placeholder = Placeholder.configure({
+	placeholder: "Нажмите '/' для просмотра команд..",
+	emptyNodeClass:
+		'first:before:text-muted-foreground first:before:float-left first:before:content-[attr(data-placeholder)] first:before:pointer-events-none'
+})
+
 const color = Color
 const textStyle = TextStyle
 
@@ -33,30 +39,13 @@ const tiptapLink = TiptapLink.configure({
 	}
 })
 
-const tiptapImage = TiptapImage.extend({
+const tiptapImage = ImageResize.extend({
 	addProseMirrorPlugins() {
 		return [
 			UploadImagesPlugin({
-				imageClass: cx('opacity-40 rounded-lg border')
+				imageClass: cx('opacity-40')
 			})
 		]
-	},
-	defaultOptions: {
-		...TiptapImage.options,
-		sizes: ['inline', 'block', 'left', 'right']
-	},
-	renderHTML({ HTMLAttributes }) {
-		const { style } = HTMLAttributes
-		return [
-			'figure',
-			{ style },
-			['img', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)]
-		]
-	}
-}).configure({
-	allowBase64: true,
-	HTMLAttributes: {
-		class: cx('rounded-lg border border-muted')
 	}
 })
 
@@ -123,12 +112,14 @@ export const defaultExtensions = [
 	starterKit,
 	placeholder,
 	tiptapLink,
-	tiptapImage,
+	tiptapImage.configure({
+		allowBase64: true
+	}),
 	taskList,
 	taskItem,
 	underline,
 	horizontalRule,
-	UpdatedImage,
+
 	//aiHighlight,
 	color,
 	textStyle,

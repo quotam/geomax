@@ -16,8 +16,8 @@ const onUpload = (file: File) => {
 				}
 			}),
 			{
-				loading: 'Uploading image...',
-				success: 'Image uploaded successfully.',
+				loading: 'Загрузка...',
+				success: 'Загружено успешно.',
 				error: e => e.message
 			}
 		)
@@ -28,10 +28,10 @@ export const uploadFn = createImageUpload({
 	onUpload,
 	validateFn: file => {
 		if (!file.type.includes('image/')) {
-			toast.error('File type not supported.')
+			toast.error('Формат файла не поддерживается.')
 			return false
 		} else if (file.size / 1024 / 1024 > 20) {
-			toast.error('File size too big (max 20MB).')
+			toast.error('Файл слишком большой (max 20MB).')
 			return false
 		}
 		return true

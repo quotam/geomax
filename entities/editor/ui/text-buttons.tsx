@@ -19,12 +19,6 @@ export const TextButtons = () => {
 
 	const items: SelectorItem[] = [
 		{
-			name: 'bold',
-			isActive: editor => editor!!.isActive('bold'),
-			command: editor => editor!!.chain().focus().toggleBold().run(),
-			icon: BoldIcon
-		},
-		{
 			name: 'align-left',
 			command: editor => editor!!.chain().focus().setTextAlign('left').run(),
 			isActive: editor => editor!!.isActive({ textAlign: 'left' }),
@@ -41,6 +35,13 @@ export const TextButtons = () => {
 			command: editor => editor!!.chain().focus().setTextAlign('right').run(),
 			isActive: editor => editor!!.isActive({ textAlign: 'right' }),
 			icon: AlignRightIcon
+		},
+
+		{
+			name: 'bold',
+			isActive: editor => editor!!.isActive('bold'),
+			command: editor => editor!!.chain().focus().toggleBold().run(),
+			icon: BoldIcon
 		},
 
 		{
@@ -81,7 +82,7 @@ export const TextButtons = () => {
 					<Button size="sm" className="rounded-none" variant="ghost">
 						<item.icon
 							className={cn('h-4 w-4', {
-								'text-blue-500': item.isActive(editor)
+								'text-primary': item.isActive(editor)
 							})}
 						/>
 					</Button>

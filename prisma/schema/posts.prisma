@@ -1,0 +1,13 @@
+enum PostType {
+  NEWS
+  PROJECT
+  OFFER
+  UNKNOWN
+}
+
+model Post {
+  id   String   @id @default(cuid())
+  type PostType @default(UNKNOWN)
+  desc String
+  body String
+}

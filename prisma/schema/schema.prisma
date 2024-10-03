@@ -16,7 +16,7 @@ enum LikeType {
 
 enum UserRole {
   DEFAULT
-  EXECUTIVE
+  EDITOR
   ADMIN
 }
 
@@ -36,4 +36,6 @@ model User {
   about String?
   role  UserRole @default(DEFAULT)
   slug  String   @unique
+
+  Slider Slider[]
 }

@@ -54,7 +54,7 @@ export const EmailSignInform = () => {
 				<Button
 					disabled={emailSignIn.isPending}
 					className="w-full mt-4"
-					variant="destructive"
+					variant="secondary"
 					type="submit"
 				>
 					Войти через email
