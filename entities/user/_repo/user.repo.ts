@@ -1,12 +1,12 @@
-import { UserEntity } from '@front/kernel/domain/user'
 import dbClient from '@front/shared/lib/dbClient'
-import { UserEntitys } from '../_domain/entities'
+import { userEntity } from '../_domain/entities'
+import { UserEntity } from '@front/kernel/domain/user'
 
 export class UserRepo {
 	async createUser(user: UserEntity): Promise<UserEntity> {
 		return await dbClient.user.create({
 			data: user,
-			select: UserEntitys.fullUser
+			select: userEntity.fullUser
 		})
 	}
 }

@@ -23,4 +23,4 @@ class UserEntity {
 	}
 }
 
-export const UserEntitys = new UserEntity()
+export const userEntity = new UserEntity()

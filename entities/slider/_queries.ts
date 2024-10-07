@@ -9,7 +9,9 @@ import {
 	sliderGetOneAction,
 	sliderUpdateAction
 } from './_action'
-import { serviceTag, SliderUpdateDto } from './_domain'
+import { SliderUpdateDto } from './_domain'
+
+const serviceTag = 'slider'
 
 class SliderQueries {
 	getAll = queryOptions({

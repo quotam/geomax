@@ -1,8 +1,6 @@
 import { SliderStatus } from '@prisma/client'
 import { z } from 'zod'
 
-export const serviceTag = 'slider'
-
 export const SliderUpdateSchema = z.object({
 	id: z.string(),
 	status: z.enum(Object.values(SliderStatus) as [keyof typeof SliderStatus], {

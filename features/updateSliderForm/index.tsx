@@ -86,6 +86,7 @@ const UpdateSliderForm = ({ data }: { data: SliderUpdateDto }) => {
 							<FormLabel>Содержимое слайда</FormLabel>
 							<FormControl>
 								<AppEditor
+									className="bg-foreground text-background p-0 w-full"
 									initialValue={data?.body ? JSON.parse(data.body) : undefined}
 									onChange={e => field.onChange(JSON.stringify(e))}
 								/>

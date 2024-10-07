@@ -6,7 +6,7 @@ import ArticleList from '@front/features/cms/articleList'
 import { ArticleType } from '@prisma/client'
 import { useMutation, useQuery } from '@tanstack/react-query'
 
-const entityType = ArticleType.NEWS
+const entityType = ArticleType.FAQ
 
 export default function NewsAdmin() {
 	const { data, isPending, refetch } = useQuery(

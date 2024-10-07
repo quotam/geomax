@@ -1,10 +1,7 @@
 'use client'
 import Loading from '@front/app/loading'
 import { sliderQueries } from '@front/entities/slider'
-import {
-	getProfileDisplayName,
-	getProfileLetters
-} from '@front/entities/user/profile'
+import UserToolTip from '@front/entities/user/_ui/userToolTip'
 import { Button } from '@front/shared/ui/button'
 import {
 	Card,
@@ -56,19 +53,8 @@ export default function SliderAdmin() {
 								Cтатус: <span className="font-bold text-primary">{slide.status}</span> \
 								Создан:{' '}
 							</p>
-							<Tooltip>
-								<TooltipTrigger className="cursor-pointer p-0 font-bold">
-									{slide.user ? getProfileDisplayName({ ...slide.user }) : 'неизвестен'}
-								</TooltipTrigger>
-								<TooltipContent>
-									<Link
-										className="font-bold underline hover:no-underline"
-										href={`mailto:${slide.user?.email}`}
-									>
-										{slide.user?.role + ' - ' + slide.user?.email!}
-									</Link>
-								</TooltipContent>
-							</Tooltip>
+
+							<UserToolTip profile={slide.user} />
 						</CardHeader>
 						<CardContent className="bg-foreground text-background p-0">
 							<div className="w-full pt-48">
@@ -83,7 +69,8 @@ export default function SliderAdmin() {
 								</TooltipTrigger>
 								<TooltipContent className="text-center">
 									<Pen className="mr-2 h-3 w-3 inline" /> Последнее изменение <br />
-									{slide.updatedAt.toLocaleDateString()}
+									{slide.updatedAt.toLocaleDateString()} -
+									{slide.updatedAt.toLocaleTimeString()}
 								</TooltipContent>
 							</Tooltip>
 							<h3 className="font-bold">Слайд {i + 1}</h3>

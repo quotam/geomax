@@ -8,13 +8,7 @@ enum ArticleType {
   OFFER
   PROJECT
   NEWS
-}
-
-model Category {
-  id    String @id @default(cuid())
-  title String
-
-  articles ArticleCategory[]
+  FAQ
 }
 
 model Article {
@@ -33,17 +27,15 @@ model Article {
   user   User?   @relation(fields: [userID], references: [id], onDelete: SetNull)
   userID String?
 
-  categories ArticleCategory[]
+  category          ArticleCategory? @relation(fields: [articleCategoryId], references: [id])
+  articleCategoryId String?
 }
 
 model ArticleCategory {
-  id          String      @id @default(cuid())
-  articleId   String
-  categoryId  String
-  articleType ArticleType
+  id    String @id @default(cuid())
+  title String
 
-  article  Article  @relation(fields: [articleId], references: [id])
-  category Category @relation(fields: [categoryId], references: [id])
-
-  @@unique([articleId, categoryId, articleType])
+  type      ArticleType
+  articleId String?
+  Article   Article[]
 }

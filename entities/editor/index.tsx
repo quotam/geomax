@@ -20,14 +20,16 @@ import { LinkSelector } from './ui/linkSelector'
 import { NodeSelector } from './ui/nodeSelector'
 import { TextButtons } from './ui/text-buttons'
 import { uploadFn } from './vm/uploadImage'
+import { cn } from '@front/shared/lib/utils'
 
 const extensions = [...defaultExtensions, slashCommand]
 
 interface EditorProp {
 	initialValue?: JSONContent
 	onChange: (value: JSONContent) => void
+	className?: string
 }
-const Editor = ({ initialValue, onChange }: EditorProp) => {
+const Editor = ({ initialValue, onChange, className }: EditorProp) => {
 	const [openNode, setOpenNode] = useState(false)
 	const [openColor, setOpenColor] = useState(false)
 	const [openLink, setOpenLink] = useState(false)
@@ -35,7 +37,7 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
 	return (
 		<EditorRoot>
 			<EditorContent
-				className="min-h-50 border border-input rounded-md"
+				className={cn('min-h-50 border border-input rounded-md', className)}
 				immediatelyRender={false}
 				{...(initialValue && { initialContent: initialValue })}
 				extensions={extensions}
@@ -81,7 +83,7 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
 					tippyOptions={{
 						placement: 'top'
 					}}
-					className="flex w-fit max-w-[50vw] overflow-hidden rounded-md border border-muted bg-background shadow-xl"
+					className="flex w-fit max-w-[50vw] text-foreground overflow-hidden rounded-md border border-muted bg-background shadow-xl"
 				>
 					<Separator orientation="vertical" />
 					<NodeSelector open={openNode} onOpenChange={setOpenNode} />

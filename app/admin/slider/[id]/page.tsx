@@ -9,10 +9,10 @@ import { useQuery } from '@tanstack/react-query'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
-export default function SlideEditor({ params }: { params: { id: string } }) {
-	const { data, isPending } = useQuery(sliderQueries.getOne(params.id))
+export default function SldieEditePage({ params }: { params: { id: string } }) {
+	const { data, isLoading } = useQuery(sliderQueries.getOne(params.id))
 
-	if (isPending) return <Loading />
+	if (isLoading) return <Loading />
 	if (!data) return <NotFoundPage />
 
 	return (

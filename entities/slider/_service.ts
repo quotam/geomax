@@ -1,8 +1,11 @@
 import cacheStrategy from '@front/kernel/lib/cache-strategy'
 import dbClient from '@front/shared/lib/dbClient'
 import { SliderStatus } from '@prisma/client'
-import { serviceTag, SliderUpdateDto } from './_domain'
+import { SliderUpdateDto } from './_domain'
 import { userID } from '@front/kernel/domain/user'
+import { userEntity } from '../user/_domain/entities'
+
+const serviceTag = 'slider'
 
 class SliderService {
 	async getAll() {
@@ -29,12 +32,7 @@ class SliderService {
 				updatedAt: true,
 				status: true,
 				user: {
-					select: {
-						name: true,
-						slug: true,
-						role: true,
-						email: true
-					}
+					select: userEntity.fullUser
 				}
 			}
 		})
@@ -69,7 +67,6 @@ class SliderService {
 			}
 		})
 
-		cacheStrategy.invalidate(serviceTag)
 		return id
 	}
 	async delete(id: string) {

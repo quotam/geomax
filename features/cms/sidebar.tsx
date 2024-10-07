@@ -8,6 +8,7 @@ import {
 	Box,
 	CircleCheck,
 	Images,
+	LogOut,
 	Rss,
 	TableOfContents
 } from 'lucide-react'
@@ -15,15 +16,28 @@ import Link from 'next/link'
 import { useSingOut } from '../auth/useSingOut'
 import { Separator } from '@front/shared/ui/separator'
 import { ProfileAvatar } from '@front/entities/user/_ui/profileAvatar'
+import { ArticleType } from '@prisma/client'
 
 const navItems = [
 	{ name: 'Главная', icon: BarChart, href: '/admin' },
 	{ name: 'Слайдер', icon: Images, href: '/admin/slider' },
-	{ name: 'Новости', icon: Rss, href: '/admin/news' },
+	{
+		name: 'Новости',
+		icon: Rss,
+		href: '/admin/' + ArticleType.NEWS.toLowerCase()
+	},
 	{ name: 'Продукты', icon: Box, href: '/admin/products' },
 	{ name: 'FAQ', icon: TableOfContents, href: '/admin/faq' },
-	{ name: 'Проекты', icon: CircleCheck, href: '/admin/projects' },
-	{ name: 'Предложения', icon: BadgeRussianRuble, href: '/admin/sale' }
+	{
+		name: 'Проекты',
+		icon: CircleCheck,
+		href: '/admin/' + ArticleType.PROJECT.toLowerCase()
+	},
+	{
+		name: 'Предложения',
+		icon: BadgeRussianRuble,
+		href: '/admin/' + ArticleType.OFFER.toLowerCase()
+	}
 ]
 
 const CmsSidebar = ({ session }: { session: SessionEntity }) => {
@@ -54,10 +68,11 @@ const CmsSidebar = ({ session }: { session: SessionEntity }) => {
 				</p>
 				<Button
 					variant="secondary"
+					className="gap-3"
 					onClick={() => signOut.signOut()}
 					disabled={signOut.isPending}
 				>
-					Выйти
+					Выйти <LogOut className="h-4 w-4" />
 				</Button>
 			</div>
 		</aside>
