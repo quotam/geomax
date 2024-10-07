@@ -5,6 +5,7 @@ import { Session } from 'next-auth'
 import React from 'react'
 import { Toaster } from '@front/shared/ui/sonner'
 import QueriesClient from './queriesClient'
+import { TooltipProvider } from '@radix-ui/react-tooltip'
 
 const AppProvider = ({
 	children,
@@ -16,7 +17,9 @@ const AppProvider = ({
 	return (
 		<ThemeProvider>
 			<AppSessionProvider session={session}>
-				<QueriesClient>{children}</QueriesClient>
+				<QueriesClient>
+					<TooltipProvider>{children}</TooltipProvider>
+				</QueriesClient>
 				<Toaster position="bottom-right" />
 			</AppSessionProvider>
 		</ThemeProvider>

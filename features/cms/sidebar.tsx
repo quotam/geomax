@@ -1,0 +1,67 @@
+'use client'
+import { getProfileDisplayName } from '@front/entities/user/profile'
+import { SessionEntity } from '@front/kernel/domain/user'
+import { Button } from '@front/shared/ui/button'
+import {
+	BadgeRussianRuble,
+	BarChart,
+	Box,
+	CircleCheck,
+	Images,
+	Rss,
+	TableOfContents
+} from 'lucide-react'
+import Link from 'next/link'
+import { useSingOut } from '../auth/useSingOut'
+import { Separator } from '@front/shared/ui/separator'
+import { ProfileAvatar } from '@front/entities/user/_ui/profileAvatar'
+
+const navItems = [
+	{ name: 'Главная', icon: BarChart, href: '/admin' },
+	{ name: 'Слайдер', icon: Images, href: '/admin/slider' },
+	{ name: 'Новости', icon: Rss, href: '/admin/news' },
+	{ name: 'Продукты', icon: Box, href: '/admin/products' },
+	{ name: 'FAQ', icon: TableOfContents, href: '/admin/faq' },
+	{ name: 'Проекты', icon: CircleCheck, href: '/admin/projects' },
+	{ name: 'Предложения', icon: BadgeRussianRuble, href: '/admin/sale' }
+]
+
+const CmsSidebar = ({ session }: { session: SessionEntity }) => {
+	const signOut = useSingOut()
+
+	return (
+		<aside className="w-64 mr-8">
+			<nav className="space-y-1">
+				{navItems.map(item => (
+					<Link
+						key={item.name}
+						href={item.href}
+						className="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900"
+					>
+						<item.icon className="mr-3 h-6 w-6" />
+						{item.name}
+					</Link>
+				))}
+			</nav>
+			<div className="p-4 flex flex-col gap-3">
+				<Separator orientation="horizontal" />
+				<ProfileAvatar profile={{ ...session.user }} />
+				<p>
+					<span>Вы вошли как: </span>
+					<span className="text-lg font-bold">
+						{getProfileDisplayName(session.user)} [{session.user.role}]
+					</span>
+				</p>
+				<Button
+					variant="secondary"
+					onClick={() => signOut.signOut()}
+					disabled={signOut.isPending}
+				>
+					Выйти
+				</Button>
+			</div>
+		</aside>
+	)
+}
+
+export default CmsSidebar

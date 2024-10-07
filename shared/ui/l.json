@@ -1,0 +1,28 @@
+{
+	"type": "doc",
+	"content": [
+		{
+			"type": "paragraph",
+			"attrs": { "textAlign": "left" },
+			"content": [
+				{
+					"type": "text",
+					"marks": [
+						{
+							"type": "link",
+							"attrs": {
+								"href": "http://asd.ew",
+								"target": "_blank",
+								"rel": "noopener noreferrer nofollow",
+								"class": "text-muted-foreground underline underline-offset-[3px] hover:text-primary transition-colors cursor-pointer"
+							}
+						},
+						{ "type": "buttonLink", "attrs": { "class": null } }
+					],
+					"text": "asdasdfassdwerqwasdasd asd"
+				}
+			]
+		},
+		{ "type": "paragraph", "attrs": { "textAlign": "left" } }
+	]
+}

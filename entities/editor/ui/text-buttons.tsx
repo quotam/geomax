@@ -7,7 +7,8 @@ import {
 	CodeIcon,
 	AlignLeftIcon,
 	AlignCenterIcon,
-	AlignRightIcon
+	AlignRightIcon,
+	Zap
 } from 'lucide-react'
 import { Button } from '@front/shared/ui/button'
 import { SelectorItem } from './nodeSelector'
@@ -19,11 +20,19 @@ export const TextButtons = () => {
 
 	const items: SelectorItem[] = [
 		{
+			name: 'button',
+			command: editor => editor!!.chain().toggleMark('buttonLink').run(),
+			isActive: editor => editor!!.isActive('buttonLink'),
+			icon: Zap
+		},
+
+		{
 			name: 'align-left',
 			command: editor => editor!!.chain().focus().setTextAlign('left').run(),
 			isActive: editor => editor!!.isActive({ textAlign: 'left' }),
 			icon: AlignLeftIcon
 		},
+
 		{
 			name: 'align-center',
 			command: editor => editor!!.chain().focus().setTextAlign('center').run(),
@@ -79,7 +88,12 @@ export const TextButtons = () => {
 						item.command(editor)
 					}}
 				>
-					<Button size="sm" className="rounded-none" variant="ghost">
+					<Button
+						size="sm"
+						className="rounded-none"
+						onClick={e => e.preventDefault()}
+						variant="ghost"
+					>
 						<item.icon
 							className={cn('h-4 w-4', {
 								'text-primary': item.isActive(editor)

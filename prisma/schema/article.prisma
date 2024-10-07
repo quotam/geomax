@@ -1,0 +1,49 @@
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ArticleType {
+  OFFER
+  PROJECT
+  NEWS
+}
+
+model Category {
+  id    String @id @default(cuid())
+  title String
+
+  articles ArticleCategory[]
+}
+
+model Article {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  status ArticleStatus @default(DRAFT)
+  type   ArticleType
+
+  title String
+  body  String
+  desc  String
+  meta  String
+
+  user   User?   @relation(fields: [userID], references: [id], onDelete: SetNull)
+  userID String?
+
+  categories ArticleCategory[]
+}
+
+model ArticleCategory {
+  id          String      @id @default(cuid())
+  articleId   String
+  categoryId  String
+  articleType ArticleType
+
+  article  Article  @relation(fields: [articleId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
+
+  @@unique([articleId, categoryId, articleType])
+}

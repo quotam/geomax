@@ -72,7 +72,7 @@ const Projects = () => {
 					</Button>
 				</span>
 
-				<div className="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-3 gap-16">
+				<div className="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-3 md:px-8 sm:px-3 gap-16">
 					{projects.map(project => (
 						<Card key={project.id} className="flex flex-col overflow-hidden">
 							<Image

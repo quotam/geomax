@@ -6,9 +6,10 @@ import {
 	sliderDeleteAction,
 	sliderGetAllAction,
 	sliderGetAllAdminAction,
-	sliderGetOneAction
+	sliderGetOneAction,
+	sliderUpdateAction
 } from './_action'
-import { serviceTag } from './_domain'
+import { serviceTag, SliderUpdateDto } from './_domain'
 
 class SliderQueries {
 	getAll = queryOptions({
@@ -37,13 +38,31 @@ class SliderQueries {
 				queryClient.invalidateQueries({
 					queryKey: this.getAll.queryKey
 				})
-				toast('CREATED', {
+				toast('Слайд добавлен', {
 					action: {
 						label: 'Просмотр',
 						onClick: () => router.push('/admin/slider/' + id)
 					}
 				})
 				refetch?.()
+			}
+		}
+	}
+
+	update = () => {
+		const queryClient = useQueryClient()
+		return {
+			mutationKey: [serviceTag, 'update'],
+			mutationFn: (dto: SliderUpdateDto) => sliderUpdateAction(dto),
+			onSuccess: (id: string) => {
+				queryClient.refetchQueries({
+					queryKey: [this.getAll.queryKey, this.getAllAdmin.queryKey]
+				})
+				queryClient.resetQueries({
+					queryKey: this.getOne(id).queryKey
+				})
+
+				toast.success('Cлайд обновлен')
 			}
 		}
 	}
@@ -58,7 +77,7 @@ class SliderQueries {
 				queryClient.invalidateQueries({
 					queryKey: this.getAll.queryKey
 				})
-				toast.success('DELETED')
+				toast.success('Cлайд удален')
 				refetch?.()
 			}
 		}

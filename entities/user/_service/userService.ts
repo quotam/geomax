@@ -11,8 +11,6 @@ type CreateUser = {
 	emailVerified?: Date | null
 }
 
-const serviceTag = 'userService'
-
 class UserService {
 	async createUser(data: CreateUser) {
 		const adminMails = privateConfig.ADMIN_EMAILS?.split(',') ?? []

@@ -49,7 +49,7 @@ export default function EnhancedNewsSection() {
 			<div className="container">
 				<h4 className="text-3xl font-bold text-center mb-12">Последние новости</h4>
 
-				<div className="grid gap-8 md:grid-cols-2 grid-cols-3">
+				<div className="grid gap-8 md:px-4 sm:grid-cols-1 md:grid-cols-2 grid-cols-3">
 					{latestNews.map(news => (
 						<Card
 							key={news.id}

@@ -93,19 +93,17 @@ const CalcPage = () => {
 					<div className="space-y-2">
 						<div className="flex items-center space-x-2">
 							<Label htmlFor="costPerHectare">Стоимость обработки за гектар (₽)</Label>
-							<TooltipProvider>
-								<Tooltip>
-									<TooltipTrigger>
-										<Info className="h-4 w-4 text-muted-foreground" />
-									</TooltipTrigger>
-									<TooltipContent>
-										<p>
-											Введите среднюю стоимость обработки одного гектара, включая затраты
-											на семена, удобрения, топливо и т.д.
-										</p>
-									</TooltipContent>
-								</Tooltip>
-							</TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger>
+									<Info className="h-4 w-4 text-muted-foreground" />
+								</TooltipTrigger>
+								<TooltipContent>
+									<p>
+										Введите среднюю стоимость обработки одного гектара, включая затраты на
+										семена, удобрения, топливо и т.д.
+									</p>
+								</TooltipContent>
+							</Tooltip>
 						</div>
 						<Input
 							id="costPerHectare"

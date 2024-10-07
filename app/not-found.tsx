@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-const NotFound = () => {
+const NotFoundPage = () => {
 	return (
 		<div className="w-screen h-[calc(100vh-20rem)] flex justify-center flex-col items-center">
 			<h1 className="text-2xl"> 404 | Страница не найдена</h1>
@@ -15,4 +15,4 @@ const NotFound = () => {
 	)
 }
 
-export default NotFound
+export default NotFoundPage

@@ -66,18 +66,18 @@ export const menuItems = [
 	},
 	{
 		title: 'Калькулятор экономии',
-		href: 'calc'
+		href: '/calc'
 	},
 	{
 		title: 'Сезонные предложения',
-		href: 'offers'
+		href: '/offers'
 	},
 	{
 		title: 'Новости',
-		href: 'news'
+		href: '/news'
 	},
 	{
 		title: 'Контакты',
-		href: 'contacts'
+		href: '/contacts'
 	}
 ]

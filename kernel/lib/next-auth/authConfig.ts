@@ -6,13 +6,11 @@ import { compact } from 'lodash-es'
 import { AuthOptions, NextAuthOptions } from 'next-auth'
 import EmailProvider from 'next-auth/providers/email'
 import GoogleProvider from 'next-auth/providers/google'
-import OsuProvider from 'next-auth/providers/osu'
-import VkProvider from 'next-auth/providers/vk'
 
 export const authConfig: NextAuthOptions = {
 	adapter: {
 		...PrismaAdapter(dbClient),
-		createUser: async user => {
+		createUser: async (user: any) => {
 			return userService.createUser(user)
 		}
 	} as AuthOptions['adapter'],
@@ -52,7 +50,7 @@ export const authConfig: NextAuthOptions = {
 	providers: compact([
 		EmailProvider({
 			server: privateConfig.MAILER,
-			from: `Koyomi <${privateConfig.MAILER.auth.user}>`
+			from: `Geomax <${privateConfig.MAILER.auth.user}>`
 		}),
 		GoogleProvider({
 			clientId: privateConfig.GOOGLE_CLIENT_ID,

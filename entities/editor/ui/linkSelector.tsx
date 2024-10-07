@@ -38,7 +38,6 @@ export const LinkSelector = ({ open, onOpenChange }: LinkSelectorProps) => {
 	const inputRef = useRef<HTMLInputElement>(null)
 	const { editor } = useEditor()
 
-	// Autofocus on input by default
 	useEffect(() => {
 		inputRef.current && inputRef.current?.focus()
 	})
@@ -58,50 +57,48 @@ export const LinkSelector = ({ open, onOpenChange }: LinkSelectorProps) => {
 							'text-primary': editor.isActive('link')
 						})}
 					>
-						Ссылка
+						Link
 					</p>
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent align="start" className="w-60 p-0" sideOffset={10}>
-				<form
-					onSubmit={e => {
-						const target = e.currentTarget as HTMLFormElement
-						e.preventDefault()
-						const input = target[0] as HTMLInputElement
-						const url = getUrlFromString(input.value)
-						if (url) {
-							editor.chain().focus().setLink({ href: url }).run()
+				<input
+					ref={inputRef}
+					type="text"
+					placeholder="Paste a link"
+					className="flex-1 bg-background p-1 text-sm outline-none"
+					defaultValue={editor.getAttributes('link').href || ''}
+				/>
+				{editor.getAttributes('link').href ? (
+					<Button
+						size="icon"
+						variant="outline"
+						type="button"
+						className="flex h-8 items-center rounded-sm p-1 text-red-600 transition-all hover:bg-red-100 dark:hover:bg-red-800"
+						onClick={e => {
+							e.preventDefault()
+							editor.chain().focus().unsetLink().run()
 							onOpenChange(false)
-						}
-					}}
-					className="flex  p-1 "
-				>
-					<input
-						ref={inputRef}
-						type="text"
-						placeholder="Paste a link"
-						className="flex-1 bg-background p-1 text-sm outline-none"
-						defaultValue={editor.getAttributes('link').href || ''}
-					/>
-					{editor.getAttributes('link').href ? (
-						<Button
-							size="icon"
-							variant="outline"
-							type="button"
-							className="flex h-8 items-center rounded-sm p-1 text-red-600 transition-all hover:bg-red-100 dark:hover:bg-red-800"
-							onClick={() => {
-								editor.chain().focus().unsetLink().run()
+						}}
+					>
+						<Trash className="h-4 w-4" />
+					</Button>
+				) : (
+					<Button
+						onClick={e => {
+							e.preventDefault()
+							const url = inputRef.current?.value
+							if (url) {
+								editor.chain().focus().setLink({ href: url }).run()
 								onOpenChange(false)
-							}}
-						>
-							<Trash className="h-4 w-4" />
-						</Button>
-					) : (
-						<Button size="icon" className="h-8">
-							<Check className="h-4 w-4" />
-						</Button>
-					)}
-				</form>
+							}
+						}}
+						size="icon"
+						className="h-8"
+					>
+						<Check className="h-4 w-4" />
+					</Button>
+				)}
 			</PopoverContent>
 		</Popover>
 	)

@@ -1,5 +1,4 @@
 'use client'
-
 import { Separator } from '@front/shared/ui/separator'
 import {
 	EditorBubble,
@@ -26,7 +25,7 @@ const extensions = [...defaultExtensions, slashCommand]
 
 interface EditorProp {
 	initialValue?: JSONContent
-	onChange: (value: string) => void
+	onChange: (value: JSONContent) => void
 }
 const Editor = ({ initialValue, onChange }: EditorProp) => {
 	const [openNode, setOpenNode] = useState(false)
@@ -37,6 +36,7 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
 		<EditorRoot>
 			<EditorContent
 				className="min-h-50 border border-input rounded-md"
+				immediatelyRender={false}
 				{...(initialValue && { initialContent: initialValue })}
 				extensions={extensions}
 				editorProps={{
@@ -51,7 +51,7 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
 					}
 				}}
 				onUpdate={({ editor }) => {
-					onChange(editor.getHTML())
+					onChange(editor.getJSON())
 				}}
 			>
 				<EditorCommand className="z-50 h-auto max-h-[330px] overflow-y-auto rounded-md border border-muted bg-background px-1 py-2 shadow-md transition-all">

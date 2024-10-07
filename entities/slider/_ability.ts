@@ -6,6 +6,7 @@ export const sliderAbility = (session: SessionEntity) => {
 
 	return {
 		canViewAll: () => accessLevel,
+		canUpdate: () => accessLevel,
 		canCrete: () => accessLevel,
 		canDelete: () => accessLevel
 	}

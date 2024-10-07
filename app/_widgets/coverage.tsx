@@ -6,7 +6,7 @@ const Coverage = () => {
 		<section id="coverage">
 			<div className="container pt-35 flex items-center md:flex-col md:gap-18 xs:gap-8 justify-between sm:pt-16 xs:pt-0">
 				<SvgMap className="px-10 py-30 border-b-8 border-r-8 border-t-[.2rem]  border-l-[.2rem] rounded-lg rounded-ss-[6.2rem] box-content object-cover md:w-[88%] border-secondary w-[80rem] h-[43rem] sm:w-[83%] sm:h-50 xs:w-full xs:border-0 xs:-ml-10" />
-				<div className="px-8 w-2/5 md:p-0 md:w-full flex flex-col gap-9">
+				<div className="px-8 w-2/5 md:p-0 md:w-full flex flex-col gap-9 md:px-8">
 					<h4 className="text-heading sm:text-3xl  font-bold">
 						Широкая сеть регионального обслуживания
 					</h4>

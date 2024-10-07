@@ -1,7 +1,7 @@
 import cacheStrategy from '@front/kernel/lib/cache-strategy'
 import dbClient from '@front/shared/lib/dbClient'
 import { SliderStatus } from '@prisma/client'
-import { serviceTag } from './_domain'
+import { serviceTag, SliderUpdateDto } from './_domain'
 import { userID } from '@front/kernel/domain/user'
 
 class SliderService {
@@ -21,10 +21,38 @@ class SliderService {
 	}
 
 	async getAllAdmin() {
-		return await dbClient.slider.findMany()
+		return await dbClient.slider.findMany({
+			select: {
+				id: true,
+				body: true,
+				createdAt: true,
+				updatedAt: true,
+				status: true,
+				user: {
+					select: {
+						name: true,
+						slug: true,
+						role: true,
+						email: true
+					}
+				}
+			}
+		})
 	}
 	async getOne(id: string) {
 		return await dbClient.slider.findUnique({ where: { id } })
+	}
+
+	async update(dto: SliderUpdateDto) {
+		const { id } = await dbClient.slider.update({
+			where: { id: dto.id },
+			data: {
+				body: dto.body,
+				status: dto.status
+			}
+		})
+		cacheStrategy.invalidate(serviceTag)
+		return id
 	}
 	async create(userId: userID) {
 		const { id } = await dbClient.slider.create({

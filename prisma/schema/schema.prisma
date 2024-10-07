@@ -37,5 +37,6 @@ model User {
   role  UserRole @default(DEFAULT)
   slug  String   @unique
 
-  Slider Slider[]
+  Slider  Slider[]
+  Article Article[]
 }

@@ -5,7 +5,7 @@ import React from 'react'
 const InfoBlocks = () => {
 	return (
 		<section className="mt-32 sm:mt-16">
-			<div className="container flex justify-between  items-center md:flex-wrap md:gap-y-9">
+			<div className="container md:px-8 flex justify-between  items-center md:flex-wrap md:gap-y-9">
 				<div className="flex flex-col gap-7 mr-16 md:mr-0">
 					<h3 className="text-[6.4rem] sm:text-heading leading-[7.2rem]">
 						Добро пожаловать в <span className="text-primary">GPSAGRO!</span>
@@ -31,7 +31,7 @@ const InfoBlocks = () => {
 				</div>
 				<div>
 					<InfoBlock
-						className="md:w-90 sm:w-full"
+						className="md:w-80 sm:w-full"
 						icon={<MapPin className="h-12 w-12 text-primary" />}
 						data={{
 							title: 'Работаем и выезжаем',
@@ -43,7 +43,7 @@ const InfoBlocks = () => {
 					/>
 					<InfoBlock
 						icon={<TagIcon className="h-12 w-12 text-primary" />}
-						className="mt-12 md:w-90  sm:w-full"
+						className="mt-12 md:w-80  sm:w-full"
 						data={{
 							title: 'Мы уверенно гарантируем',
 							desc:
@@ -55,7 +55,7 @@ const InfoBlocks = () => {
 				</div>
 				<div className="mt-16 ml-12 md:m-0">
 					<InfoBlock
-						className="md:w-90 sm:w-full"
+						className="md:w-80 sm:w-full"
 						icon={<TagIcon className="h-12 w-12 text-primary" />}
 						data={{
 							title: 'Подбираем и устанавливаем',
@@ -67,7 +67,7 @@ const InfoBlocks = () => {
 					/>
 					<InfoBlock
 						icon={<TagIcon className="h-12 w-12 text-primary" />}
-						className="mt-12 md:w-90 sm:w-full"
+						className="mt-12 md:w-80 sm:w-full"
 						variant="primary"
 						data={{
 							title: 'Осуществляем \n поддержку',

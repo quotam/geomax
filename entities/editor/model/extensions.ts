@@ -4,6 +4,7 @@ import {
 	HorizontalRule,
 	Placeholder,
 	StarterKit,
+	HighlightExtension,
 	TaskItem,
 	TaskList,
 	TextStyle,
@@ -18,9 +19,69 @@ import { UploadImagesPlugin } from 'novel/plugins'
 
 import { cx } from 'class-variance-authority'
 
+import { Mark, mergeAttributes } from '@tiptap/core'
+
+interface CustomMarkOptions {
+	HTMLAttributes: Record<string, any>
+	classNames: string[] // массив классов для добавления
+}
+
+export const CustomMark = Mark.create<CustomMarkOptions>({
+	name: 'buttonLink',
+
+	// Опции по умолчанию
+	addOptions() {
+		return {
+			HTMLAttributes: {
+				class:
+					'bg-primary text-primary-foreground shadow hover:bg-primary/90 py-2 rounded-sm px-8 font-medium cursor-pointer leading-[4rem]'
+			},
+			classNames: []
+		}
+	},
+
+	// Добавляем наш атрибут `class`
+	addAttributes() {
+		return {
+			class: {
+				default: null,
+				parseHTML: element => element.getAttribute('class'),
+				renderHTML: attributes => {
+					if (!attributes.class) {
+						return {}
+					}
+					return { class: attributes.class }
+				}
+			}
+		}
+	},
+
+	parseHTML() {
+		return [
+			{
+				tag: 'span' // тег, который будет использоваться для данного марка
+			}
+		]
+	},
+
+	renderHTML({ HTMLAttributes }) {
+		const mergedClassNames = [
+			...this.options.classNames,
+			HTMLAttributes.class || ''
+		]
+			.join(' ')
+			.trim()
+
+		// Объединяем атрибуты с дополнительными классами
+		return [
+			'span',
+			mergeAttributes(this.options.HTMLAttributes, { class: mergedClassNames }),
+			0
+		]
+	}
+})
+
 const underline = TiptapUnderline
-//const aiHighlight = AIHighlight
-//
 
 const placeholder = Placeholder.configure({
 	placeholder: "Нажмите '/' для просмотра команд..",
@@ -31,11 +92,24 @@ const placeholder = Placeholder.configure({
 const color = Color
 const textStyle = TextStyle
 
+export const ButtonLink = TiptapLink.extend({
+	name: 'buttonLink',
+
+	// Определяем кастомные атрибуты
+	addOptions() {
+		return {
+			...this.parent?.(),
+			HTMLAttributes: {
+				class:
+					'bg-primary text-primary-foreground shadow hover:bg-primary/90 py-2 leading-[4rem] rounded-sm px-8 font-medium'
+			}
+		}
+	}
+})
+
 const tiptapLink = TiptapLink.configure({
 	HTMLAttributes: {
-		class: cx(
-			'text-muted-foreground underline underline-offset-[3px] hover:text-primary transition-colors cursor-pointer'
-		)
+		class: cx('underline hover:no-underline text-primary')
 	}
 })
 
@@ -118,10 +192,11 @@ export const defaultExtensions = [
 	taskList,
 	taskItem,
 	underline,
+	HighlightExtension,
 	horizontalRule,
-
-	//aiHighlight,
 	color,
+	CustomMark,
 	textStyle,
+	CustomMark,
 	TextAlign.configure({ types: ['heading', 'paragraph', 'image'] })
 ]

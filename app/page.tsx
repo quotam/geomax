@@ -5,7 +5,7 @@ import NewsSection from './_widgets/newsSection'
 import Projects from './_widgets/projects'
 import HeroSlider from './_widgets/slider'
 
-export default function Home() {
+export default function HomePage() {
 	return (
 		<main>
 			<HeroSlider />
