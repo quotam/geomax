@@ -1,0 +1,34 @@
+model Product {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  title String
+  price Float
+  body  String
+  meta  String
+
+  images String[]
+
+  user   User?   @relation(fields: [userID], references: [id], onDelete: SetNull)
+  userID String?
+
+  category   ProductCategory? @relation(fields: [categoryID], references: [id], onDelete: SetNull)
+  categoryID String?
+
+  facturer   Facturer? @relation(fields: [facturerID], references: [id], onDelete: SetNull)
+  facturerID String?
+}
+
+model Facturer {
+  id    String @id @default(cuid())
+  title String
+
+  Product Product[]
+}
+
+model ProductCategory {
+  id      String    @id @default(cuid())
+  title   String
+  Product Product[]
+}

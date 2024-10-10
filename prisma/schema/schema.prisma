@@ -39,4 +39,6 @@ model User {
 
   Slider  Slider[]
   Article Article[]
+
+  Product Product[]
 }
