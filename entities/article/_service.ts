@@ -8,13 +8,49 @@ import { ArticleUpdateDto } from './_domain/dto'
 const serviceTag = 'article'
 
 class ArticleService {
-	constructor(private readonly type: ArticleType) {}
+	constructor(private readonly _type: ArticleType) {}
+
+	createCategory(title: string) {
+		return dbClient.articleCategory.create({
+			data: {
+				title,
+				type: this._type
+			},
+			select: {
+				id: true,
+				title: true
+			}
+		})
+	}
+
+	deleteCategory(id: string) {
+		return dbClient.articleCategory.delete({
+			where: {
+				id
+			},
+			select: {
+				title: true
+			}
+		})
+	}
+
+	async getAdminCategoryes() {
+		return await dbClient.articleCategory.findMany({
+			where: {
+				type: this._type
+			},
+			select: {
+				id: true,
+				title: true
+			}
+		})
+	}
 
 	async getAll() {
 		return cacheStrategy.fetch([serviceTag], () =>
 			dbClient.article.findMany({
 				where: {
-					type: this.type,
+					type: this._type,
 					status: ArticleStatus.PUBLISHED
 				},
 				select: articleEntity.clientView
@@ -25,7 +61,7 @@ class ArticleService {
 	async getAllAdmin() {
 		return await dbClient.article.findMany({
 			where: {
-				type: this.type
+				type: this._type
 			},
 			select: articleEntity.adminView
 		})
@@ -38,6 +74,7 @@ class ArticleService {
 			},
 			select: {
 				...articleEntity.clientView,
+				image: true,
 				status: true
 			}
 		})
@@ -51,10 +88,13 @@ class ArticleService {
 			data: {
 				title: dto.title,
 				body: dto.body,
+				image: dto.image,
 				status: dto.status,
 				meta: dto.meta,
 				desc: dto.desc,
-				articleCategoryId: dto.categoryId
+				...(dto.categoryId && {
+					articleCategoryId: dto.categoryId
+				})
 			}
 		})
 		cacheStrategy.invalidate(serviceTag)
@@ -64,7 +104,7 @@ class ArticleService {
 	async create(userId: userID) {
 		const { id } = await dbClient.article.create({
 			data: {
-				type: this.type,
+				type: this._type,
 				body: '',
 				title: '',
 				desc: '',

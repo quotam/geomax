@@ -58,7 +58,7 @@ const config: Config = {
 			'0': ['0', '0'],
 			xs: ['clamp(1.2rem, 0.875vw, 1.4rem)', '2rem'],
 			base: ['clamp(1.4rem, 1vw, 1.6rem)', '2.4rem'],
-			lg: ['1,8rem', '2.2rem'],
+			lg: ['1.8rem', '2.2rem'],
 			xl: ['2rem', '2.8rem'],
 			'2xl': ['2.4rem', '2.6rem'],
 			'3xl': ['clamp(3rem, 2vw, 3.2rem)', '3.4rem'],

@@ -1,5 +1,4 @@
 import AppSearch from '@front/features/search/pub/search'
-import { menuItems } from '@front/shared/config/publicConfig'
 import { cn } from '@front/shared/lib/utils'
 import { Button } from '@front/shared/ui/button'
 import LogoIcon from '@front/shared/ui/logoIcon'
@@ -22,6 +21,52 @@ import {
 } from '@front/shared/ui/sheet'
 import { ChevronDown, Menu } from 'lucide-react'
 import Link from 'next/link'
+
+export const menuItems = [
+	{
+		title: 'О компании',
+		main: true,
+		subMenu: [
+			{
+				title: 'FAQ',
+				desc: 'Ответы на часто задаваемые вопросы, FAQ ',
+				href: '/faq'
+			},
+			{
+				title: 'Выполненные проекты',
+				desc:
+					'В этом разделе примеры наших успешных проектов, иллюстрирующие профессионализм и индивидуальный подход.',
+				href: '/project'
+			},
+			{
+				title: 'Реквизиты',
+				desc: 'Юридическая информация.',
+				href: '/legal'
+			}
+		]
+	},
+	{
+		title: 'Каталог',
+		href: '/catalog',
+		subMenu: []
+	},
+	{
+		title: 'Калькулятор экономии',
+		href: '/calc'
+	},
+	{
+		title: 'Сезонные предложения',
+		href: '/offer'
+	},
+	{
+		title: 'Новости',
+		href: '/news'
+	},
+	{
+		title: 'Контакты',
+		href: '/contacts'
+	}
+]
 
 const Logo = ({ className }: { className?: string }) => {
 	return (

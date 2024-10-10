@@ -1,17 +1,21 @@
 'use server'
 
 import { fileStorage } from '@front/kernel/lib/s3/fileStorage'
-import { BadRequestError } from '@front/shared/lib/errors'
-import { IMAGE_KEY } from '../domain'
+import { AccessDeniedError, BadRequestError } from '@front/shared/lib/errors'
+import { IMAGE_KEY as FILE_KEY } from '../domain'
+import { getAppSessionStrictServer } from '@front/kernel/lib/next-auth/getAppSessionStrictServer'
+import { editorAbility } from '../_ability'
 
-export const uploadProfileImage = async (data: FormData) => {
-	const file = data.get(IMAGE_KEY)
+export const uploadStorageFile = async (data: FormData) => {
+	const session = await getAppSessionStrictServer()
 
-	if (!(file instanceof File)) {
-		throw new BadRequestError()
+	if (editorAbility(session).canUploadFile()) {
+		const file = data.get(FILE_KEY)
+		if (!(file instanceof File)) throw new BadRequestError()
+
+		const stored = await fileStorage.uploadImage(file, FILE_KEY)
+		return stored.path
 	}
 
-	const stored = await fileStorage.uploadImage(file, IMAGE_KEY)
-
-	return stored.path
+	throw new AccessDeniedError('Недостаточно прав для загрузки file')
 }

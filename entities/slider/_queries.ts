@@ -26,7 +26,7 @@ class SliderQueries {
 
 	getOne = (id: string) =>
 		queryOptions({
-			queryKey: [serviceTag, 'getOne'],
+			queryKey: [serviceTag, id, 'getOne'],
 			queryFn: () => sliderGetOneAction(id)
 		})
 
@@ -34,7 +34,6 @@ class SliderQueries {
 		const queryClient = useQueryClient()
 		const router = useRouter()
 		return {
-			mutationKey: [serviceTag, 'create'],
 			mutationFn: () => sliderCreateAction(),
 			onSuccess: (id: string) => {
 				queryClient.invalidateQueries({
@@ -54,7 +53,6 @@ class SliderQueries {
 	update = () => {
 		const queryClient = useQueryClient()
 		return {
-			mutationKey: [serviceTag, 'update'],
 			mutationFn: (dto: SliderUpdateDto) => sliderUpdateAction(dto),
 			onSuccess: (id: string) => {
 				queryClient.refetchQueries({
@@ -73,7 +71,6 @@ class SliderQueries {
 		const queryClient = useQueryClient()
 
 		return {
-			mutationKey: [serviceTag, 'delete'],
 			mutationFn: (id: string) => sliderDeleteAction(id),
 			onSuccess: () => {
 				queryClient.invalidateQueries({

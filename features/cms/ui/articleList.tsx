@@ -18,6 +18,7 @@ import {
 	ChevronDownIcon,
 	ChevronUpIcon,
 	Edit,
+	Eye,
 	Pen,
 	PlusCircle,
 	PlusSquare,
@@ -28,12 +29,13 @@ import {
 	TooltipContent,
 	TooltipTrigger
 } from '@front/shared/ui/tooltip'
-import { Article } from './domain/type'
 import { ArticleStatus, ArticleType } from '@prisma/client'
+import { Article } from '../domain/type'
 
 type props = {
 	articles: Article[]
 	entityType: ArticleType
+	link?: (id: string) => string
 	createArticle: () => void
 	isPendingCreate: boolean
 	deleteArticle: (id: string) => void
@@ -41,6 +43,7 @@ type props = {
 
 const ArticleList = ({
 	articles,
+	link,
 	entityType,
 	isPendingCreate,
 	createArticle,
@@ -82,7 +85,7 @@ const ArticleList = ({
 	}
 	return (
 		<div>
-			<div className="flex justify-between items-center mb-4">
+			<div className="flex justify-between items-center mb-8">
 				<h1 className="text-2xl font-bold">Управление {entityType}</h1>
 				<Input
 					placeholder="Поиск по названию или автору"
@@ -93,7 +96,6 @@ const ArticleList = ({
 				<Button
 					onClick={createArticle}
 					disabled={isPendingCreate}
-					className="mb-4"
 					variant="secondary"
 				>
 					<PlusCircle className="mr-2 h-4 w-4" /> Добавить {entityType.toLowerCase()}
@@ -189,8 +191,20 @@ const ArticleList = ({
 									</Tooltip>
 								</TableCell>
 								<TableCell className="text-right">
+									{link && (
+										<Button
+											className="mr-2"
+											variant="outline"
+											title="Просмотр"
+											size="icon"
+										>
+											<Link href={link(article.id)}>
+												<Eye className="h-4 w-4" />
+											</Link>
+										</Button>
+									)}
 									<Button variant="outline" size="icon">
-										<Link href={`/admin/${entityType.toLowerCase()}/${article.id}`}>
+										<Link href={`/admin/${entityType}/${article.id}`}>
 											<Edit className="h-4 w-4" />
 										</Link>
 									</Button>
@@ -212,15 +226,17 @@ const ArticleList = ({
 						))}
 					</TableBody>
 				</Table>
-				{articles.length === 0 && (
+				{sortedArticles.length === 0 && (
 					<div className="flex flex-col items-center m-8">
-						<p>Ничего не найдено</p>
+						<p>Ничего не найдено..</p>
 						<Button
 							className="mx-auto mt-4"
+							variant="outline"
 							onClick={createArticle}
 							disabled={isPendingCreate}
 						>
-							Добавить {entityType} <PlusSquare className="ml-2 h-4 w-4" />
+							Добавить {entityType.toLowerCase()}{' '}
+							<PlusSquare className="ml-2 h-4 w-4" />
 						</Button>
 					</div>
 				)}

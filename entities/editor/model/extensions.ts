@@ -92,21 +92,6 @@ const placeholder = Placeholder.configure({
 const color = Color
 const textStyle = TextStyle
 
-export const ButtonLink = TiptapLink.extend({
-	name: 'buttonLink',
-
-	// Определяем кастомные атрибуты
-	addOptions() {
-		return {
-			...this.parent?.(),
-			HTMLAttributes: {
-				class:
-					'bg-primary text-primary-foreground shadow hover:bg-primary/90 py-2 leading-[4rem] rounded-sm px-8 font-medium'
-			}
-		}
-	}
-})
-
 const tiptapLink = TiptapLink.configure({
 	HTMLAttributes: {
 		class: cx('underline hover:no-underline text-primary')

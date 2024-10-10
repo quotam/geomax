@@ -26,21 +26,27 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SliderStatus } from '@prisma/client'
 import { useMutation } from '@tanstack/react-query'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 
-const UpdateSliderForm = ({ data }: { data: SliderUpdateDto }) => {
+const UpdateSliderForm = ({
+	data,
+	isPending
+}: {
+	data?: SliderUpdateDto | null
+	isPending: boolean
+}) => {
 	const form = useForm<SliderUpdateDto>({
-		resolver: zodResolver(SliderUpdateSchema),
-		defaultValues: {
-			id: data.id,
-			status: data.status,
-			body: data.body
-		}
+		resolver: zodResolver(SliderUpdateSchema)
 	})
 
 	const { mutateAsync, isPending: isPendingUpdate } = useMutation(
 		sliderQueries.update()
 	)
+
+	React.useEffect(() => {
+		if (data) form.reset(data)
+	}, [data, form])
 
 	function onSubmit(values: SliderUpdateDto) {
 		mutateAsync(values)
@@ -50,7 +56,7 @@ const UpdateSliderForm = ({ data }: { data: SliderUpdateDto }) => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="space-y-8 border mx-auto p-6 bg-white rounded-lg shadow-md"
+				className={`space-y-8 border mx-auto p-6 bg-white rounded-lg shadow-md ${isPending && 'animate-pulse bg-secondary/5'}`}
 			>
 				<h1 className="text-2xl font-bold mb-4">Редактирование слайда</h1>
 				<FormField
@@ -59,7 +65,7 @@ const UpdateSliderForm = ({ data }: { data: SliderUpdateDto }) => {
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Статус</FormLabel>
-							<Select onValueChange={field.onChange} defaultValue={field.value}>
+							<Select onValueChange={field.onChange} value={field.value}>
 								<FormControl>
 									<SelectTrigger>
 										<SelectValue placeholder="Выберите статус" />
@@ -86,8 +92,9 @@ const UpdateSliderForm = ({ data }: { data: SliderUpdateDto }) => {
 							<FormLabel>Содержимое слайда</FormLabel>
 							<FormControl>
 								<AppEditor
+									key={field.value?.slice(0, 10)}
 									className="bg-foreground text-background p-0 w-full"
-									initialValue={data?.body ? JSON.parse(data.body) : undefined}
+									initialValue={field.value && JSON.parse(field.value)}
 									onChange={e => field.onChange(JSON.stringify(e))}
 								/>
 							</FormControl>
@@ -97,7 +104,7 @@ const UpdateSliderForm = ({ data }: { data: SliderUpdateDto }) => {
 					)}
 				/>
 
-				<Button disabled={isPendingUpdate} type="submit">
+				<Button disabled={isPendingUpdate || isPending} type="submit">
 					Обновить
 				</Button>
 			</form>

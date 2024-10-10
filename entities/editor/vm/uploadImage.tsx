@@ -1,14 +1,14 @@
 import { createImageUpload } from 'novel/plugins'
 import { toast } from 'sonner'
-import { uploadProfileImage } from '../action/uploadImage'
+import { uploadStorageFile } from '../action/uploadImage'
 import { IMAGE_KEY } from '../domain'
 
-const onUpload = (file: File) => {
+export const onUpload = (file: File) => {
 	return new Promise(resolve => {
 		const formData = new FormData()
 		formData.append(IMAGE_KEY, file)
 		toast.promise(
-			uploadProfileImage(formData).then(res => {
+			uploadStorageFile(formData).then(res => {
 				let image = new Image()
 				image.src = res
 				image.onload = () => {
@@ -24,16 +24,18 @@ const onUpload = (file: File) => {
 	})
 }
 
+export const validateFn = (file: File) => {
+	if (!file.type.includes('image/')) {
+		toast.error('Формат файла не поддерживается.')
+		return false
+	} else if (file.size / 1024 / 1024 > 20) {
+		toast.error('Файл слишком большой (max 20MB).')
+		return false
+	}
+	return true
+}
+
 export const uploadFn = createImageUpload({
 	onUpload,
-	validateFn: file => {
-		if (!file.type.includes('image/')) {
-			toast.error('Формат файла не поддерживается.')
-			return false
-		} else if (file.size / 1024 / 1024 > 20) {
-			toast.error('Файл слишком большой (max 20MB).')
-			return false
-		}
-		return true
-	}
+	validateFn
 })

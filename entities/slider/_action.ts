@@ -2,7 +2,7 @@
 
 import { getAppSessionStrictServer } from '@front/kernel/lib/next-auth/getAppSessionStrictServer'
 import { schemaParse } from '@front/kernel/lib/zod/shemaParse'
-import { AccessErrorError } from '@front/shared/lib/errors'
+import { AccessDeniedError } from '@front/shared/lib/errors'
 import { sliderAbility } from './_ability'
 import { SliderUpdateDto, SliderUpdateSchema } from './_domain'
 import { sliderService } from './_service'
@@ -15,7 +15,7 @@ export const sliderUpdateAction = async (dto: SliderUpdateDto) => {
 		return await sliderService.update(result)
 	}
 
-	throw new AccessErrorError('Недостаточно прав для обновления')
+	throw new AccessDeniedError('Недостаточно прав для обновления')
 }
 
 export const sliderCreateAction = async () => {
@@ -25,7 +25,7 @@ export const sliderCreateAction = async () => {
 		return await sliderService.create(session.user.id)
 	}
 
-	throw new AccessErrorError('Недостаточно прав для создания')
+	throw new AccessDeniedError('Недостаточно прав для создания')
 }
 
 export const sliderDeleteAction = async (id: string) => {
@@ -35,7 +35,7 @@ export const sliderDeleteAction = async (id: string) => {
 		return await sliderService.delete(id)
 	}
 
-	throw new AccessErrorError('Недостаточно прав для удаления')
+	throw new AccessDeniedError('Недостаточно прав для удаления')
 }
 
 export const sliderGetOneAction = async (id: string) => {
@@ -45,7 +45,7 @@ export const sliderGetOneAction = async (id: string) => {
 		return await sliderService.getOne(id)
 	}
 
-	throw new AccessErrorError('Недостаточно прав для просмотра')
+	throw new AccessDeniedError('Недостаточно прав для просмотра')
 }
 
 export const sliderGetAllAction = async () => {
@@ -59,5 +59,5 @@ export const sliderGetAllAdminAction = async () => {
 		return await sliderService.getAllAdmin()
 	}
 
-	throw new AccessErrorError('Недостаточно прав для просмотра')
+	throw new AccessDeniedError('Недостаточно прав для просмотра')
 }

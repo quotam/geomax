@@ -1,14 +1,11 @@
 'use client'
-
 import Loading from '@front/app/loading'
 import { articleQueries } from '@front/entities/article/_queries'
-import ArticleList from '@front/features/cms/articleList'
-import { ArticleType } from '@prisma/client'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import ArticleList from './ui/articleList'
+import { ArticleType } from '@prisma/client'
 
-const entityType = ArticleType.FAQ
-
-export default function NewsAdmin() {
+const ListLayout = ({ entityType }: { entityType: ArticleType }) => {
 	const { data, isPending, refetch } = useQuery(
 		articleQueries(entityType).getAllAdmin
 	)
@@ -22,10 +19,13 @@ export default function NewsAdmin() {
 	if (isPending) return <Loading />
 
 	return (
-		<main className="p-4 w-full">
+		<main className="px-4 w-full">
 			<ArticleList
 				entityType={entityType}
 				isPendingCreate={isPendingCreate}
+				link={(id: string) =>
+					`/${entityType.toLowerCase()}/${entityType === ArticleType.FAQ && '#'}${id}`
+				}
 				articles={data || []}
 				createArticle={() => create()}
 				deleteArticle={(id: string) => deleteArticle(id)}
@@ -33,3 +33,5 @@ export default function NewsAdmin() {
 		</main>
 	)
 }
+
+export default ListLayout

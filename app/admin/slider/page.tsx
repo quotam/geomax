@@ -32,7 +32,7 @@ export default function SliderAdmin() {
 	if (isPendingData) return <Loading />
 
 	return (
-		<main className="p-4 w-full">
+		<main className="px-4 w-full">
 			<div className="flex flex-wrap justify-between items-center">
 				<h2 className="text-2xl font-bold mb-4">Управление главным слайдером</h2>
 

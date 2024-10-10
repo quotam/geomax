@@ -64,9 +64,9 @@ const Projects = () => {
 					Выполненные проекты
 					<CheckCircle strokeWidth={3} className="inline h-8 w-8 mb-2 ml-2" />
 				</h4>
-				<span className="text-center block text-muted-foreground mb-20">
+				<span className="text-center block mb-20">
 					Откройте для себя наши достижения и успешные решения. <br />
-					<Button variant="ghost" className="mt-4">
+					<Button variant="ghost" className="mt-4 text-muted-foreground">
 						<Link href="/projects">Архив проектов</Link>
 						<ArrowRight className="ml-2 h-4 w-4" />
 					</Button>

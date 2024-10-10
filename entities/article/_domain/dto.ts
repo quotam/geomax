@@ -9,6 +9,8 @@ export const ArticleUpdateSchema = z.object({
 		message: 'текст должен содержать не менее 2 символов.'
 	}),
 
+	image: z.string().optional().nullable(),
+
 	status: z.enum(Object.values(ArticleStatus) as [keyof typeof ArticleStatus], {
 		required_error: 'Пожалуйста, выберите статус.'
 	}),

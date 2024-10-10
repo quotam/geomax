@@ -3,7 +3,10 @@ import { queryOptions, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import {
 	ArticleCreateAdminAction,
+	ArticleCteateCategoryAction,
 	ArticleDeleteAdminAction,
+	ArticleDeleteCategoryAdminAction,
+	ArticleGetAdminCategoryes,
 	ArticleGetAllAdminAction,
 	ArticleGetOneAction,
 	ArticleUpdateAdminAction
@@ -45,6 +48,7 @@ class ArticleQueries {
 			}
 		}
 	}
+
 	delete = (refetch?: () => void) => {
 		return {
 			mutationKey: [serviceTag, this.type, 'delete'],
@@ -72,6 +76,29 @@ class ArticleQueries {
 			}
 		}
 	}
+
+	getCategories = queryOptions({
+		queryKey: [serviceTag, this.type, 'getCategories'],
+		queryFn: () => ArticleGetAdminCategoryes(this.type)
+	})
+
+	deleteCategory = (refetch?: () => void) => ({
+		mutationKey: [serviceTag, this.type, 'delete Category'],
+		mutationFn: (id: string) => ArticleDeleteCategoryAdminAction(this.type, id),
+		onSuccess: ({ title }: { title: string }) => {
+			toast.success('Категория ' + title + ' удалена')
+			refetch?.()
+		}
+	})
+
+	createCategory = (refetch?: () => void) => ({
+		mutationKey: [serviceTag, this.type, 'create Category'],
+		mutationFn: (title: string) => ArticleCteateCategoryAction(this.type, title),
+		onSuccess: ({ title }: { title: string }) => {
+			toast.success('Категория ' + title + ' создана')
+			refetch?.()
+		}
+	})
 }
 
 export const articleQueries = (type: ArticleType) => new ArticleQueries(type)

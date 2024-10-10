@@ -14,7 +14,7 @@ export class DataValidateError extends SafeError {
 	}
 }
 
-export class AccessErrorError extends SafeError {
+export class AccessDeniedError extends SafeError {
 	constructor(message = 'Access denied..') {
 		super(message)
 		this.name = message

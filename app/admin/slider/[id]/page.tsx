@@ -1,29 +1,27 @@
 'use client'
 
-import Loading from '@front/app/loading'
 import NotFoundPage from '@front/app/not-found'
 import { sliderQueries } from '@front/entities/slider'
-import UpdateSliderForm from '@front/features/updateSliderForm'
+import UpdateSliderForm from '@front/features/cms/updateSliderForm'
 import { Button } from '@front/shared/ui/button'
 import { useQuery } from '@tanstack/react-query'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
 export default function SldieEditePage({ params }: { params: { id: string } }) {
-	const { data, isLoading } = useQuery(sliderQueries.getOne(params.id))
+	const { data, isPending } = useQuery(sliderQueries.getOne(params.id))
 
-	if (isLoading) return <Loading />
-	if (!data) return <NotFoundPage />
+	if (!data && !isPending) return <NotFoundPage />
 
 	return (
-		<div className="container mx-auto p-4">
+		<main className="container mx-auto px-4">
 			<Link href="/admin/slider">
 				<Button variant="ghost" className="mb-4">
 					<ArrowLeft className="mr-2 h-4 w-4" />
 					Назад к списку слайдов{' '}
 				</Button>
 			</Link>
-			<UpdateSliderForm data={data} />
-		</div>
+			<UpdateSliderForm isPending={isPending} data={data} />
+		</main>
 	)
 }

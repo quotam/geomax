@@ -6,7 +6,7 @@ const VerifyPage = () => {
 			<Card className="p-4 mx-auto max-w-2xl  border mt-23">
 				<CardHeader>
 					<h1 className="text-2xl font-bold text-center">
-						Подтвердите свой аккаунт
+						Проверьте свою электронную почту
 					</h1>
 				</CardHeader>
 				<CardContent className="p-4">
