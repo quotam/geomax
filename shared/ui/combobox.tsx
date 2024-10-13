@@ -1,4 +1,4 @@
-import { Check } from 'lucide-react'
+import { Check, Plus } from 'lucide-react'
 import * as React from 'react'
 
 import { CaretSortIcon } from '@radix-ui/react-icons'
@@ -70,7 +70,15 @@ export function Combobox({
 			</PopoverTrigger>
 			<PopoverContent className={cn('p-0 w-full', style?.content)}>
 				<Command className={style?.command}>
-					<CommandInput onValueChange={onSearchValueChange} placeholder="Поиск.." />
+					<CommandInput
+						icon={
+							values?.length === 0 ? (
+								<Plus className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+							) : undefined
+						}
+						onValueChange={onSearchValueChange}
+						placeholder={values?.length === 0 ? 'Нзвание..' : 'Поиск...'}
+					/>
 					<CommandList>
 						<CommandEmpty>
 							{emptyContent ? emptyContent : 'Ничего не найдено'}

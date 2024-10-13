@@ -20,7 +20,7 @@ import { ArticleType } from '@prisma/client'
 
 const navItems = [
 	{ name: 'Главная', icon: BarChart, href: '/admin' },
-	{ name: 'Продукты', icon: Box, href: '/admin/products' },
+	{ name: 'Продукты', icon: Box, href: '/admin/product' },
 	{ name: 'Слайдер', icon: Images, href: '/admin/slider' },
 	{
 		name: 'Новости',

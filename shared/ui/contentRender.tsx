@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { cn } from '../lib/utils'
+import { Input } from './input'
 
 const renderContent = (node: any) => {
 	if (!node) return null
@@ -83,8 +84,13 @@ const renderContent = (node: any) => {
 
 		case 'taskItem':
 			return (
-				<div key={Math.random()}>
-					<input type="checkbox" checked={node.attrs?.checked} readOnly />{' '}
+				<div className="flex items-center" key={Math.random()}>
+					<Input
+						type="checkbox"
+						checked={node.attrs?.checked}
+						readOnly
+						className="mr-2 inline-block w-4 h-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-500 checked:border-blue-500 focus:outline-none transition-colors duration-200"
+					/>{' '}
 					{node.content?.map((childNode: any, index: number) => (
 						<React.Fragment key={index}>{renderContent(childNode)}</React.Fragment>
 					))}

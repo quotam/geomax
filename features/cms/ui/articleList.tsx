@@ -169,7 +169,7 @@ const ArticleList = ({
 					<TableBody>
 						{sortedArticles.map(article => (
 							<TableRow key={article.id}>
-								<TableCell className="font-medium">
+								<TableCell className="font-medium max-w-50 truncate">
 									{article.title || '[Без названия]'}
 								</TableCell>
 								<TableCell>{article.status}</TableCell>

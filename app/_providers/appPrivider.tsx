@@ -20,7 +20,7 @@ const AppProvider = ({
 				<QueriesClient>
 					<TooltipProvider>{children}</TooltipProvider>
 				</QueriesClient>
-				<Toaster position="bottom-right" />
+				<Toaster position="bottom-center" />
 			</AppSessionProvider>
 		</ThemeProvider>
 	)

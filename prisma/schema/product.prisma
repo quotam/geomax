@@ -1,14 +1,22 @@
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
 model Product {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  title String
-  price Float
-  body  String
-  meta  String
-
+  title  String
+  price  Float?
+  body   String
+  meta   String
   images String[]
+
+  status       ProductStatus @default(DRAFT)
+  availability Boolean       @default(true)
 
   user   User?   @relation(fields: [userID], references: [id], onDelete: SetNull)
   userID String?
@@ -21,9 +29,8 @@ model Product {
 }
 
 model Facturer {
-  id    String @id @default(cuid())
-  title String
-
+  id      String    @id @default(cuid())
+  title   String
   Product Product[]
 }
 

@@ -33,12 +33,10 @@ export default function SliderAdmin() {
 
 	return (
 		<main className="px-4 w-full">
-			<div className="flex flex-wrap justify-between items-center">
-				<h2 className="text-2xl font-bold mb-4">Управление главным слайдером</h2>
-
+			<div className="flex flex-wrap justify-between items-center mb-8">
+				<h1 className="text-2xl font-bold">Управление главным слайдером</h1>
 				<Button
 					onClick={() => mutateAsync()}
-					className="mb-4"
 					variant="secondary"
 					disabled={isPending}
 				>

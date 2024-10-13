@@ -6,8 +6,6 @@ class UserEntity {
 
 		name: true,
 		email: true,
-		emailVerified: true,
-		cover: true,
 
 		image: true,
 		slug: true,

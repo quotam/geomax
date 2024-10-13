@@ -59,7 +59,6 @@ export const ArticleUpdateAdminAction = async (
 	dto: ArticleUpdateDto
 ) => {
 	const session = await getAppSessionStrictServer()
-	console.log(dto)
 	if (articleAbility(session).canUpdate()) {
 		const result = schemaParse(ArticleUpdateSchema, dto)
 		return await articleService(type).update(result)

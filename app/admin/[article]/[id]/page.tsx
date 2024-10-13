@@ -8,6 +8,7 @@ const schema = z.object({
 	article: z.nativeEnum(ArticleType),
 	id: z.string()
 })
+
 const ArticleUpdatePage = ({ params }: { params: z.infer<typeof schema> }) => {
 	const result = schema.safeParse(params)
 	if (result.error) return <NotFound />

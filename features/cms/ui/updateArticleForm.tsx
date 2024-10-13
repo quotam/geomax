@@ -33,7 +33,8 @@ import { useMutation } from '@tanstack/react-query'
 import { Image } from 'lucide-react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import ArticleGroupSelect from './groupSelect'
+import { useArticleCat } from '../vm/useArticleCat'
+import GroupSelect from './groupSelect'
 
 const UpdateArticleForm = ({
 	data,
@@ -47,6 +48,8 @@ const UpdateArticleForm = ({
 	const form = useForm<ArticleUpdateDto>({
 		resolver: zodResolver(ArticleUpdateSchema)
 	})
+
+	const options = useArticleCat(entityType)
 
 	const { mutateAsync, isPending: isPendingUpdate } = useMutation(
 		articleQueries(entityType).update()
@@ -100,7 +103,7 @@ const UpdateArticleForm = ({
 								<FormItem>
 									<FormLabel>Категория</FormLabel>
 									<FormControl>
-										<ArticleGroupSelect type={entityType} field={field} />
+										<GroupSelect {...options} field={field} />
 									</FormControl>
 									<FormDescription>Выберите категорию.</FormDescription>
 									<FormMessage />

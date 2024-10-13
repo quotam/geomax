@@ -58,8 +58,6 @@ export default function AdminPanel() {
 
 	return (
 		<main className="flex-1">
-			<h2 className="text-3xl font-bold text-gray-900 mb-8"></h2>
-
 			<div className="grid sm:grid-cols-1 gap-4 md:grid-cols-2 grid-cols-3 mb-8">
 				<Card>
 					<CardHeader>

@@ -1,18 +1,21 @@
-import { articleQueries } from '@front/entities/article/_queries'
 import { cn } from '@front/shared/lib/utils'
 import { Button } from '@front/shared/ui/button'
 import { Combobox } from '@front/shared/ui/combobox'
 import { CommandItem } from '@front/shared/ui/command'
-import { ArticleType } from '@prisma/client'
-import { useMutation, useQuery } from '@tanstack/react-query'
 import { Check, PlusSquare, Trash } from 'lucide-react'
 import React from 'react'
 
-const ArticleGroupSelect = ({
-	type,
-	field
+const GroupSelect = ({
+	field,
+	data,
+	isFetching,
+	createCat,
+	deleteCat
 }: {
-	type: ArticleType
+	data?: { value: string; label: string }[]
+	isFetching: boolean
+	createCat: (name: string) => Promise<{ id: string }>
+	deleteCat: (id: string) => void
 	field: any
 }) => {
 	const [search, setSearch] = React.useState('')
@@ -23,16 +26,6 @@ const ArticleGroupSelect = ({
 			setSearch('')
 		}
 	}, [open])
-
-	const { data, refetch, isFetching } = useQuery(
-		articleQueries(type).getCategories
-	)
-	const { mutateAsync: createCat } = useMutation(
-		articleQueries(type).createCategory(refetch)
-	)
-	const { mutateAsync: deleteCat } = useMutation(
-		articleQueries(type).deleteCategory(refetch)
-	)
 
 	return (
 		<div className="flex gap-2">
@@ -82,7 +75,7 @@ const ArticleGroupSelect = ({
 				emptyContent={
 					<div>
 						<p className="text-muted-foreground mb-2">
-							Результатов не найдено.. <br />{' '}
+							{data?.length === 0 ? 'Создайте категорию' : 'Ничего не найдено'} <br />
 						</p>
 						{search && (
 							<Button
@@ -101,14 +94,11 @@ const ArticleGroupSelect = ({
 						)}
 					</div>
 				}
-				placeholder="Выберите категорию статьи"
-				values={data?.map(category => ({
-					value: category.id,
-					label: category.title
-				}))}
+				placeholder="Выберите значение"
+				values={data}
 			/>
 		</div>
 	)
 }
 
-export default ArticleGroupSelect
+export default GroupSelect
