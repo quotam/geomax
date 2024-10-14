@@ -1,3 +1,5 @@
+import { articleService } from '@front/entities/article/_service'
+import { productService } from '@front/entities/product/_service'
 import AppSearch from '@front/features/search/pub/search'
 import { cn } from '@front/shared/lib/utils'
 import { Button } from '@front/shared/ui/button'
@@ -80,7 +82,21 @@ const Logo = ({ className }: { className?: string }) => {
 	)
 }
 
-const Header = () => {
+const Header = async () => {
+	const catalog = await productService.getCategories()
+	const items = menuItems.map(i => {
+		if (i.title === 'Каталог') {
+			return {
+				...i,
+				subMenu: catalog.map(c => ({
+					title: c.title,
+					href: `/catalog/${c.id}`,
+					desc: c.desc
+				}))
+			}
+		}
+		return i
+	})
 	return (
 		<header className="sticky top-0 z-50 w-full pt-1 backdrop-blur supports-[backdrop-filter]:bg-transparent">
 			<div className="container flex justify-between items-center text-secondary-foreground">
@@ -105,7 +121,7 @@ const Header = () => {
 							</SheetClose>
 						</SheetHeader>
 						<ul className="flex flex-col gap-3">
-							{menuItems.map((item, i) => {
+							{items.map((item, i) => {
 								if (item.subMenu && !item.href)
 									return (
 										<li key={i}>
@@ -134,7 +150,7 @@ const Header = () => {
 				</Sheet>
 				<NavigationMenu className="bg-secondary/70 md:hidden p-1 border-[.1rem] border-foreground/10 rounded-lg">
 					<NavigationMenuList>
-						{menuItems.map((item, i) => {
+						{items.map((item, i) => {
 							if (item.subMenu)
 								return (
 									<NavigationMenuItem key={i}>

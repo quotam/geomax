@@ -1,4 +1,6 @@
-'use client'
+import { articleAbility } from '@front/entities/article/_ability'
+import { articleService } from '@front/entities/article/_service'
+import { getAppSessionServer } from '@front/kernel/lib/next-auth/getAppSessionServer'
 import { Badge } from '@front/shared/ui/badge'
 import { Button } from '@front/shared/ui/button'
 import {
@@ -9,110 +11,83 @@ import {
 	CardHeader,
 	CardTitle
 } from '@front/shared/ui/card'
+import JSONContentRenderer from '@front/shared/ui/contentRender'
+import { Calendar, Settings } from 'lucide-react'
 import Image from 'next/image'
-import { useState } from 'react'
+import Link from 'next/link'
 
-const seasonalOffers = [
-	{
-		id: 1,
-		title: 'Летняя распродажа навигаторов',
-		description: 'Скидки до 30% на все морские навигаторы',
-		season: 'Лето',
-		image: '/placeholder.svg',
-		endDate: '2024-08-31',
-		discount: '30%',
-		code: 'SUMMER30'
-	},
-	{
-		id: 2,
-		title: 'Осенний комплект для яхтинга',
-		description: 'Специальное предложение: навигатор + эхолот со скидкой 25%',
-		season: 'Осень',
-		image: '/placeholder.svg',
-		endDate: '2024-11-30',
-		discount: '25%',
-		code: 'AUTUMN25'
-	},
-	{
-		id: 3,
-		title: 'Зимнее хранение лодок',
-		description:
-			'Забронируйте место для зимнего хранения лодки и получите скидку 20% на весенное обслуживание',
-		season: 'Зима',
-		image: '/placeholder.svg',
-		endDate: '2025-02-28',
-		discount: '20%',
-		code: 'WINTER20'
-	},
-	{
-		id: 4,
-		title: 'Весенняя подготовка к сезону',
-		description:
-			'Комплексная проверка и обслуживание вашего судна со скидкой 15%',
-		season: 'Весна',
-		image: '/placeholder.svg',
-		endDate: '2024-05-31',
-		discount: '15%',
-		code: 'SPRING15'
-	}
-]
+export default async function OfferPage({
+	searchParams
+}: {
+	searchParams: { [key: string]: string | string[] | undefined }
+}) {
+	const session = await getAppSessionServer()
 
-const seasons = ['Все', 'Весна', 'Лето', 'Осень', 'Зима']
+	const selectedCategory = searchParams.category
 
-export default function SeasonalOffers() {
-	const [selectedSeason, setSelectedSeason] = useState('Все')
+	const items = await articleService('OFFER').getCatFiltered()
 
-	const filteredOffers =
-		selectedSeason === 'Все'
-			? seasonalOffers
-			: seasonalOffers.filter(offer => offer.season === selectedSeason)
+	const filteredItems =
+		typeof selectedCategory === 'string'
+			? items.filter(item => item.category.id === selectedCategory)
+			: items
 
 	return (
-		<main className="container px-4 py-20">
+		<main className="container py-20 px-15 md:px-10 sm:px-4">
 			<h1 className="text-3xl font-bold mb-8 text-center">Сезонные предложения</h1>
 
-			<div className="flex flex-wrap justify-center gap-2 mb-12">
-				{seasons.map(season => (
+			<div className="flex flex-wrap gap-2 justify-center mb-12">
+				{items.map(i => (
 					<Button
-						key={season}
-						variant={selectedSeason === season ? 'secondary' : 'outline'}
-						onClick={() => setSelectedSeason(season)}
+						key={i.category.id}
+						variant={selectedCategory === i.category.id ? 'secondary' : 'outline'}
 					>
-						{season}
+						<Link href={`/offer?category=${i.category.id}`}>{i.category.title}</Link>
 					</Button>
 				))}
 			</div>
-
 			<div className="grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 gap-6">
-				{filteredOffers.map(offer => (
-					<Card key={offer.id} className="flex flex-col">
-						<CardHeader>
-							<Image
-								src={offer.image}
-								alt={offer.title}
-								width={600}
-								height={400}
-								className="w-full h-48 object-cover rounded-t-lg"
-							/>
-							<CardTitle className="mt-2">{offer.title}</CardTitle>
-							<CardDescription>{offer.description}</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<Badge>{offer.season}</Badge>
-							<div className="mt-2">
-								<span className="font-bold">Скидка: </span>
-								{offer.discount}
+				{filteredItems.map(cat =>
+					cat.article.map(item => (
+						<Card key={item.id} className="flex relative flex-col">
+							{session && articleAbility(session).canUpdate() && (
+								<Link
+									href={`/admin/OFFER/${item.id}`}
+									className="text-primary absolute top-2 right-2"
+								>
+									<Settings className="w-4 h-4" />
+								</Link>
+							)}
+							<div className="px-6 pt-6">
+								<Image
+									src={item.image || 'placeholder.svg'}
+									alt={item.title}
+									width={600}
+									height={400}
+									className="w-full h-50 object-cover rounded-t-lg"
+								/>
 							</div>
-							<div className="mt-2">
-								<span className="font-bold">Код акции: </span>
-								{offer.code}
-							</div>
-						</CardContent>
-						<CardFooter className="mt-auto">
-							<Button className="w-full">Воспользоваться предложением</Button>
-						</CardFooter>
-					</Card>
-				))}
+							<CardHeader>
+								<div className="flex justify-between items-center">
+									<CardTitle className="text-xl">{item.title}</CardTitle>{' '}
+									<Badge variant="secondary">{cat.category.title}</Badge>
+								</div>
+								<CardDescription>
+									<Calendar className="h-4 w-4 inline mr-2 mb-1" />
+									{new Date(item.createdAt).toLocaleDateString()}
+								</CardDescription>
+								<CardContent className="p-0">
+									<JSONContentRenderer content={item.desc} />
+								</CardContent>
+							</CardHeader>
+							<CardFooter className="mt-auto">
+								<Button className="w-full">
+									<Link href={`/offer/${item.id}`}>Воспользоваться предложением</Link>
+								</Button>
+							</CardFooter>
+						</Card>
+					))
+				)}
 			</div>
 		</main>
 	)

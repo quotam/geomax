@@ -5,6 +5,7 @@ class ArtileEntity {
 		id: true,
 		title: true,
 		body: true,
+		image: true,
 		desc: true,
 		meta: true,
 		createdAt: true,

@@ -101,7 +101,7 @@ const ArticleList = ({
 					<PlusCircle className="mr-2 h-4 w-4" /> Добавить {entityType.toLowerCase()}
 				</Button>
 			</div>
-			<div className="rounded-md border">
+			<div className="rounded-md border bg-card">
 				<Table>
 					<TableHeader>
 						<TableRow>

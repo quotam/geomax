@@ -37,5 +37,6 @@ model Facturer {
 model ProductCategory {
   id      String    @id @default(cuid())
   title   String
+  desc    String
   Product Product[]
 }

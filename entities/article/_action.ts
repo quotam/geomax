@@ -49,7 +49,7 @@ export const ArticleGetAllAdminAction = async (type: ArticleType) => {
 export const ArticleGetOneAction = async (type: ArticleType, id: string) => {
 	const session = await getAppSessionStrictServer()
 	if (articleAbility(session).canViewAll()) {
-		return await articleService(type).getOne(id)
+		return await articleService(type).getOneAdmin(id)
 	}
 	throw new AccessDeniedError('Недостаточно прав для просмотра')
 }

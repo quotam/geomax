@@ -69,7 +69,7 @@ class ArticleQueries {
 				toast(this.type + ' добавлен', {
 					action: {
 						label: 'Просмотр',
-						onClick: () => router.push('/admin/' + this.type.toLowerCase() + '/' + id)
+						onClick: () => router.push('/admin/' + this.type + '/' + id)
 					}
 				})
 				refetch?.()

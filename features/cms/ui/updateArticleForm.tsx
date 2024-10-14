@@ -1,5 +1,4 @@
 'use client'
-
 import {
 	ArticleUpdateDto,
 	ArticleUpdateSchema
@@ -35,6 +34,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useArticleCat } from '../vm/useArticleCat'
 import GroupSelect from './groupSelect'
+import { cn } from '@front/shared/lib/utils'
 
 const UpdateArticleForm = ({
 	data,
@@ -63,13 +63,19 @@ const UpdateArticleForm = ({
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(values => mutateAsync(values))}
-				className={`space-y-4 border mx-auto p-6 bg-white rounded-lg shadow-md ${isPending && 'animate-pulse bg-secondary/5'}`}
+				className={`space-y-4 border bg-card mx-auto p-6 bg-white rounded-lg shadow-md ${isPending && 'animate-pulse bg-secondary/5'}`}
 			>
 				<h1 className="text-2xl font-bold mb-10">
 					Редактирование {entityType.toLowerCase()}
 				</h1>
 				<div className="grid grid-cols-2 gap-4">
-					<div className="space-y-4">
+					<div
+						className={cn(
+							'space-y-4',
+							entityType === ArticleType.FAQ &&
+								'col-span-2 grid grid-cols-2 gap-4 space-y-0'
+						)}
+					>
 						<FormField
 							control={form.control}
 							name="status"
@@ -111,55 +117,57 @@ const UpdateArticleForm = ({
 							)}
 						/>
 					</div>
-					<FormField
-						control={form.control}
-						name="image"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Изображение</FormLabel>
-								<FormControl>
-									<Button
-										variant="secondary"
-										className="w-full flex-col h-auto"
-										onClick={e => {
-											e.preventDefault()
-											selectFile('image/*').then(file => {
-												if (validateFn(file))
-													onUpload(file).then(url => field.onChange(url))
-											})
-										}}
-									>
-										<div className="flex items-center gap-2">
-											Выберите изображение <Image size={20} />
-										</div>
-										{field.value && (
-											<img
-												src={field.value}
-												alt="preview"
-												className="w-full object-cover"
-											/>
-										)}
-									</Button>
-								</FormControl>
-								<FormDescription>
-									Выберите изображение.{' '}
-									{field.value && (
+					{entityType !== ArticleType.FAQ && (
+						<FormField
+							control={form.control}
+							name="image"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Изображение</FormLabel>
+									<FormControl>
 										<Button
-											variant="link"
-											className="text-destructive"
+											variant="secondary"
+											className="w-full flex-col h-auto"
 											onClick={e => {
 												e.preventDefault()
-												field.onChange('')
+												selectFile('image/*').then(file => {
+													if (validateFn(file))
+														onUpload(file).then(url => field.onChange(url))
+												})
 											}}
 										>
-											Сбросить
+											<div className="flex items-center gap-2">
+												Выберите изображение <Image size={20} />
+											</div>
+											{field.value && (
+												<img
+													src={field.value}
+													alt="preview"
+													className="w-full object-cover"
+												/>
+											)}
 										</Button>
-									)}
-								</FormDescription>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+									</FormControl>
+									<FormDescription>
+										Выберите изображение.{' '}
+										{field.value && (
+											<Button
+												variant="link"
+												className="text-destructive"
+												onClick={e => {
+													e.preventDefault()
+													field.onChange('')
+												}}
+											>
+												Сбросить
+											</Button>
+										)}
+									</FormDescription>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+					)}
 				</div>
 				<FormField
 					control={form.control}
@@ -196,10 +204,10 @@ const UpdateArticleForm = ({
 				{entityType !== ArticleType.FAQ && (
 					<FormField
 						control={form.control}
-						name="desc"
+						name="body"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Описание</FormLabel>
+								<FormLabel>Контент</FormLabel>
 								<FormControl>
 									<AppEditor
 										key={field.value?.slice(0, 10)}
@@ -207,10 +215,7 @@ const UpdateArticleForm = ({
 										onChange={e => field.onChange(JSON.stringify(e))}
 									/>
 								</FormControl>
-								<FormDescription>
-									Превью {entityType.toLowerCase()}, краткая информация. (в редких
-									случаях не требуется).
-								</FormDescription>
+								<FormDescription>Основное содержимое.</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
@@ -219,10 +224,10 @@ const UpdateArticleForm = ({
 
 				<FormField
 					control={form.control}
-					name="body"
+					name="desc"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Контент</FormLabel>
+							<FormLabel>Описание</FormLabel>
 							<FormControl>
 								<AppEditor
 									key={field.value?.slice(0, 10)}
@@ -230,7 +235,10 @@ const UpdateArticleForm = ({
 									onChange={e => field.onChange(JSON.stringify(e))}
 								/>
 							</FormControl>
-							<FormDescription>Основное содержимое.</FormDescription>
+							<FormDescription>
+								Превью {entityType.toLowerCase()}, краткая информация. (в редких случаях
+								не требуется).
+							</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}

@@ -10,13 +10,15 @@ const GroupSelect = ({
 	data,
 	isFetching,
 	createCat,
-	deleteCat
+	deleteCat,
+	renderCreateLable
 }: {
 	data?: { value: string; label: string }[]
 	isFetching: boolean
 	createCat: (name: string) => Promise<{ id: string }>
 	deleteCat: (id: string) => void
 	field: any
+	renderCreateLable?: (s: string) => React.ReactNode
 }) => {
 	const [search, setSearch] = React.useState('')
 	const [open, setOpen] = React.useState(false)
@@ -56,7 +58,9 @@ const GroupSelect = ({
 							title="Удалить категорию"
 							onClick={e => {
 								e.preventDefault()
-								deleteCat(item.value)
+								confirm(
+									'Удалить категорию? Категория может использоваться в других записях'
+								) && deleteCat(item.value)
 							}}
 							className="hidden group-hover:flex"
 							size="icon"
@@ -89,7 +93,9 @@ const GroupSelect = ({
 								variant="outline"
 							>
 								<PlusSquare className=" h-4 w-4" />
-								<span>{search}</span>{' '}
+								<span>
+									{renderCreateLable ? renderCreateLable(search) : search}
+								</span>{' '}
 							</Button>
 						)}
 					</div>

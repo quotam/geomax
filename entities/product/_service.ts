@@ -10,7 +10,25 @@ const serviceTag = 'product'
 class ProductService {
 	cacheTags = {
 		list: serviceTag,
-		once: (id: string) => id + serviceTag
+		once: (id: string) => id + serviceTag,
+		category: serviceTag + 'cat'
+	}
+
+	getCategories() {
+		return cacheStrategy.fetch([this.cacheTags.category], () =>
+			dbClient.productCategory.findMany({
+				select: {
+					id: true,
+					title: true,
+					desc: true
+				},
+				where: {
+					Product: {
+						some: {}
+					}
+				}
+			})
+		)
 	}
 
 	async createFacturer(title: string) {
@@ -40,16 +58,20 @@ class ProductService {
 		})
 	}
 	async createCategory(title: string) {
-		return await dbClient.productCategory.create({
+		const data = title.split('&')
+		const cat = await dbClient.productCategory.create({
 			data: {
-				title
+				title: data[0],
+				desc: data[1] || ''
 			},
 			select: { id: true, title: true }
 		})
+		cacheStrategy.invalidate(this.cacheTags.category)
+		return cat
 	}
 
 	async deleteCategory(id: string) {
-		return await dbClient.productCategory.delete({
+		const cat = await dbClient.productCategory.delete({
 			where: {
 				id
 			},
@@ -57,6 +79,8 @@ class ProductService {
 				title: true
 			}
 		})
+		cacheStrategy.invalidate(this.cacheTags.category)
+		return cat
 	}
 
 	async getAdminCategoryes() {
@@ -78,6 +102,7 @@ class ProductService {
 			select: { id: true }
 		})
 		cacheStrategy.invalidate(this.cacheTags.list)
+		cacheStrategy.invalidate(this.cacheTags.category)
 		cacheStrategy.invalidate(this.cacheTags.once(id))
 		return id
 	}

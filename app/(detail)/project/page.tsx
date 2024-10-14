@@ -1,5 +1,7 @@
-'use client'
-import { useState } from 'react'
+import { articleAbility } from '@front/entities/article/_ability'
+import { articleService } from '@front/entities/article/_service'
+import { getAppSessionServer } from '@front/kernel/lib/next-auth/getAppSessionServer'
+import { Badge } from '@front/shared/ui/badge'
 import { Button } from '@front/shared/ui/button'
 import {
 	Card,
@@ -9,152 +11,85 @@ import {
 	CardHeader,
 	CardTitle
 } from '@front/shared/ui/card'
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger
-} from '@front/shared/ui/dialog'
-import { Badge } from '@front/shared/ui/badge'
+import JSONContentRenderer from '@front/shared/ui/contentRender'
+import { Calendar, Settings } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
-const projects = [
-	{
-		id: 1,
-		title: 'Морской навигатор Pro',
-		description: 'Разработка современной навигационной системы для морских судов',
-		category: 'Навигация',
-		image: '/placeholder.svg',
-		completionDate: '2023-05-15',
-		client: 'OceanTech Inc.',
-		technologies: ['React Native', 'GPS API', 'Морские карты']
-	},
-	{
-		id: 2,
-		title: 'Система управления яхтой',
-		description: 'Интегрированная система для управления всеми аспектами яхты',
-		category: 'Управление',
-		image: '/placeholder.svg',
-		completionDate: '2023-08-22',
-		client: 'LuxuryYachts Co.',
-		technologies: ['IoT', 'React', 'Node.js']
-	},
-	{
-		id: 3,
-		title: 'Приложение для рыбалки',
-		description: 'Мобильное приложение для отслеживания лучших мест для рыбалки',
-		category: 'Мобильные приложения',
-		image: '/placeholder.svg',
-		completionDate: '2023-03-10',
-		client: 'FishFinder Ltd.',
-		technologies: ['React Native', 'Google Maps API', 'Weather API']
-	},
-	{
-		id: 4,
-		title: 'Система мониторинга двигателя',
-		description:
-			'Разработка системы для мониторинга состояния морских двигателей',
-		category: 'Мониторинг',
-		image: '/placeholder.svg',
-		completionDate: '2023-11-05',
-		client: 'MarineEngines Corp.',
-		technologies: ['IoT сенсоры', 'Real-time аналитика', 'Облачное хранение']
-	}
-]
+export default async function OfferPage({
+	searchParams
+}: {
+	searchParams: { [key: string]: string | string[] | undefined }
+}) {
+	const session = await getAppSessionServer()
 
-const categories = [
-	'Все',
-	'Навигация',
-	'Управление',
-	'Мобильные приложения',
-	'Мониторинг'
-]
+	const selectedCategory = searchParams.category
 
-export default function CompletedProjects() {
-	const [selectedCategory, setSelectedCategory] = useState('Все')
+	const items = await articleService('PROJECT').getCatFiltered()
 
-	const filteredProjects =
-		selectedCategory === 'Все'
-			? projects
-			: projects.filter(project => project.category === selectedCategory)
+	const filteredItems =
+		typeof selectedCategory === 'string'
+			? items.filter(item => item.category.id === selectedCategory)
+			: items
 
 	return (
-		<main className="container px-4 py-20">
+		<main className="container py-20 px-15 md:px-10 sm:px-4">
 			<h1 className="text-3xl font-bold mb-8 text-center">Выполненные проекты</h1>
 
 			<div className="flex flex-wrap gap-2 justify-center mb-12">
-				{categories.map(category => (
+				{items.map(i => (
 					<Button
-						key={category}
-						variant={selectedCategory === category ? 'secondary' : 'outline'}
-						onClick={() => setSelectedCategory(category)}
+						key={i.category.id}
+						variant={selectedCategory === i.category.id ? 'secondary' : 'outline'}
 					>
-						{category}
+						<Link href={`/project?category=${i.category.id}`}>
+							{i.category.title}
+						</Link>
 					</Button>
 				))}
 			</div>
-
 			<div className="grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 gap-6">
-				{filteredProjects.map(project => (
-					<Card key={project.id} className="flex flex-col">
-						<CardHeader>
-							<Image
-								src={project.image}
-								alt={project.title}
-								width={600}
-								height={400}
-								className="w-full h-48 object-cover rounded-t-lg"
-							/>
-							<CardTitle className="mt-2">{project.title}</CardTitle>
-							<CardDescription>{project.description}</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<Badge>{project.category}</Badge>
-						</CardContent>
-						<CardFooter className="mt-auto">
-							<Dialog>
-								<DialogTrigger asChild>
-									<Button variant="outline">Подробнее</Button>
-								</DialogTrigger>
-								<DialogContent className="sm:max-w-[425px]">
-									<DialogHeader>
-										<DialogTitle>{project.title}</DialogTitle>
-										<DialogDescription>{project.description}</DialogDescription>
-									</DialogHeader>
-									<div className="grid gap-4 py-4">
-										<Image
-											src={project.image}
-											alt={project.title}
-											width={600}
-											height={400}
-											className="w-full h-48 object-cover rounded-lg"
-										/>
-										<div>
-											<h4 className="font-bold">Клиент:</h4>
-											<p>{project.client}</p>
-										</div>
-										<div>
-											<h4 className="font-bold">Дата завершения:</h4>
-											<p>{new Date(project.completionDate).toLocaleDateString()}</p>
-										</div>
-										<div>
-											<h4 className="font-bold">Технологии:</h4>
-											<div className="flex flex-wrap gap-2 mt-2">
-												{project.technologies.map((tech, index) => (
-													<Badge key={index} variant="secondary">
-														{tech}
-													</Badge>
-												))}
-											</div>
-										</div>
-									</div>
-								</DialogContent>
-							</Dialog>
-						</CardFooter>
-					</Card>
-				))}
+				{filteredItems.map(cat =>
+					cat.article.map(item => (
+						<Card key={item.id} className="flex relative flex-col">
+							{session && articleAbility(session).canUpdate() && (
+								<Link
+									href={`/admin/PROJECT/${item.id}`}
+									className="text-primary absolute top-2 right-2"
+								>
+									<Settings className="w-4 h-4" />
+								</Link>
+							)}
+							<div className="px-6 pt-6">
+								<Image
+									src={item.image || 'placeholder.svg'}
+									alt={item.title}
+									width={600}
+									height={400}
+									className="w-full h-50 object-cover rounded-t-lg"
+								/>
+							</div>
+							<CardHeader>
+								<div className="flex justify-between items-center">
+									<CardTitle className="text-xl">{item.title}</CardTitle>{' '}
+									<Badge>{cat.category.title}</Badge>
+								</div>
+								<CardDescription>
+									<Calendar className="h-4 w-4 inline mr-2 mb-1" />
+									{new Date(item.createdAt).toLocaleDateString()}
+								</CardDescription>
+								<CardContent className="p-0">
+									<JSONContentRenderer content={item.desc} />
+								</CardContent>
+							</CardHeader>
+							<CardFooter className="mt-auto">
+								<Button className="w-full" variant="secondary">
+									<Link href={`/project/${item.id}`}>Детали</Link>
+								</Button>
+							</CardFooter>
+						</Card>
+					))
+				)}
 			</div>
 		</main>
 	)

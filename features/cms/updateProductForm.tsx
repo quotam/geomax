@@ -66,7 +66,7 @@ const UpdateProductForm = ({
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className={`space-y-8 border mx-auto p-6 bg-white rounded-lg shadow-md ${isPending && 'animate-pulse bg-secondary/5'}`}
+				className={`space-y-8 border mx-auto bg-card p-6 bg-white rounded-lg shadow-md ${isPending && 'animate-pulse bg-secondary/5'}`}
 			>
 				<h1 className="text-2xl font-bold mb-4">Редактирование продукта</h1>
 				<div className="grid grid-cols-2 gap-4">
@@ -142,9 +142,16 @@ const UpdateProductForm = ({
 								<FormItem>
 									<FormLabel>Категория</FormLabel>
 									<FormControl>
-										<GroupSelect {...catOptions} field={field} />
+										<GroupSelect
+											renderCreateLable={e => e.split('&')[0]}
+											{...catOptions}
+											field={field}
+										/>
 									</FormControl>
-									<FormDescription>Выберите или создайте категорию.</FormDescription>
+									<FormDescription>
+										Выберите или создайте категорию. при создании категории - название &
+										описание
+									</FormDescription>
 									<FormMessage />
 								</FormItem>
 							)}

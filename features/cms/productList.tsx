@@ -100,7 +100,7 @@ export default function ProductList({
 					<PlusSquare className="mr-2 h-4 w-4" /> Добавить продукт
 				</Button>
 			</div>
-			<div className="rounded-md border">
+			<div className="rounded-md border bg-card">
 				<Table>
 					<TableHeader>
 						<TableRow>

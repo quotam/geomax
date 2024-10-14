@@ -56,7 +56,7 @@ const UpdateSliderForm = ({
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className={`space-y-8 border mx-auto p-6 bg-white rounded-lg shadow-md ${isPending && 'animate-pulse bg-secondary/5'}`}
+				className={`space-y-8 bg-card border mx-auto p-6 bg-white rounded-lg shadow-md ${isPending && 'animate-pulse bg-secondary/5'}`}
 			>
 				<h1 className="text-2xl font-bold mb-4">Редактирование слайда</h1>
 				<FormField
