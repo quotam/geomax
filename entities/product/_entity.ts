@@ -6,6 +6,7 @@ class ProductEntity {
 		status: true,
 		availability: true,
 		price: true,
+		desc: true,
 		category: {
 			select: {
 				id: true,

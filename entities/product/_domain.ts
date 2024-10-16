@@ -12,6 +12,7 @@ export const UpdateProdcutSchema = z.object({
 		required_error: 'Пожалуйста, выберите статус.'
 	}),
 	price: z.number().optional().nullable(),
+	desc: z.string().optional().nullable(),
 
 	categoryId: z.string().nullable().optional(),
 	facturerId: z.string().nullable().optional(),

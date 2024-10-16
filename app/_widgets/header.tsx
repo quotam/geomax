@@ -90,7 +90,7 @@ const Header = async () => {
 				...i,
 				subMenu: catalog.map(c => ({
 					title: c.title,
-					href: `/catalog/${c.id}`,
+					href: `/catalog?category=${c.id}`,
 					desc: c.desc
 				}))
 			}

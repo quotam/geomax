@@ -101,6 +101,34 @@
 		scrollbar-track-color: hsl(var(--background));
 	}
 
+	.rating {
+		@apply relative;
+	}
+	.rating:before {
+		@apply content-[""] block text-0 absolute z-10 top-[5.2rem] -left-[.48rem] mt-[1.4rem] w-0 h-0;
+		border-top: 0.7rem solid hsl(var(--primary));
+		border-left: 0.4rem solid transparent;
+	}
+
+	.rating__inner:after {
+		@apply top-[50%];
+
+		border-bottom: 1.7rem solid hsl(var(--primary));
+	}
+	.rating__inner:before {
+		border-top: 1.5rem solid hsl(var(--primary));
+	}
+
+	.rating__inner:after,
+	.rating__inner:before {
+		@apply content-[""] w-[13.2rem] h-7 absolute top-[3.8rem] -left-[.48rem] z-10 box-border;
+		border-right: 0.6rem solid transparent;
+	}
+
+	.rating__value {
+		@apply flex text-destructive-foreground justify-center top-[4rem] absolute z-20  h-6  font-bold shadow-[0_0_1rem_hsl(var(--primary))];
+	}
+
 	::-webkit-scrollbar {
 		@apply w-[0.3rem] h-[0.3rem];
 	}

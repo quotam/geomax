@@ -15,7 +15,7 @@ const Faq = async () => {
 
 	if (data.length >= 3)
 		return (
-			<section className="py-30">
+			<section className="py-30" id="faq">
 				<div className="container flex gap-30 md:gap-18 md:flex-col md:px-8 sm:px-3">
 					<div className="flex w-2/5 md:w-full flex-col gap-10 items-start">
 						<h4 className="font-bold text-[6.4rem] md:text-heading leading-[6.4rem]">
@@ -28,7 +28,7 @@ const Faq = async () => {
 						</span>
 						<Link
 							className="bg-secondary font-medium text-secondary-foreground py-3 rounded-sm px-8 shadow-sm hover:bg-secondary/80"
-							href="/?modal"
+							href="/?modal#faq"
 						>
 							Задать вопрос
 						</Link>

@@ -31,7 +31,7 @@ export const SuperModal = ({
 	style
 }: {
 	open: boolean
-	setOpen: React.Dispatch<React.SetStateAction<boolean>>
+	setOpen: (val: boolean) => void
 	content?: ReactNode
 	closeButt?: boolean
 	title?: ReactNode

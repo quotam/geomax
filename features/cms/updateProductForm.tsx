@@ -5,7 +5,6 @@ import {
 	UpdateProdcutSchema,
 	UpdateProductDto
 } from '@front/entities/product/_domain'
-import { Image } from 'lucide-react'
 import { productQueries } from '@front/entities/product/_queries'
 import { Button } from '@front/shared/ui/button'
 import {
@@ -31,10 +30,10 @@ import { ProductStatus } from '@prisma/client'
 import { useMutation } from '@tanstack/react-query'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { useProductCat } from './vm/useProductCat'
 import GroupSelect from './ui/groupSelect'
-import { useProductFacturer } from './vm/useProductFacturer'
 import ImageSelector from './ui/imageSelector'
+import { useProductCat } from './vm/useProductCat'
+import { useProductFacturer } from './vm/useProductFacturer'
 
 const UpdateProductForm = ({
 	data,
@@ -227,10 +226,10 @@ const UpdateProductForm = ({
 				/>
 				<FormField
 					control={form.control}
-					name="body"
+					name="desc"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Содержимое слайда</FormLabel>
+							<FormLabel>Краткое описание товара</FormLabel>
 							<FormControl>
 								<AppEditor
 									key={field.value?.slice(0, 10)}
@@ -239,6 +238,24 @@ const UpdateProductForm = ({
 								/>
 							</FormControl>
 							<FormDescription>Введите дополнительный текст.</FormDescription>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="body"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Полноценное описание товара</FormLabel>
+							<FormControl>
+								<AppEditor
+									key={field.value?.slice(0, 10)}
+									initialValue={field.value && JSON.parse(field.value)}
+									onChange={e => field.onChange(JSON.stringify(e))}
+								/>
+							</FormControl>
+							<FormDescription>Введите текст.</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}

@@ -12,6 +12,7 @@ model Product {
   title  String
   price  Float?
   body   String
+  desc   String?
   meta   String
   images String[]
 

@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { articleService } from '@front/entities/article/_service'
 import { Badge } from '@front/shared/ui/badge'
 import { Button } from '@front/shared/ui/button'
 import {
@@ -9,10 +9,10 @@ import {
 	CardHeader,
 	CardTitle
 } from '@front/shared/ui/card'
-import { ArrowRight, Calendar, CheckCircle, Users } from 'lucide-react'
-import Link from 'next/link'
-import { articleService } from '@front/entities/article/_service'
 import JSONContentRenderer from '@front/shared/ui/contentRender'
+import { ArrowRight, Calendar, CheckCircle } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const Projects = async () => {
 	const projects = await articleService('PROJECT').getPreview()
@@ -25,7 +25,10 @@ const Projects = async () => {
 				</h4>
 				<span className="text-center block mb-20">
 					Откройте для себя наши достижения и успешные решения. <br />
-					<Button variant="ghost" className="mt-4 text-muted-foreground">
+					<Button
+						variant="outline"
+						className="mt-4 border-secondary text-muted-foreground"
+					>
 						<Link href="/projects">Архив проектов</Link>
 						<ArrowRight className="ml-2 h-4 w-4" />
 					</Button>

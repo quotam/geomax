@@ -5,6 +5,7 @@ import AppProvider from './_providers/appPrivider'
 import './globals.css'
 import Header from './_widgets/header'
 import Footer from './_widgets/footer'
+import Modal from '@front/features/moadl/pub'
 
 const nunito = Nunito({
 	subsets: ['cyrillic'],
@@ -39,6 +40,7 @@ export default async function RootLayout({
 						{children}
 						<Footer />
 					</div>
+					<Modal />
 				</AppProvider>
 			</body>
 		</html>
