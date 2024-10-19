@@ -1,51 +1,108 @@
+'use client'
+import { useAppDebounce } from '@front/kernel/hooks/useDebounce'
 import {
 	Command,
 	CommandEmpty,
 	CommandGroup,
-	CommandInput,
 	CommandItem,
 	CommandList,
-	CommandSeparator,
-	CommandShortcut
+	CommandSeparator
 } from '@front/shared/ui/command'
-import { FaceIcon, GearIcon, PersonIcon } from '@radix-ui/react-icons'
-import { CalendarIcon, RocketIcon } from 'lucide-react'
+import { Input } from '@front/shared/ui/input'
+import { useQuery } from '@tanstack/react-query'
+import {
+	BadgeRussianRuble,
+	Box,
+	CircleCheck,
+	NewspaperIcon,
+	TableOfContents
+} from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { searchAction } from '../_action'
 
-const SearchCommand = () => {
+const SearchCommand = ({ close }: { close: () => void }) => {
+	const [search, setSearch] = useState('')
+	const makeRequest = useAppDebounce((e: string) => setSearch(e), 500)
+
 	return (
 		<Command className="w-full">
-			<CommandInput placeholder="Введите поисковый запрос.." />
-			<CommandList className="max-h-[60rem] sm:h-auto sm:max-h-[30rem] ">
-				<CommandEmpty>Результаты не найдены..</CommandEmpty>
-				<CommandGroup heading="Продукты">
-					<CommandItem>
-						<CalendarIcon className="mr-2 h-4 w-4" />
-						<span>Calendar</span>
-					</CommandItem>
-					<CommandItem>
-						<FaceIcon className="mr-2 h-4 w-4" />
-						<span>Search Emoji</span>
-					</CommandItem>
-					<CommandItem>
-						<RocketIcon className="mr-2 h-4 w-4" />
-						<span>Launch</span>
-					</CommandItem>
-				</CommandGroup>
-				<CommandSeparator />
-				<CommandGroup heading="Общие">
-					<CommandItem value="profile">
-						<PersonIcon className="mr-2 h-4 w-4" />
-						<span>Profile</span>
-						<CommandShortcut className="sm:hidden">⌘P</CommandShortcut>
-					</CommandItem>
-					<CommandItem>
-						<GearIcon className="mr-2 h-4 w-4" />
-						<span>Settings</span>
-						<CommandShortcut className="sm:hidden">⌘S</CommandShortcut>
-					</CommandItem>
-				</CommandGroup>
-			</CommandList>
+			<Input
+				className="w-full py-6 rounded-b-0"
+				onChange={e => makeRequest(e.target.value)}
+				placeholder="Введите поисковый запрос.."
+			/>
+			<List close={close} e={search} />
 		</Command>
+	)
+}
+
+const List = ({ e, close }: { e: string; close: () => void }) => {
+	const { data, isPending } = useQuery({
+		queryKey: ['searchQuery', e],
+		queryFn: () => searchAction(e)
+	})
+
+	const router = useRouter()
+
+	if (isPending) return <div className="text-center p-5">Загрузка..</div>
+
+	return (
+		<CommandList className="max-h-[60rem] sm:h-auto sm:max-h-[30rem] ">
+			<CommandEmpty>Результаты не найдены..</CommandEmpty>
+			{data?.products && data.products.length > 0 && (
+				<CommandGroup heading="Продукты">
+					{data.products.map(p => (
+						<CommandItem
+							key={p.id}
+							onSelect={() => {
+								router.push('/catalog/' + p.id)
+								close()
+							}}
+						>
+							<Box className="mr-2 h-4 w-4" />
+							<span>{p.title}</span>
+						</CommandItem>
+					))}
+				</CommandGroup>
+			)}
+
+			{data?.articles && data.articles.length > 0 && (
+				<>
+					<CommandSeparator />
+					<CommandGroup heading="Блог">
+						{data.articles.map(p => (
+							<CommandItem
+								key={p.id}
+								onSelect={() => {
+									switch (p.type) {
+										case 'NEWS':
+											router.push('/news/' + p.id)
+											break
+										case 'FAQ':
+											router.push('/faq/#' + p.id)
+											break
+										case 'OFFER':
+											router.push('/offer/' + p.id)
+											break
+										case 'PROJECT':
+											router.push('/project/' + p.id)
+											break
+									}
+									close()
+								}}
+							>
+								{p.type === 'NEWS' && <NewspaperIcon className="mr-2 h-4 w-4" />}
+								{p.type === 'FAQ' && <TableOfContents className="mr-2 h-4 w-4" />}
+								{p.type === 'OFFER' && <BadgeRussianRuble className="mr-2 h-4 w-4" />}
+								{p.type === 'PROJECT' && <CircleCheck className="mr-2 h-4 w-4" />}
+								<span>{p.title}</span>
+							</CommandItem>
+						))}
+					</CommandGroup>
+				</>
+			)}
+		</CommandList>
 	)
 }
 export default SearchCommand

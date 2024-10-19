@@ -1,5 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@front/shared/ui/card'
 import { Building2, FileText, Globe, Mail, MapPin, Phone } from 'lucide-react'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+	title: 'Реквизиты',
+	description: 'Реквизиты'
+}
 
 const LegalPage = () => {
 	return (

@@ -4,7 +4,7 @@ import React from 'react'
 
 const InfoBlocks = () => {
 	return (
-		<section className="mt-32 sm:mt-16">
+		<section className="mt-32 sm:mt-16" id="about">
 			<div className="container md:px-8 flex justify-between  items-center md:flex-wrap md:gap-y-9">
 				<div className="flex flex-col gap-7 mr-16 md:mr-0">
 					<h3 className="text-[6.4rem] sm:text-heading leading-[7.2rem]">
@@ -62,7 +62,7 @@ const InfoBlocks = () => {
 							desc:
 								'Подбираем и устанавливаем только проверенное оборудование, исходя из потребностей Вашего парка техники.',
 							link: 'Заявка на консультацию',
-							href: '/?form=1'
+							href: '/?modal#about'
 						}}
 					/>
 					<InfoBlock

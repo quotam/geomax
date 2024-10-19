@@ -4,6 +4,12 @@ import { Input } from '@front/shared/ui/input'
 import { Textarea } from '@front/shared/ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle } from '@front/shared/ui/card'
 import { Mail, MapPin, Phone } from 'lucide-react'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+	title: 'Контакты',
+	description: 'Контакты'
+}
 
 const ContactPage = () => {
 	return (

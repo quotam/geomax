@@ -39,17 +39,17 @@ export function SearchLayout() {
 			<SuperModal
 				open={open}
 				setOpen={setOpen}
-				content={<SearchCommand />}
+				content={<SearchCommand close={() => setOpen(false)} />}
 				mobileNode={
 					<Sheet open={open} onOpenChange={setOpen}>
 						<SheetContent className="p-4" side="top">
-							<SearchCommand />
+							<SearchCommand close={() => setOpen(false)} />
 						</SheetContent>
 					</Sheet>
 				}
 				DesktopNode={
 					<CommandDialog open={open} onOpenChange={setOpen}>
-						<SearchCommand />
+						<SearchCommand close={() => setOpen(false)} />
 					</CommandDialog>
 				}
 			/>

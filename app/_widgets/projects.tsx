@@ -10,14 +10,15 @@ import {
 	CardTitle
 } from '@front/shared/ui/card'
 import JSONContentRenderer from '@front/shared/ui/contentRender'
-import { ArrowRight, Calendar, CheckCircle } from 'lucide-react'
+import { ArrowRight, Calendar, CheckCircle, Tag } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const Projects = async () => {
 	const projects = await articleService('PROJECT').getPreview()
+	if (projects.length === 0) return null
 	return (
-		<section className="py-23 mt-35 bg-foreground text-background">
+		<section className="py-23 bg-foreground text-background">
 			<div className="container mx-auto px-4">
 				<h4 className="text-3xl font-bold mb-3 text-primary text-center">
 					Выполненные проекты
@@ -47,7 +48,10 @@ const Projects = async () => {
 							<CardHeader>
 								<div className="flex justify-between items-start">
 									<CardTitle className="text-xl mb-2">{project.title}</CardTitle>
-									<Badge>{project.category?.title || 'Разное'}</Badge>
+									<Badge>
+										<Tag className="h-4 w-4 mr-1" />
+										{project.category?.title || 'Разное'}
+									</Badge>
 								</div>
 								<CardDescription className="flex gap-2 items-center">
 									<Calendar className="h-4 w-4" />

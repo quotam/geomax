@@ -12,6 +12,27 @@ import AppShareModal from '@front/shared/ui/shareModal'
 import { Calendar } from 'lucide-react'
 import Image from 'next/image'
 
+export const generateMetadata = async ({
+	params
+}: {
+	params: { id: string }
+}) => {
+	const data = await articleService('PROJECT').getOne(params.id)
+	if (!data) return { title: 'Страница не найдена' }
+
+	return {
+		title: data.title,
+		keywords: data.meta
+	}
+}
+
+export const generateStaticParams = async () => {
+	const data = await articleService('PROJECT').getAll()
+	return data.map(item => ({
+		id: item.id
+	}))
+}
+
 export default async function NewsPage({ params }: { params: { id: string } }) {
 	const data = await articleService('PROJECT').getOne(params.id)
 	if (!data) return <NotFound />
@@ -36,8 +57,8 @@ export default async function NewsPage({ params }: { params: { id: string } }) {
 					<Image
 						src={data.image || '/placeholder.svg'}
 						alt="presentation"
-						width={800}
-						height={400}
+						width={1000}
+						height={500}
 						className={cn(
 							'w-full h-auto object-cover rounded-lg mb-6',
 							!data.image && 'max-h-100'

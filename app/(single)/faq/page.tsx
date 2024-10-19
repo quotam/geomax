@@ -12,7 +12,13 @@ import { Button } from '@front/shared/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@front/shared/ui/card'
 import JSONContentRenderer from '@front/shared/ui/contentRender'
 import { Settings } from 'lucide-react'
+import { Metadata } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+	title: 'Часто задаваемые вопросы',
+	description: 'Часто задаваемые вопросы'
+}
 
 const FaqPage = async ({
 	searchParams

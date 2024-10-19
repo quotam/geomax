@@ -9,8 +9,8 @@ import { ChevronRight, Cookie, FileText, Shield } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-	title: 'Пользовательское соглашение | {переменная}',
-	description: 'Пользовательское соглашение сайта {переменная}'
+	title: 'Пользовательское соглашение',
+	description: 'Пользовательское соглашение сайта'
 }
 
 export default function UserAgreementPage() {

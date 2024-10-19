@@ -12,9 +12,15 @@ import {
 	CardTitle
 } from '@front/shared/ui/card'
 import JSONContentRenderer from '@front/shared/ui/contentRender'
-import { Calendar, Settings } from 'lucide-react'
+import { Calendar, Settings, Tag } from 'lucide-react'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+	title: 'Сезонные предложения',
+	description: 'Сезонные предложения'
+}
 
 export default async function OfferPage({
 	searchParams
@@ -70,7 +76,10 @@ export default async function OfferPage({
 							<CardHeader>
 								<div className="flex justify-between items-center">
 									<CardTitle className="text-xl">{item.title}</CardTitle>{' '}
-									<Badge variant="secondary">{cat.category.title}</Badge>
+									<Badge variant="secondary">
+										<Tag className="h-4 w-4 mr-1" />
+										{cat.category.title}
+									</Badge>
 								</div>
 								<CardDescription>
 									<Calendar className="h-4 w-4 inline mr-2 mb-1" />

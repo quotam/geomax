@@ -12,6 +12,26 @@ import AppShareModal from '@front/shared/ui/shareModal'
 import { Calendar } from 'lucide-react'
 import Image from 'next/image'
 
+export const generateMetadata = async ({
+	params
+}: {
+	params: { id: string }
+}) => {
+	const data = await articleService('OFFER').getOne(params.id)
+	if (!data) return { title: 'Страница не найдена' }
+
+	return {
+		title: data.title,
+		keywords: data.meta
+	}
+}
+export const generateStaticParams = async () => {
+	const data = await articleService('OFFER').getAll()
+	return data.map(item => ({
+		id: item.id
+	}))
+}
+
 export default async function NewsPage({ params }: { params: { id: string } }) {
 	const data = await articleService('OFFER').getOne(params.id)
 	if (!data) return <NotFound />

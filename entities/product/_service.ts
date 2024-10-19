@@ -11,7 +11,8 @@ class ProductService {
 	cacheTags = {
 		list: serviceTag,
 		once: (id: string) => id + serviceTag,
-		category: serviceTag + 'cat'
+		category: serviceTag + 'cat',
+		search: serviceTag + 'search'
 	}
 
 	getCategories() {
@@ -32,15 +33,19 @@ class ProductService {
 	}
 
 	async createFacturer(title: string) {
-		return await dbClient.facturer.create({
+		const data = await dbClient.facturer.create({
 			data: {
 				title
 			},
 			select: { id: true, title: true }
 		})
+
+		cacheStrategy.invalidate(this.cacheTags.search)
+		return data
 	}
+
 	async deleteFacturer(id: string) {
-		return await dbClient.facturer.delete({
+		const data = await dbClient.facturer.delete({
 			where: {
 				id
 			},
@@ -48,6 +53,9 @@ class ProductService {
 				title: true
 			}
 		})
+
+		cacheStrategy.invalidate(this.cacheTags.search)
+		return data
 	}
 	async getAdminFactureres() {
 		return dbClient.facturer.findMany({
@@ -67,6 +75,7 @@ class ProductService {
 			select: { id: true, title: true }
 		})
 		cacheStrategy.invalidate(this.cacheTags.category)
+		cacheStrategy.invalidate(this.cacheTags.search)
 		return cat
 	}
 
@@ -80,6 +89,7 @@ class ProductService {
 			}
 		})
 		cacheStrategy.invalidate(this.cacheTags.category)
+		cacheStrategy.invalidate(this.cacheTags.search)
 		return cat
 	}
 
@@ -166,6 +176,33 @@ class ProductService {
 		cacheStrategy.invalidate(this.cacheTags.list)
 		cacheStrategy.invalidate(this.cacheTags.once(id))
 		return id
+	}
+	async getSearchParams() {
+		return await cacheStrategy.fetch([this.cacheTags.search], async () => {
+			const categories = await dbClient.productCategory.findMany({
+				where: {
+					Product: {
+						some: {}
+					}
+				},
+				select: {
+					id: true,
+					title: true
+				}
+			})
+			const facturers = await dbClient.facturer.findMany({
+				where: {
+					Product: {
+						some: {}
+					}
+				},
+				select: {
+					id: true,
+					title: true
+				}
+			})
+			return { categories, facturers }
+		})
 	}
 }
 

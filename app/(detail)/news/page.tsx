@@ -13,9 +13,15 @@ import {
 	CardTitle
 } from '@front/shared/ui/card'
 import JSONContentRenderer from '@front/shared/ui/contentRender'
-import { Calendar, Settings } from 'lucide-react'
+import { ArrowRight, Calendar, Settings, Tag } from 'lucide-react'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+	title: 'Новости',
+	description: 'Новости'
+}
 
 export default async function NewsPage({
 	searchParams
@@ -81,7 +87,10 @@ export default async function NewsPage({
 							<CardHeader>
 								<div className="flex justify-between items-center">
 									<CardTitle className="text-xl">{item.title}</CardTitle>{' '}
-									<Badge>{cat.category.title}</Badge>
+									<Badge>
+										<Tag className="h-4 w-4 mr-1" />
+										{cat.category.title}
+									</Badge>
 								</div>
 								<CardDescription>
 									<Calendar className="h-4 w-4 inline mr-2 mb-1" />
@@ -94,6 +103,7 @@ export default async function NewsPage({
 							<CardFooter className="mt-auto">
 								<Button variant="outline" className="w-full">
 									<Link href={`/news/${item.id}`}>Читать полностью</Link>
+									<ArrowRight className="ml-2 h-4 w-4" />
 								</Button>
 							</CardFooter>
 						</Card>

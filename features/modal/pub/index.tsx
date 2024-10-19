@@ -32,6 +32,9 @@ export default function Modal({ trigger }: { trigger?: ReactNode }) {
 	return (
 		<SuperModal
 			open={open}
+			style={{
+				dialog: 'max-w-100'
+			}}
 			setOpen={val => {
 				if (!val) {
 					const url = new URL(window.location.href)
@@ -43,13 +46,13 @@ export default function Modal({ trigger }: { trigger?: ReactNode }) {
 			title={
 				<div className="flex items-center gap-3">
 					<LogoIcon className="text-primary mx-auto w-15 h-15" />
-					<span className="font-bold">
+					<span className="font-bold text-left">
 						Заявка на консультацию и подбор оборудования
 					</span>
 				</div>
 			}
 			content={
-				<form onSubmit={handleSubmit} className="space-y-4">
+				<form onSubmit={handleSubmit} className="space-y-6">
 					<div className="space-y-2">
 						<Label htmlFor="name">Как к Вам обращаться?</Label>
 						<Input
@@ -69,14 +72,14 @@ export default function Modal({ trigger }: { trigger?: ReactNode }) {
 							required
 						/>
 					</div>
-					<div className="flex items-center space-x-2">
+					<div className="flex items-center space-x-4">
 						<Checkbox
 							id="terms"
 							checked={agreed}
 							onCheckedChange={checked => setAgreed(checked as boolean)}
 							required
 						/>
-						<Label htmlFor="terms" className="text-sm">
+						<Label htmlFor="terms" className="text-xs text-muted-foreground">
 							Я прочитал, ознакомился и согласен с условиями Политики
 							конфиденциальности
 						</Label>

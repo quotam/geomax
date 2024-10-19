@@ -1,27 +1,26 @@
-import type { Metadata } from 'next'
-import { Button } from '@front/shared/ui/button'
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger
 } from '@front/shared/ui/accordion'
+import { Button } from '@front/shared/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@front/shared/ui/card'
 import {
-	Shield,
-	Eye,
+	AlertTriangle,
 	Cookie,
 	Database,
-	Lock,
+	Eye,
 	Globe,
-	AlertTriangle,
-	HelpCircle
+	HelpCircle,
+	Lock
 } from 'lucide-react'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-	title: 'Политика конфиденциальности | {переменная}',
-	description: 'Политика конфиденциальности сайта {переменная}'
+	title: 'Политика конфиденциальности',
+	description: 'Политика конфиденциальности сайт'
 }
 
 export default function PrivacyPolicyPage() {

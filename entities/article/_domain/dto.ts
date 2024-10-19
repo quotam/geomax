@@ -24,9 +24,7 @@ export const ArticleUpdateSchema = z.object({
 		})
 		.optional(),
 
-	body: z.string().min(2, {
-		message: 'текст должен содержать не менее 2 символов.'
-	})
+	body: z.string().optional().nullable()
 })
 
 export type ArticleUpdateDto = z.infer<typeof ArticleUpdateSchema>

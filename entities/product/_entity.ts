@@ -4,13 +4,15 @@ class ProductEntity {
 		images: true,
 		title: true,
 		status: true,
+		meta: true,
 		availability: true,
 		price: true,
 		desc: true,
 		category: {
 			select: {
 				id: true,
-				title: true
+				title: true,
+				desc: true
 			}
 		},
 		facturer: {

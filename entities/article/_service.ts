@@ -10,11 +10,31 @@ const serviceTag = 'article'
 class ArticleService {
 	constructor(private readonly _type: ArticleType) {}
 
+	cacheTags = {
+		list: serviceTag,
+		once: (id: string) => id + serviceTag,
+		preview: serviceTag + 'preview' + this._type
+	}
+
+	async prepareStatic() {
+		return await dbClient.article.findMany({
+			where: {
+				status: ArticleStatus.PUBLISHED
+			}
+		})
+	}
+
 	async _getCatFiltered() {
 		const withCategory = await dbClient.articleCategory.findMany({
 			where: {
-				type: this._type
+				type: this._type,
+				Article: {
+					some: {
+						status: ArticleStatus.PUBLISHED
+					}
+				}
 			},
+
 			select: {
 				id: true,
 				title: true,
@@ -29,7 +49,10 @@ class ArticleService {
 		})
 		const withoutCategory = await dbClient.article.findMany({
 			where: {
-				type: this._type
+				type: this._type,
+				category: {
+					is: null
+				}
 			},
 			select: {
 				...articleEntity.clientView,
@@ -45,12 +68,21 @@ class ArticleService {
 				},
 				article: cat.Article
 			})),
-			{ category: { id: 'some', title: 'Разное' }, article: withoutCategory }
+			...(withoutCategory.length
+				? [
+						{
+							category: { id: 'withoutCategory', title: 'Без категории' },
+							article: withoutCategory
+						}
+					]
+				: [])
 		]
 	}
 
 	async getCatFiltered() {
-		return await cacheStrategy.fetch([serviceTag], () => this._getCatFiltered())
+		return await cacheStrategy.fetch([this.cacheTags.list], () =>
+			this._getCatFiltered()
+		)
 	}
 
 	createCategory(title: string) {
@@ -67,7 +99,7 @@ class ArticleService {
 	}
 
 	deleteCategory(id: string) {
-		return dbClient.articleCategory.delete({
+		const data = dbClient.articleCategory.delete({
 			where: {
 				id
 			},
@@ -75,6 +107,8 @@ class ArticleService {
 				title: true
 			}
 		})
+		cacheStrategy.invalidate(this.cacheTags.list)
+		return data
 	}
 
 	async getAdminCategoryes() {
@@ -100,7 +134,7 @@ class ArticleService {
 	}
 
 	async getPreview() {
-		return cacheStrategy.fetch([serviceTag], () =>
+		return cacheStrategy.fetch([this.cacheTags.preview], () =>
 			dbClient.article.findMany({
 				take: this.getCount(),
 				where: {
@@ -113,7 +147,7 @@ class ArticleService {
 	}
 
 	async getAll() {
-		return cacheStrategy.fetch([serviceTag], () =>
+		return cacheStrategy.fetch([this.cacheTags.list], () =>
 			dbClient.article.findMany({
 				where: {
 					type: this._type,
@@ -133,7 +167,7 @@ class ArticleService {
 		})
 	}
 	async getOne(id: string) {
-		return await cacheStrategy.fetch([serviceTag + id], () =>
+		return await cacheStrategy.fetch([this.cacheTags.once(id)], () =>
 			dbClient.article.findUnique({
 				where: {
 					id,
@@ -150,7 +184,8 @@ class ArticleService {
 	async getOneAdmin(id: string) {
 		return await dbClient.article.findUnique({
 			where: {
-				id
+				id,
+				type: this._type
 			},
 			select: {
 				...articleEntity.clientView,
@@ -167,18 +202,21 @@ class ArticleService {
 			},
 			data: {
 				title: dto.title,
-				body: dto.body,
 				image: dto.image,
 				status: dto.status,
 				meta: dto.meta,
 				desc: dto.desc,
 				...(dto.categoryId && {
 					articleCategoryId: dto.categoryId
+				}),
+				...(dto.body && {
+					body: dto.body
 				})
 			}
 		})
-		cacheStrategy.invalidate(serviceTag)
-		cacheStrategy.invalidate(serviceTag + id)
+		cacheStrategy.invalidate(this.cacheTags.once(id))
+		cacheStrategy.invalidate(this.cacheTags.list)
+		cacheStrategy.invalidate(this.cacheTags.preview)
 		return id
 	}
 
@@ -210,8 +248,9 @@ class ArticleService {
 			}
 		})
 
-		cacheStrategy.invalidate(serviceTag)
-		cacheStrategy.invalidate(serviceTag + id)
+		cacheStrategy.invalidate(this.cacheTags.once(id))
+		cacheStrategy.invalidate(this.cacheTags.list)
+		cacheStrategy.invalidate(this.cacheTags.preview)
 		return id
 	}
 }
