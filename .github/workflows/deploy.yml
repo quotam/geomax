@@ -27,7 +27,6 @@ jobs:
    - name: SSH Command
      uses: D3rHase/ssh-command-action@v0.2.2
      with:
-      # hostname / IP of the server
       host: ${{ secrets.STAGING_SSH_HOST }}
       user: ${{ secrets.STAGING_SSH_USERNAME }}
       private_key: ${{ secrets.STAGING_SSH_PRIVATE_KEY }}
