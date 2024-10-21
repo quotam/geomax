@@ -1,5 +1,11 @@
 -- CreateEnum
-CREATE TYPE "PostType" AS ENUM ('NEWS', 'PROJECT', 'OFFER', 'UNKNOWN');
+CREATE TYPE "ArticleStatus" AS ENUM ('DRAFT', 'PUBLISHED', 'ARCHIVED');
+
+-- CreateEnum
+CREATE TYPE "ArticleType" AS ENUM ('OFFER', 'PROJECT', 'NEWS', 'FAQ');
+
+-- CreateEnum
+CREATE TYPE "ProductStatus" AS ENUM ('DRAFT', 'PUBLISHED', 'ARCHIVED');
 
 -- CreateEnum
 CREATE TYPE "LikeType" AS ENUM ('LIKE', 'DISLIKE', 'UNSTATUS');
@@ -9,6 +15,34 @@ CREATE TYPE "UserRole" AS ENUM ('DEFAULT', 'EDITOR', 'ADMIN');
 
 -- CreateEnum
 CREATE TYPE "SliderStatus" AS ENUM ('DRAFT', 'PUBLISHED', 'ARCHIVED');
+
+-- CreateTable
+CREATE TABLE "Article" (
+    "id" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+    "status" "ArticleStatus" NOT NULL DEFAULT 'DRAFT',
+    "type" "ArticleType" NOT NULL,
+    "title" TEXT NOT NULL,
+    "image" TEXT,
+    "body" TEXT NOT NULL,
+    "desc" TEXT NOT NULL,
+    "meta" TEXT NOT NULL,
+    "userID" TEXT,
+    "articleCategoryId" TEXT,
+
+    CONSTRAINT "Article_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ArticleCategory" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "type" "ArticleType" NOT NULL,
+    "articleId" TEXT,
+
+    CONSTRAINT "ArticleCategory_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Account" (
@@ -46,13 +80,40 @@ CREATE TABLE "VerificationToken" (
 );
 
 -- CreateTable
-CREATE TABLE "Post" (
+CREATE TABLE "Product" (
     "id" TEXT NOT NULL,
-    "type" "PostType" NOT NULL DEFAULT 'UNKNOWN',
-    "desc" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+    "title" TEXT NOT NULL,
+    "price" DOUBLE PRECISION,
     "body" TEXT NOT NULL,
+    "desc" TEXT,
+    "meta" TEXT NOT NULL,
+    "images" TEXT[],
+    "status" "ProductStatus" NOT NULL DEFAULT 'DRAFT',
+    "availability" BOOLEAN NOT NULL DEFAULT true,
+    "userID" TEXT,
+    "categoryID" TEXT,
+    "facturerID" TEXT,
 
-    CONSTRAINT "Post_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Facturer" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+
+    CONSTRAINT "Facturer_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ProductCategory" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "desc" TEXT NOT NULL,
+
+    CONSTRAINT "ProductCategory_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -97,6 +158,9 @@ CREATE TABLE "Slider" (
     "id" TEXT NOT NULL,
     "status" "SliderStatus" NOT NULL DEFAULT 'DRAFT',
     "body" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+    "userID" TEXT,
 
     CONSTRAINT "Slider_pkey" PRIMARY KEY ("id")
 );
@@ -120,10 +184,28 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "User_slug_key" ON "User"("slug");
 
 -- AddForeignKey
+ALTER TABLE "Article" ADD CONSTRAINT "Article_userID_fkey" FOREIGN KEY ("userID") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Article" ADD CONSTRAINT "Article_articleCategoryId_fkey" FOREIGN KEY ("articleCategoryId") REFERENCES "ArticleCategory"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Session" ADD CONSTRAINT "Session_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Product" ADD CONSTRAINT "Product_userID_fkey" FOREIGN KEY ("userID") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Product" ADD CONSTRAINT "Product_categoryID_fkey" FOREIGN KEY ("categoryID") REFERENCES "ProductCategory"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Product" ADD CONSTRAINT "Product_facturerID_fkey" FOREIGN KEY ("facturerID") REFERENCES "Facturer"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Qa" ADD CONSTRAINT "Qa_categoryID_fkey" FOREIGN KEY ("categoryID") REFERENCES "QaCategory"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Slider" ADD CONSTRAINT "Slider_userID_fkey" FOREIGN KEY ("userID") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
