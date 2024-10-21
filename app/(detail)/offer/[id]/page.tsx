@@ -54,6 +54,7 @@ export default async function NewsPage({ params }: { params: { id: string } }) {
 				</CardHeader>
 				<CardContent>
 					<Image
+						loading="lazy"
 						src={data.image || '/placeholder.svg'}
 						alt="prewiew"
 						width={800}

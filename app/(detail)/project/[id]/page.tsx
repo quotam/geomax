@@ -57,6 +57,7 @@ export default async function NewsPage({ params }: { params: { id: string } }) {
 					<Image
 						src={data.image || '/placeholder.svg'}
 						alt="presentation"
+						loading="lazy"
 						width={1000}
 						height={500}
 						className={cn(

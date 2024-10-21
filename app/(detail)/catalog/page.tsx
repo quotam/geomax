@@ -90,6 +90,7 @@ export default async function CatalogPage({
 							)}
 							<CardHeader>
 								<Image
+									loading="lazy"
 									src={product.images[0] || '/placeholder.svg'}
 									alt={product.title}
 									width={800}

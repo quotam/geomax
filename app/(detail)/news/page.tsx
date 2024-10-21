@@ -77,6 +77,7 @@ export default async function NewsPage({
 							)}
 							<div className="px-6 pt-6">
 								<Image
+									loading="lazy"
 									src={item.image || 'placeholder.svg'}
 									alt={item.title}
 									width={600}
