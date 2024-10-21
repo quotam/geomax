@@ -17,7 +17,6 @@ import {
 	TooltipTrigger
 } from '@front/shared/ui/tooltip'
 import { Calculator, Info } from 'lucide-react'
-import { Metadata } from 'next'
 import { useState } from 'react'
 import CountUp from 'react-countup'
 

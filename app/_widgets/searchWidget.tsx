@@ -39,7 +39,7 @@ const SearchWidget = ({
 		router.push(url.toString())
 	}, 400)
 
-	useEffect(() => handleSearch(), [search, category])
+	useEffect(handleSearch, [search, category, handleSearch])
 
 	return (
 		<>

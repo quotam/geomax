@@ -1,4 +1,3 @@
-import { articleService } from '@front/entities/article/_service'
 import { productService } from '@front/entities/product/_service'
 import AppSearch from '@front/features/search/pub/search'
 import { cn } from '@front/shared/lib/utils'
