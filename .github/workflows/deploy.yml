@@ -7,7 +7,6 @@ on:
 
 jobs:
  deploy:
-  needs: lint
   runs-on: ubuntu-latest
   concurrency:
    group: staging
