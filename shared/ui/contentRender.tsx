@@ -193,6 +193,16 @@ type ImageData = {
 	}
 }
 
+const parseToNumber = (value: string | number | null): number => {
+	if (typeof value === 'number') {
+		return value
+	}
+	if (typeof value === 'string') {
+		return value === 'auto' ? 1200 : parseInt(value.replace('px', ''), 10)
+	}
+	return 0 // Возвращаем 0, если значение `null` или не указано.
+}
+
 const RenderNextImage = ({ imageData }: { imageData: ImageData }) => {
 	const {
 		src,
@@ -213,20 +223,8 @@ const RenderNextImage = ({ imageData }: { imageData: ImageData }) => {
 			<Image
 				src={src}
 				alt={alt || 'Image'}
-				width={
-					width
-						? width
-						: parsedStyle.width
-							? Number(parsedStyle.width.replace('px', ''))
-							: 700
-				} // Установим ширину по умолчанию
-				height={
-					height
-						? height
-						: parsedStyle.height && parsedStyle.height !== 'auto'
-							? Number(parsedStyle.height.replace('px', ''))
-							: 500
-				} // Установим высоту по умолчанию
+				width={width ? parseToNumber(width) : 700} // Установим ширину по умолчанию
+				height={height ? parseToNumber(height) : 400} // Установим высоту по умолчанию
 				style={parsedStyle}
 				title={title || undefined}
 				loading={loading ? 'eager' : 'lazy'} // Ленивая загрузка по умолчанию
