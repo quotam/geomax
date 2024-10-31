@@ -124,11 +124,34 @@ const config: Config = {
 			sm: 'calc(var(--radius) - 0.4rem)'
 		},
 		extend: {
+			typography: {
+				DEFAULT: {
+					css: {
+						color: 'inherit', // Наследуемый цвет текста
+						fontSize: 'inherit', // Наследуемый размер текста
+						lineHeight: 'inherit', // Наследуемая высота строки
+						img: {
+							margin: '0', // Убираем отступы
+							padding: '0', // Убираем внутренние отступы
+							textAlign: 'inherit',
+							display: 'inline' // Отменяем display: block для отмены центровки
+						},
+						h1: { color: 'inherit', fontSize: 'inherit', lineHeight: 'inherit' },
+						h2: { color: 'inherit', fontSize: 'inherit', lineHeight: 'inherit' },
+						p: { color: 'inherit', fontSize: 'inherit', lineHeight: 'inherit' },
+						a: { color: 'inherit' }
+					}
+				}
+			},
 			spacing: Object.fromEntries(
 				Array.from({ length: 101 }, (_, i) => [[i], `${(i * 0.4).toFixed(1)}rem`])
 			)
 		}
 	},
-	plugins: [require('tailwindcss-animate'), theme]
+	plugins: [
+		require('tailwindcss-animate'),
+		require('@tailwindcss/typography'),
+		theme
+	]
 }
 export default config

@@ -217,7 +217,6 @@ const RenderNextImage = ({ imageData }: { imageData: ImageData }) => {
 
 	// Пример парсинга стилей, если они в строке
 	const parsedStyle = style ? parseInlineStyles(style) : {}
-
 	return (
 		<div style={{ textAlign: imageData.attrs.textAlign as any }}>
 			<Image
@@ -228,7 +227,7 @@ const RenderNextImage = ({ imageData }: { imageData: ImageData }) => {
 				style={parsedStyle}
 				title={title || undefined}
 				loading={loading ? 'eager' : 'lazy'} // Ленивая загрузка по умолчанию
-				className={className || undefined}
+				className={cn('block', className)}
 			/>
 		</div>
 	)
@@ -254,7 +253,7 @@ const JSONContentRenderer = ({ content }: { content: any }) => {
 	if (!content) return null
 
 	return (
-		<>
+		<div className=" prose dark:prose-invert w-full max-w-full">
 			{typeof content === 'string'
 				? JSON.parse(content)?.content.map((node: any, index: number) => (
 						<React.Fragment key={index}>{renderContent(node)}</React.Fragment>
@@ -262,7 +261,7 @@ const JSONContentRenderer = ({ content }: { content: any }) => {
 				: content.content?.map((node: any, index: number) => (
 						<React.Fragment key={index}>{renderContent(node)}</React.Fragment>
 					))}
-		</>
+		</div>
 	)
 }
 
