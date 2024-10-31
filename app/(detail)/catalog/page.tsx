@@ -47,17 +47,21 @@ export default async function CatalogPage({
 			: true
 
 		const matchesCategory =
-			category && product.category ? category.includes(product.category?.id) : true
+			category !== undefined
+				? product.category
+					? category.includes(product.category.id)
+					: false
+				: true
 
 		const matchesManufacturer =
-			manufacturer && product.facturer
-				? manufacturer.includes(product.facturer?.id)
+			manufacturer !== undefined
+				? product.facturer
+					? manufacturer.includes(product.facturer.id)
+					: false
 				: true
 
 		const matchesInStock =
-			inStock !== undefined &&
-			Boolean(inStock) === true &&
-			product.availability === true
+			inStock !== undefined ? Boolean(inStock) === product.availability : true
 
 		return (
 			matchesQuery && matchesCategory && matchesManufacturer && matchesInStock

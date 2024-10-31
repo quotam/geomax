@@ -20,7 +20,14 @@ const EditeAdminPage = ({ params }: { params: { id: string } }) => {
 					Назад к списку продуктов{' '}
 				</Button>
 			</Link>
-			<UpdateProductForm isPending={isPending} data={data} />
+			<UpdateProductForm
+				isPending={isPending}
+				data={{
+					...data!,
+					...(data?.category && { categoryId: data.category.id }),
+					...(data?.facturer && { facturerId: data.facturer.id })
+				}}
+			/>
 		</main>
 	)
 }

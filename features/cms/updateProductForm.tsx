@@ -54,7 +54,9 @@ const UpdateProductForm = ({
 	const facOptions = useProductFacturer()
 
 	React.useEffect(() => {
-		if (data) form.reset(data)
+		if (data) {
+			form.reset(data)
+		}
 	}, [data, form])
 
 	function onSubmit(values: UpdateProductDto) {
@@ -76,7 +78,7 @@ const UpdateProductForm = ({
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Статус</FormLabel>
-									<Select onValueChange={field.onChange} defaultValue={field.value}>
+									<Select onValueChange={field.onChange} value={field.value}>
 										<FormControl>
 											<SelectTrigger>
 												<SelectValue placeholder="Выберите статус" />
@@ -104,7 +106,7 @@ const UpdateProductForm = ({
 										<Input
 											type="number"
 											placeholder="Цена"
-											defaultValue={field.value || undefined}
+											value={field.value || undefined}
 											onChange={e => field.onChange(Number(e.target.value))}
 										/>
 									</FormControl>
@@ -195,7 +197,7 @@ const UpdateProductForm = ({
 								<Input
 									placeholder="Название"
 									onChange={field.onChange}
-									defaultValue={field.value}
+									value={field.value}
 								/>
 							</FormControl>
 							<FormDescription>Введите название.</FormDescription>
@@ -214,7 +216,7 @@ const UpdateProductForm = ({
 								<Textarea
 									placeholder="Мета"
 									onChange={field.onChange}
-									defaultValue={field.value}
+									value={field.value}
 								/>
 							</FormControl>
 							<FormDescription>

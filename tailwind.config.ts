@@ -128,18 +128,26 @@ const config: Config = {
 				DEFAULT: {
 					css: {
 						color: 'inherit', // Наследуемый цвет текста
-						fontSize: 'inherit', // Наследуемый размер текста
-						lineHeight: 'inherit', // Наследуемая высота строки
-						img: {
-							margin: '0', // Убираем отступы
-							padding: '0', // Убираем внутренние отступы
-							textAlign: 'inherit',
-							display: 'inline' // Отменяем display: block для отмены центровки
+						fontSize: '1.6rem', // Наследуемый размер текста
+						code: {
+							color: 'inherit' // Наследуемый цвет текста
 						},
-						h1: { color: 'inherit', fontSize: 'inherit', lineHeight: 'inherit' },
-						h2: { color: 'inherit', fontSize: 'inherit', lineHeight: 'inherit' },
-						p: { color: 'inherit', fontSize: 'inherit', lineHeight: 'inherit' },
-						a: { color: 'inherit' }
+						lineHeight: 'inherit', // Наследуемая высота строки
+						p: {
+							color: 'inherit' // Наследуемый цвет текста
+						},
+						span: {
+							color: 'inherit' // Наследуемый цвет текста
+						},
+						ul: {
+							color: 'inherit' // Наследуемый цвет текста
+						},
+						h1: {
+							color: 'inherit', // Наследуемый цвет текста
+							fontSize: '3.4rem',
+							fontWeight: 'bold',
+							lineHeight: '3.6rem'
+						}
 					}
 				}
 			},
