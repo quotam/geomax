@@ -174,6 +174,7 @@ class ProductService {
 			}
 		})
 		cacheStrategy.invalidate(this.cacheTags.list)
+		cacheStrategy.invalidate(this.cacheTags.search)
 		cacheStrategy.invalidate(this.cacheTags.once(id))
 		return id
 	}
