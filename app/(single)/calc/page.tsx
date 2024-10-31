@@ -1,4 +1,5 @@
 'use client'
+
 import { Button } from '@front/shared/ui/button'
 import {
 	Card,
@@ -11,11 +12,7 @@ import {
 import { Input } from '@front/shared/ui/input'
 import { Label } from '@front/shared/ui/label'
 import { Slider } from '@front/shared/ui/slider'
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger
-} from '@front/shared/ui/tooltip'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@front/shared/ui/tooltip'
 import { Calculator, Info } from 'lucide-react'
 import { useState } from 'react'
 import CountUp from 'react-countup'
@@ -34,9 +31,7 @@ const CalcPage = () => {
 
 	return (
 		<main className="container px-4 py-20">
-			<h1 className="text-3xl font-bold mb-12 text-center">
-				Калькулятор экономии{' '}
-			</h1>
+			<h1 className="text-3xl font-bold mb-12 text-center">Калькулятор экономии </h1>
 
 			<Card className="w-full max-w-[60rem] mx-auto">
 				<CardHeader>
@@ -97,8 +92,8 @@ const CalcPage = () => {
 								</TooltipTrigger>
 								<TooltipContent>
 									<p>
-										Введите среднюю стоимость обработки одного гектара, включая затраты на
-										семена, удобрения, топливо и т.д.
+										Введите среднюю стоимость обработки одного гектара, включая затраты на семена, удобрения,
+										топливо и т.д.
 									</p>
 								</TooltipContent>
 							</Tooltip>

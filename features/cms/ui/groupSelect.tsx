@@ -46,10 +46,7 @@ const GroupSelect = ({
 					>
 						<p className="flex items-center gap-2">
 							<Check
-								className={cn(
-									'mr-2 h-4 w-4',
-									field.value === item.value ? 'opacity-100' : 'opacity-0'
-								)}
+								className={cn('mr-2 h-4 w-4', field.value === item.value ? 'opacity-100' : 'opacity-0')}
 							/>
 							{item.label}
 						</p>
@@ -58,9 +55,8 @@ const GroupSelect = ({
 							title="Удалить категорию"
 							onClick={e => {
 								e.preventDefault()
-								confirm(
-									'Удалить категорию? Категория может использоваться в других записях'
-								) && deleteCat(item.value)
+								confirm('Удалить категорию? Категория может использоваться в других записях') &&
+									deleteCat(item.value)
 							}}
 							className="hidden group-hover:flex"
 							size="icon"
@@ -93,9 +89,7 @@ const GroupSelect = ({
 								variant="outline"
 							>
 								<PlusSquare className=" h-4 w-4" />
-								<span>
-									{renderCreateLable ? renderCreateLable(search) : search}
-								</span>{' '}
+								<span>{renderCreateLable ? renderCreateLable(search) : search}</span>{' '}
 							</Button>
 						)}
 					</div>

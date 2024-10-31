@@ -1,9 +1,8 @@
-import * as React from 'react'
+import { cn } from '@front/shared/lib/utils'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu'
 import { cva } from 'class-variance-authority'
-
-import { cn } from '@front/shared/lib/utils'
+import * as React from 'react'
 
 const NavigationMenu = React.forwardRef<
 	React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -11,10 +10,7 @@ const NavigationMenu = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
 	<NavigationMenuPrimitive.Root
 		ref={ref}
-		className={cn(
-			'relative z-10 flex max-w-max flex-1 items-center justify-center',
-			className
-		)}
+		className={cn('relative z-10 flex max-w-max flex-1 items-center justify-center', className)}
 		{...props}
 	>
 		{children}
@@ -29,10 +25,7 @@ const NavigationMenuList = React.forwardRef<
 >(({ className, ...props }, ref) => (
 	<NavigationMenuPrimitive.List
 		ref={ref}
-		className={cn(
-			'group flex flex-1 list-none items-center justify-center space-x-1',
-			className
-		)}
+		className={cn('group flex flex-1 list-none items-center justify-center space-x-1', className)}
 		{...props}
 	/>
 ))
@@ -94,8 +87,7 @@ const NavigationMenuViewport = React.forwardRef<
 		/>
 	</div>
 ))
-NavigationMenuViewport.displayName =
-	NavigationMenuPrimitive.Viewport.displayName
+NavigationMenuViewport.displayName = NavigationMenuPrimitive.Viewport.displayName
 
 const NavigationMenuIndicator = React.forwardRef<
 	React.ElementRef<typeof NavigationMenuPrimitive.Indicator>,
@@ -112,33 +104,29 @@ const NavigationMenuIndicator = React.forwardRef<
 		<div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
 	</NavigationMenuPrimitive.Indicator>
 ))
-NavigationMenuIndicator.displayName =
-	NavigationMenuPrimitive.Indicator.displayName
+NavigationMenuIndicator.displayName = NavigationMenuPrimitive.Indicator.displayName
 
-const ListItem = React.forwardRef<
-	React.ElementRef<'a'>,
-	React.ComponentPropsWithoutRef<'a'>
->(({ className, title, children, ...props }, ref) => {
-	return (
-		<li>
-			<NavigationMenuLink asChild>
-				<a
-					ref={ref}
-					className={cn(
-						'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-						className
-					)}
-					{...props}
-				>
-					<div className="text-sm font-medium leading-none">{title}</div>
-					<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-						{children}
-					</p>
-				</a>
-			</NavigationMenuLink>
-		</li>
-	)
-})
+const ListItem = React.forwardRef<React.ElementRef<'a'>, React.ComponentPropsWithoutRef<'a'>>(
+	({ className, title, children, ...props }, ref) => {
+		return (
+			<li>
+				<NavigationMenuLink asChild>
+					<a
+						ref={ref}
+						className={cn(
+							'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+							className
+						)}
+						{...props}
+					>
+						<div className="text-sm font-medium leading-none">{title}</div>
+						<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">{children}</p>
+					</a>
+				</NavigationMenuLink>
+			</li>
+		)
+	}
+)
 ListItem.displayName = 'ListItem'
 export {
 	navigationMenuTriggerStyle,

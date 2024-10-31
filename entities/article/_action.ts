@@ -1,12 +1,13 @@
 'use server'
 
-import { ArticleType } from '@prisma/client'
-import { articleService } from './_service'
 import { getAppSessionStrictServer } from '@front/kernel/lib/next-auth/getAppSessionStrictServer'
-import { articleAbility } from './_ability'
-import { AccessDeniedError } from '@front/shared/lib/errors'
-import { ArticleUpdateDto, ArticleUpdateSchema } from './_domain/dto'
 import { schemaParse } from '@front/kernel/lib/zod/shemaParse'
+import { AccessDeniedError } from '@front/shared/lib/errors'
+import { ArticleType } from '@prisma/client'
+
+import { articleAbility } from './_ability'
+import { ArticleUpdateDto, ArticleUpdateSchema } from './_domain/dto'
+import { articleService } from './_service'
 
 export const ArticleGetAdminCategoryes = async (type: ArticleType) => {
 	const session = await getAppSessionStrictServer()
@@ -16,10 +17,7 @@ export const ArticleGetAdminCategoryes = async (type: ArticleType) => {
 	throw new AccessDeniedError('Недостаточно прав для просмотра')
 }
 
-export const ArticleDeleteCategoryAdminAction = async (
-	type: ArticleType,
-	id: string
-) => {
+export const ArticleDeleteCategoryAdminAction = async (type: ArticleType, id: string) => {
 	const session = await getAppSessionStrictServer()
 	if (articleAbility(session).canDelete()) {
 		return await articleService(type).deleteCategory(id)
@@ -27,10 +25,7 @@ export const ArticleDeleteCategoryAdminAction = async (
 	throw new AccessDeniedError('Недостаточно прав для удаления')
 }
 
-export const ArticleCteateCategoryAction = async (
-	type: ArticleType,
-	title: string
-) => {
+export const ArticleCteateCategoryAction = async (type: ArticleType, title: string) => {
 	const session = await getAppSessionStrictServer()
 	if (articleAbility(session).canCrete()) {
 		return await articleService(type).createCategory(title)
@@ -54,10 +49,7 @@ export const ArticleGetOneAction = async (type: ArticleType, id: string) => {
 	throw new AccessDeniedError('Недостаточно прав для просмотра')
 }
 
-export const ArticleUpdateAdminAction = async (
-	type: ArticleType,
-	dto: ArticleUpdateDto
-) => {
+export const ArticleUpdateAdminAction = async (type: ArticleType, dto: ArticleUpdateDto) => {
 	const session = await getAppSessionStrictServer()
 	if (articleAbility(session).canUpdate()) {
 		const result = schemaParse(ArticleUpdateSchema, dto)
@@ -66,10 +58,7 @@ export const ArticleUpdateAdminAction = async (
 	throw new AccessDeniedError('Недостаточно прав для обновления')
 }
 
-export const ArticleDeleteAdminAction = async (
-	type: ArticleType,
-	id: string
-) => {
+export const ArticleDeleteAdminAction = async (type: ArticleType, id: string) => {
 	const session = await getAppSessionStrictServer()
 	if (articleAbility(session).canDelete()) {
 		return await articleService(type).delete(id)

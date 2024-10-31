@@ -1,8 +1,10 @@
 'use client'
+
 import { cn } from '@front/shared/lib/utils'
 import { Button } from '@front/shared/ui/button'
 import GoogleIcon from '@front/shared/ui/googleIcon'
 import { ClientSafeProvider } from 'next-auth/react'
+
 import { useOAuthSignIn } from '../useOauthSignIn'
 
 const ProviderButton = ({

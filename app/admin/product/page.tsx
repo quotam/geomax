@@ -1,4 +1,5 @@
 'use client'
+
 import Loading from '@front/app/loading'
 import { productQueries } from '@front/entities/product/_queries'
 import ProductList from '@front/features/cms/productList'

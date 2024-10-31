@@ -1,10 +1,4 @@
-import {
-	ArticleStatus,
-	Facturer,
-	ProductCategory,
-	ProductStatus,
-	UserRole
-} from '@prisma/client'
+import { ArticleStatus, Facturer, ProductCategory, ProductStatus, UserRole } from '@prisma/client'
 
 export type Product = {
 	id: string

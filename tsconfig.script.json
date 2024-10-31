@@ -1,8 +1,8 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "esModuleInterop": true
-  },
-  "include": ["./prisma/**/*.ts", "./tests/**/*.ts"]
+	"compilerOptions": {
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"esModuleInterop": true
+	},
+	"include": ["./prisma/**/*.ts", "./tests/**/*.ts"]
 }

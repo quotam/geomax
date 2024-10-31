@@ -5,13 +5,7 @@ import { getAppSessionServer } from '@front/kernel/lib/next-auth/getAppSessionSe
 import { PriceToRub } from '@front/shared/lib/utils'
 import { Badge } from '@front/shared/ui/badge'
 import { Button } from '@front/shared/ui/button'
-import {
-	Card,
-	CardContent,
-	CardFooter,
-	CardHeader,
-	CardTitle
-} from '@front/shared/ui/card'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@front/shared/ui/card'
 import JSONContentRenderer from '@front/shared/ui/contentRender'
 import { Settings, ShoppingCart, Tag } from 'lucide-react'
 import { Metadata } from 'next'
@@ -60,12 +54,9 @@ export default async function CatalogPage({
 					: false
 				: true
 
-		const matchesInStock =
-			inStock !== undefined ? Boolean(inStock) === product.availability : true
+		const matchesInStock = inStock !== undefined ? Boolean(inStock) === product.availability : true
 
-		return (
-			matchesQuery && matchesCategory && matchesManufacturer && matchesInStock
-		)
+		return matchesQuery && matchesCategory && matchesManufacturer && matchesInStock
 	})
 
 	return (
@@ -77,10 +68,7 @@ export default async function CatalogPage({
 					{products.map(product => (
 						<Card key={product.id} className="flex flex-col relative">
 							{session && productAbility(session).canUpdate() && (
-								<Link
-									href={`/admin/product/${product.id}`}
-									className="text-primary absolute top-2 right-2"
-								>
+								<Link href={`/admin/product/${product.id}`} className="text-primary absolute top-2 right-2">
 									<Settings className="w-4 h-4" />
 								</Link>
 							)}
@@ -114,9 +102,7 @@ export default async function CatalogPage({
 								</CardTitle>
 								<JSONContentRenderer content={product.desc} />
 								{product.price && (
-									<p className="text-2xl mt-2 font-bold text-primary">
-										{PriceToRub(product.price)}
-									</p>
+									<p className="text-2xl mt-2 font-bold text-primary">{PriceToRub(product.price)}</p>
 								)}
 							</CardContent>
 							<CardFooter className="flex justify-end gap-2">

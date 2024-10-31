@@ -1,12 +1,11 @@
 'use client'
-import {
-	ArticleUpdateDto,
-	ArticleUpdateSchema
-} from '@front/entities/article/_domain/dto'
+
+import { ArticleUpdateDto, ArticleUpdateSchema } from '@front/entities/article/_domain/dto'
 import { articleQueries } from '@front/entities/article/_queries'
 import AppEditor from '@front/entities/editor'
 import { onUpload, validateFn } from '@front/entities/editor/vm/uploadImage'
 import { selectFile } from '@front/shared/lib/file'
+import { cn } from '@front/shared/lib/utils'
 import { Button } from '@front/shared/ui/button'
 import {
 	Form,
@@ -32,9 +31,9 @@ import { useMutation } from '@tanstack/react-query'
 import { Image } from 'lucide-react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+
 import { useArticleCat } from '../vm/useArticleCat'
 import GroupSelect from './groupSelect'
-import { cn } from '@front/shared/lib/utils'
 
 const UpdateArticleForm = ({
 	data,
@@ -65,15 +64,12 @@ const UpdateArticleForm = ({
 				onSubmit={form.handleSubmit(values => mutateAsync(values))}
 				className={`space-y-4 border bg-card mx-auto p-6 bg-white rounded-lg shadow-md ${isPending && 'animate-pulse bg-secondary/5'}`}
 			>
-				<h1 className="text-2xl font-bold mb-10">
-					Редактирование {entityType.toLowerCase()}
-				</h1>
+				<h1 className="text-2xl font-bold mb-10">Редактирование {entityType.toLowerCase()}</h1>
 				<div className="grid grid-cols-2 gap-4">
 					<div
 						className={cn(
 							'space-y-4',
-							entityType === ArticleType.FAQ &&
-								'col-span-2 grid grid-cols-2 gap-4 space-y-0'
+							entityType === ArticleType.FAQ && 'col-span-2 grid grid-cols-2 gap-4 space-y-0'
 						)}
 					>
 						<FormField
@@ -131,21 +127,14 @@ const UpdateArticleForm = ({
 											onClick={e => {
 												e.preventDefault()
 												selectFile('image/*').then(file => {
-													if (validateFn(file))
-														onUpload(file).then(url => field.onChange(url))
+													if (validateFn(file)) onUpload(file).then(url => field.onChange(url))
 												})
 											}}
 										>
 											<div className="flex items-center gap-2">
 												Выберите изображение <Image size={20} />
 											</div>
-											{field.value && (
-												<img
-													src={field.value}
-													alt="preview"
-													className="w-full object-cover"
-												/>
-											)}
+											{field.value && <img src={field.value} alt="preview" className="w-full object-cover" />}
 										</Button>
 									</FormControl>
 									<FormDescription>
@@ -193,9 +182,7 @@ const UpdateArticleForm = ({
 							<FormControl>
 								<Textarea onChange={field.onChange} defaultValue={field.value} />
 							</FormControl>
-							<FormDescription>
-								Ключевые слова, нужные при поиске (через запятую)
-							</FormDescription>
+							<FormDescription>Ключевые слова, нужные при поиске (через запятую)</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -236,8 +223,7 @@ const UpdateArticleForm = ({
 								/>
 							</FormControl>
 							<FormDescription>
-								Превью {entityType.toLowerCase()}, краткая информация. (в редких случаях
-								не требуется).
+								Превью {entityType.toLowerCase()}, краткая информация. (в редких случаях не требуется).
 							</FormDescription>
 							<FormMessage />
 						</FormItem>

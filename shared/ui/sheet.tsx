@@ -1,11 +1,10 @@
 'use client'
 
-import * as React from 'react'
+import { cn } from '@front/shared/lib/utils'
 import * as SheetPrimitive from '@radix-ui/react-dialog'
 import { Cross2Icon } from '@radix-ui/react-icons'
-import { cva, type VariantProps } from 'class-variance-authority'
-
-import { cn } from '@front/shared/lib/utils'
+import { type VariantProps, cva } from 'class-variance-authority'
+import * as React from 'react'
 
 const Sheet = SheetPrimitive.Root
 
@@ -75,9 +74,7 @@ const SheetContent = React.forwardRef<
 					side === 'top' && '-bottom-14 h-10 w-10 top-auto'
 				)}
 			>
-				<Cross2Icon
-					className={cn('h-5 w-5', side === 'top' && 'h-10 text-background w-10')}
-				/>
+				<Cross2Icon className={cn('h-5 w-5', side === 'top' && 'h-10 text-background w-10')} />
 
 				<span className="sr-only">Close</span>
 			</SheetPrimitive.Close>
@@ -87,26 +84,14 @@ const SheetContent = React.forwardRef<
 ))
 SheetContent.displayName = SheetPrimitive.Content.displayName
 
-const SheetHeader = ({
-	className,
-	...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-	<div
-		className={cn('flex flex-col space-y-2 text-center sm:text-left', className)}
-		{...props}
-	/>
+const SheetHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+	<div className={cn('flex flex-col space-y-2 text-center sm:text-left', className)} {...props} />
 )
 SheetHeader.displayName = 'SheetHeader'
 
-const SheetFooter = ({
-	className,
-	...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
+const SheetFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
 	<div
-		className={cn(
-			'flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2',
-			className
-		)}
+		className={cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', className)}
 		{...props}
 	/>
 )

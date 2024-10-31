@@ -1,10 +1,7 @@
 'use client'
 
 import AppEditor from '@front/entities/editor'
-import {
-	UpdateProdcutSchema,
-	UpdateProductDto
-} from '@front/entities/product/_domain'
+import { UpdateProdcutSchema, UpdateProductDto } from '@front/entities/product/_domain'
 import { productQueries } from '@front/entities/product/_queries'
 import { Button } from '@front/shared/ui/button'
 import {
@@ -30,6 +27,7 @@ import { ProductStatus } from '@prisma/client'
 import { useMutation } from '@tanstack/react-query'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+
 import GroupSelect from './ui/groupSelect'
 import ImageSelector from './ui/imageSelector'
 import { useProductCat } from './vm/useProductCat'
@@ -46,9 +44,7 @@ const UpdateProductForm = ({
 		resolver: zodResolver(UpdateProdcutSchema)
 	})
 
-	const { mutateAsync, isPending: isPendingUpdate } = useMutation(
-		productQueries.update()
-	)
+	const { mutateAsync, isPending: isPendingUpdate } = useMutation(productQueries.update())
 
 	const catOptions = useProductCat()
 	const facOptions = useProductFacturer()
@@ -143,15 +139,10 @@ const UpdateProductForm = ({
 								<FormItem>
 									<FormLabel>Категория</FormLabel>
 									<FormControl>
-										<GroupSelect
-											renderCreateLable={e => e.split('&')[0]}
-											{...catOptions}
-											field={field}
-										/>
+										<GroupSelect renderCreateLable={e => e.split('&')[0]} {...catOptions} field={field} />
 									</FormControl>
 									<FormDescription>
-										Выберите или создайте категорию. при создании категории - название &
-										описание
+										Выберите или создайте категорию. при создании категории - название & описание
 									</FormDescription>
 									<FormMessage />
 								</FormItem>
@@ -194,11 +185,7 @@ const UpdateProductForm = ({
 						<FormItem>
 							<FormLabel>Название</FormLabel>
 							<FormControl>
-								<Input
-									placeholder="Название"
-									onChange={field.onChange}
-									value={field.value}
-								/>
+								<Input placeholder="Название" onChange={field.onChange} value={field.value} />
 							</FormControl>
 							<FormDescription>Введите название.</FormDescription>
 							<FormMessage />
@@ -213,15 +200,9 @@ const UpdateProductForm = ({
 						<FormItem>
 							<FormLabel>Мета информация</FormLabel>
 							<FormControl>
-								<Textarea
-									placeholder="Мета"
-									onChange={field.onChange}
-									value={field.value}
-								/>
+								<Textarea placeholder="Мета" onChange={field.onChange} value={field.value} />
 							</FormControl>
-							<FormDescription>
-								Ключевые слова, нужные при поиске (через запятую)
-							</FormDescription>
+							<FormDescription>Ключевые слова, нужные при поиске (через запятую)</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}

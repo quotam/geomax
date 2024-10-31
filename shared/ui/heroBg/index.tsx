@@ -1,8 +1,9 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import './style.css'
 import { useInView } from 'react-intersection-observer'
+
+import './style.css'
 
 //NOTE : AI GENERATED module
 //

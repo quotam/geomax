@@ -43,9 +43,7 @@ const FaqPage = async ({
 
 	return (
 		<main className="container mx-auto w-[90%] px-4 py-20">
-			<h1 className="text-3xl font-bold mb-12 text-center">
-				Ответы на часто задаваемые вопросы{' '}
-			</h1>
+			<h1 className="text-3xl font-bold mb-12 text-center">Ответы на часто задаваемые вопросы </h1>
 
 			<Card className="mb-8">
 				<CardHeader>
@@ -61,15 +59,8 @@ const FaqPage = async ({
 				</CardContent>
 			</Card>
 			{filteredFaqs.map(faq => (
-				<Accordion
-					key={faq.category.id}
-					type="single"
-					className="w-full"
-					collapsible
-				>
-					<h4 className="text-2xl font-bold text-foreground">
-						{faq.category.title}
-					</h4>
+				<Accordion key={faq.category.id} type="single" className="w-full" collapsible>
+					<h4 className="text-2xl font-bold text-foreground">{faq.category.title}</h4>
 					{faq.article.map(faq => (
 						<AccordionItem key={faq.id} value={faq.id} id={faq.id}>
 							<AccordionTrigger className="flex items-center">

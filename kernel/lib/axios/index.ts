@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import { getContentType } from './helpers'
 
 export const instance = axios.create({

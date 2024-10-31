@@ -1,4 +1,5 @@
 import { userWithOutName } from '@front/shared/config/publicConfig'
+
 import { Profile } from '../_domain/types'
 import { getProfileDisplayName } from './getProfileDisplayName'
 

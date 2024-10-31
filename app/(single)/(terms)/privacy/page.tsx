@@ -6,15 +6,7 @@ import {
 } from '@front/shared/ui/accordion'
 import { Button } from '@front/shared/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@front/shared/ui/card'
-import {
-	AlertTriangle,
-	Cookie,
-	Database,
-	Eye,
-	Globe,
-	HelpCircle,
-	Lock
-} from 'lucide-react'
+import { AlertTriangle, Cookie, Database, Eye, Globe, HelpCircle, Lock } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -31,14 +23,12 @@ export default function PrivacyPolicyPage() {
 			<div className="container mx-auto px-4 py-12 max-w-[90rem]">
 				<Card className="mb-8">
 					<CardHeader className="text-center">
-						<CardTitle className="text-4xl font-bold">
-							Политика конфиденциальности
-						</CardTitle>
+						<CardTitle className="text-4xl font-bold">Политика конфиденциальности</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<p className="text-muted-foreground text-center">
-							Мы ценим вашу конфиденциальность и стремимся защитить ваши данные при
-							использовании сайта {siteName}
+							Мы ценим вашу конфиденциальность и стремимся защитить ваши данные при использовании сайта{' '}
+							{siteName}
 						</p>
 					</CardContent>
 				</Card>
@@ -55,9 +45,9 @@ export default function PrivacyPolicyPage() {
 						title="2. Сбор информации"
 						content={
 							<div>
-								Мы не осуществляем регистрацию пользователей и не собираем персональные
-								данные намеренно. Однако, мы автоматически собираем некоторую информацию
-								при вашем посещении ${siteName}, включая:
+								Мы не осуществляем регистрацию пользователей и не собираем персональные данные намеренно.
+								Однако, мы автоматически собираем некоторую информацию при вашем посещении ${siteName},
+								включая:
 								<ul className="list-disc pl-5 mt-2 space-y-1">
 									<li>IP-адрес</li>
 									<li>Тип и версия браузера</li>
@@ -75,8 +65,8 @@ export default function PrivacyPolicyPage() {
 						content={
 							<>
 								<p>
-									Наш сайт использует файлы cookie для улучшения пользовательского опыта
-									и анализа использования сайта.
+									Наш сайт использует файлы cookie для улучшения пользовательского опыта и анализа
+									использования сайта.
 								</p>
 								<Accordion type="single" collapsible className="mt-4">
 									<AccordionItem value="cookie-details">
@@ -84,15 +74,12 @@ export default function PrivacyPolicyPage() {
 										<AccordionContent>
 											<ul className="list-disc pl-5 space-y-2">
 												<li>
-													Файлы cookie — это небольшие текстовые файлы, которые сохраняются
-													на вашем устройстве.
+													Файлы cookie — это небольшие текстовые файлы, которые сохраняются на вашем устройстве.
 												</li>
+												<li>Мы используем как сессионные, так и постоянные файлы cookie.</li>
 												<li>
-													Мы используем как сессионные, так и постоянные файлы cookie.
-												</li>
-												<li>
-													Вы можете отключить файлы cookie в настройках вашего браузера, но
-													это может повлиять на функциональность сайта.
+													Вы можете отключить файлы cookie в настройках вашего браузера, но это может повлиять на
+													функциональность сайта.
 												</li>
 											</ul>
 										</AccordionContent>
@@ -125,9 +112,8 @@ export default function PrivacyPolicyPage() {
 						title="7. Контакты"
 						content={
 							<p>
-								Если у вас есть какие-либо вопросы относительно нашей Политики
-								конфиденциальности, пожалуйста, свяжитесь с нами, наши контакты доступны
-								по{' '}
+								Если у вас есть какие-либо вопросы относительно нашей Политики конфиденциальности,
+								пожалуйста, свяжитесь с нами, наши контакты доступны по{' '}
 								<Button variant="link" className="p-0">
 									<Link href="/contacts" legacyBehavior passHref>
 										ссылке

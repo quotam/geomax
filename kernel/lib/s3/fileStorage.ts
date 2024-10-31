@@ -1,10 +1,9 @@
 import { S3Client } from '@aws-sdk/client-s3'
-
 import { Upload } from '@aws-sdk/lib-storage'
 import { privateConfig } from '@front/shared/config/privateConfig'
 import cuid2, { createId } from '@paralleldrive/cuid2'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 
 export type StoredFile = {
 	id: string

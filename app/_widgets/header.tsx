@@ -13,13 +13,7 @@ import {
 	NavigationMenuTrigger,
 	navigationMenuTriggerStyle
 } from '@front/shared/ui/navigation-menu'
-import {
-	Sheet,
-	SheetClose,
-	SheetContent,
-	SheetHeader,
-	SheetTrigger
-} from '@front/shared/ui/sheet'
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTrigger } from '@front/shared/ui/sheet'
 import { ChevronDown, Menu } from 'lucide-react'
 import Link from 'next/link'
 
@@ -71,10 +65,7 @@ export const menuItems = [
 
 const Logo = ({ className }: { className?: string }) => {
 	return (
-		<Link
-			href="/"
-			className={cn('text-primary  flex items-center gap-3', className)}
-		>
+		<Link href="/" className={cn('text-primary  flex items-center gap-3', className)}>
 			<LogoIcon className="h-7 w-7" />
 			<span className="text-2xl font-medium uppercase">Геомакс</span>
 		</Link>
@@ -186,12 +177,7 @@ const Header = async () => {
 												)}
 											>
 												{item.subMenu.map((subitem, j) => (
-													<ListItem
-														key={j}
-														title={subitem.title}
-														href={subitem.href}
-														className="w-70"
-													>
+													<ListItem key={j} title={subitem.title} href={subitem.href} className="w-70">
 														{subitem.desc}
 													</ListItem>
 												))}

@@ -1,5 +1,6 @@
 import 'next-auth'
-import { UserEntity, SessionEntity } from '../../domain/user'
+
+import { SessionEntity, UserEntity } from '../../domain/user'
 
 declare module 'next-auth' {
 	interface Session {

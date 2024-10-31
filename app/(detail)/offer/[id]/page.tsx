@@ -1,22 +1,13 @@
 import NotFound from '@front/app/not-found'
 import { articleService } from '@front/entities/article/_service'
 import { cn } from '@front/shared/lib/utils'
-import {
-	Card,
-	CardContent,
-	CardFooter,
-	CardHeader
-} from '@front/shared/ui/card'
+import { Card, CardContent, CardFooter, CardHeader } from '@front/shared/ui/card'
 import JSONContentRenderer from '@front/shared/ui/contentRender'
 import AppShareModal from '@front/shared/ui/shareModal'
 import { Calendar } from 'lucide-react'
 import Image from 'next/image'
 
-export const generateMetadata = async ({
-	params
-}: {
-	params: { id: string }
-}) => {
+export const generateMetadata = async ({ params }: { params: { id: string } }) => {
 	const data = await articleService('OFFER').getOne(params.id)
 	if (!data) return { title: 'Страница не найдена' }
 
@@ -59,10 +50,7 @@ export default async function NewsPage({ params }: { params: { id: string } }) {
 						alt="prewiew"
 						width={800}
 						height={400}
-						className={cn(
-							'w-full h-auto object-cover rounded-lg mb-6',
-							!data.image && 'max-h-100'
-						)}
+						className={cn('w-full h-auto object-cover rounded-lg mb-6', !data.image && 'max-h-100')}
 					/>
 					<div className="prose max-w-none">
 						<JSONContentRenderer content={data.body} />

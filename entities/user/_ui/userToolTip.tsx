@@ -1,11 +1,8 @@
-import React from 'react'
-import { getProfileDisplayName, Profile } from '../profile'
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger
-} from '@front/shared/ui/tooltip'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@front/shared/ui/tooltip'
 import Link from 'next/link'
+import React from 'react'
+
+import { Profile, getProfileDisplayName } from '../profile'
 import { ProfileAvatar } from './profileAvatar'
 
 const UserToolTip = ({ profile }: { profile?: Profile | null }) => {
@@ -20,10 +17,7 @@ const UserToolTip = ({ profile }: { profile?: Profile | null }) => {
 				<ul>
 					<li>
 						email{' '}
-						<Link
-							className="font-bold underline hover:no-underline"
-							href={`mailto:${profile?.email}`}
-						>
+						<Link className="font-bold underline hover:no-underline" href={`mailto:${profile?.email}`}>
 							{profile?.email!}
 						</Link>
 					</li>

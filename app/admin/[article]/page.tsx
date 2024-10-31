@@ -7,11 +7,7 @@ const schema = z.object({
 	article: z.nativeEnum(ArticleType)
 })
 
-export default function FaqAdmin({
-	params
-}: {
-	params: z.infer<typeof schema>
-}) {
+export default function FaqAdmin({ params }: { params: z.infer<typeof schema> }) {
 	const result = schema.safeParse(params)
 	if (result.error) return <NotFound />
 

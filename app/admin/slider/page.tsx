@@ -1,31 +1,19 @@
 'use client'
+
 import Loading from '@front/app/loading'
 import { sliderQueries } from '@front/entities/slider'
 import UserToolTip from '@front/entities/user/_ui/userToolTip'
 import { Button } from '@front/shared/ui/button'
-import {
-	Card,
-	CardContent,
-	CardFooter,
-	CardHeader
-} from '@front/shared/ui/card'
+import { Card, CardContent, CardFooter, CardHeader } from '@front/shared/ui/card'
 import JSONContentRenderer from '@front/shared/ui/contentRender'
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger
-} from '@front/shared/ui/tooltip'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@front/shared/ui/tooltip'
 import { SliderStatus } from '@prisma/client'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Calendar, Edit, Pen, PlusCircle, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 
 export default function SliderAdmin() {
-	const {
-		data,
-		isPending: isPendingData,
-		refetch
-	} = useQuery(sliderQueries.getAllAdmin)
+	const { data, isPending: isPendingData, refetch } = useQuery(sliderQueries.getAllAdmin)
 	const { mutateAsync: deleteSlide } = useMutation(sliderQueries.delete(refetch))
 	const { mutateAsync, isPending } = useMutation(sliderQueries.create(refetch))
 
@@ -35,11 +23,7 @@ export default function SliderAdmin() {
 		<main className="px-4 w-full">
 			<div className="flex flex-wrap justify-between items-center mb-8">
 				<h1 className="text-2xl font-bold">Управление главным слайдером</h1>
-				<Button
-					onClick={() => mutateAsync()}
-					variant="secondary"
-					disabled={isPending}
-				>
+				<Button onClick={() => mutateAsync()} variant="secondary" disabled={isPending}>
 					<PlusCircle className="mr-2 h-4 w-4" /> Добавить слайд
 				</Button>
 			</div>
@@ -48,8 +32,7 @@ export default function SliderAdmin() {
 					<Card key={slide.id}>
 						<CardHeader className="p-4 flex-row items-center gap-2">
 							<p className="mt-1">
-								Cтатус: <span className="font-bold text-primary">{slide.status}</span> \
-								Создан:{' '}
+								Cтатус: <span className="font-bold text-primary">{slide.status}</span> \ Создан:{' '}
 							</p>
 
 							<UserToolTip profile={slide.user} />
@@ -62,13 +45,11 @@ export default function SliderAdmin() {
 						<CardFooter className="p-4 flex justify-between items-center mt-4 ">
 							<Tooltip>
 								<TooltipTrigger className="cursor-pointer p-0 m-0 font-bold">
-									<Calendar className="mr-2 h-4 w-4 mb-1 inline" />{' '}
-									{slide.createdAt.toLocaleDateString()}
+									<Calendar className="mr-2 h-4 w-4 mb-1 inline" /> {slide.createdAt.toLocaleDateString()}
 								</TooltipTrigger>
 								<TooltipContent className="text-center">
 									<Pen className="mr-2 h-3 w-3 inline" /> Последнее изменение <br />
-									{slide.updatedAt.toLocaleDateString()} -
-									{slide.updatedAt.toLocaleTimeString()}
+									{slide.updatedAt.toLocaleDateString()} -{slide.updatedAt.toLocaleTimeString()}
 								</TooltipContent>
 							</Tooltip>
 							<h3 className="font-bold">Слайд {i + 1}</h3>
@@ -82,8 +63,7 @@ export default function SliderAdmin() {
 									variant="destructive"
 									onClick={() =>
 										slide.status === SliderStatus.PUBLISHED
-											? confirm('Вы уверены? Статус слайда ' + slide.status) &&
-												deleteSlide(slide.id)
+											? confirm('Вы уверены? Статус слайда ' + slide.status) && deleteSlide(slide.id)
 											: deleteSlide(slide.id)
 									}
 									size="icon"

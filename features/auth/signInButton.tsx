@@ -1,4 +1,5 @@
 'use client'
+
 import { Button } from '@front/shared/ui/button'
 import { LogIn } from 'lucide-react'
 import { signIn } from 'next-auth/react'

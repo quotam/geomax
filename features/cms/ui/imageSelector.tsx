@@ -1,10 +1,11 @@
 import { IMAGE_KEY } from '@front/entities/editor/domain'
+import { selectFile } from '@front/shared/lib/file'
 import { Button } from '@front/shared/ui/button'
 import { X } from 'lucide-react'
 import { ChangeEvent } from 'react'
 import { toast } from 'sonner'
+
 import { UploadimagesAction } from '../actions/uploadImages'
-import { selectFile } from '@front/shared/lib/file'
 
 export default function ImageSelector({
 	value,

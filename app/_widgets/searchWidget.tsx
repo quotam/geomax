@@ -1,9 +1,7 @@
 'use client'
+
 import { useAppDebounce } from '@front/kernel/hooks/useDebounce'
 import { Input } from '@front/shared/ui/input'
-import { Search } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
 import {
 	Select,
 	SelectContent,
@@ -11,6 +9,9 @@ import {
 	SelectTrigger,
 	SelectValue
 } from '@front/shared/ui/select'
+import { Search } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import React, { useEffect } from 'react'
 
 const SearchWidget = ({
 	searchTerm,

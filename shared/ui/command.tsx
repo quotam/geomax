@@ -1,12 +1,11 @@
 'use client'
 
-import * as React from 'react'
+import { Dialog, DialogContent } from '@front/shared//ui/dialog'
+import { cn } from '@front/shared/lib/utils'
 import { type DialogProps } from '@radix-ui/react-dialog'
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons'
 import { Command as CommandPrimitive } from 'cmdk'
-
-import { cn } from '@front/shared/lib/utils'
-import { Dialog, DialogContent } from '@front/shared//ui/dialog'
+import * as React from 'react'
 
 const Command = React.forwardRef<
 	React.ElementRef<typeof CommandPrimitive>,
@@ -44,11 +43,7 @@ const CommandInput = React.forwardRef<
 	}
 >(({ className, icon, ...props }, ref) => (
 	<div className="flex items-center border-b px-3" cmdk-input-wrapper="">
-		{icon ? (
-			icon
-		) : (
-			<MagnifyingGlassIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-		)}
+		{icon ? icon : <MagnifyingGlassIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />}
 		<CommandPrimitive.Input
 			ref={ref}
 			className={cn(
@@ -79,11 +74,7 @@ const CommandEmpty = React.forwardRef<
 	React.ElementRef<typeof CommandPrimitive.Empty>,
 	React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>
 >((props, ref) => (
-	<CommandPrimitive.Empty
-		ref={ref}
-		className="py-6 text-center text-sm"
-		{...props}
-	/>
+	<CommandPrimitive.Empty ref={ref} className="py-6 text-center text-sm" {...props} />
 ))
 
 CommandEmpty.displayName = CommandPrimitive.Empty.displayName
@@ -132,16 +123,10 @@ const CommandItem = React.forwardRef<
 
 CommandItem.displayName = CommandPrimitive.Item.displayName
 
-const CommandShortcut = ({
-	className,
-	...props
-}: React.HTMLAttributes<HTMLSpanElement>) => {
+const CommandShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => {
 	return (
 		<span
-			className={cn(
-				'ml-auto text-xs tracking-widest text-muted-foreground',
-				className
-			)}
+			className={cn('ml-auto text-xs tracking-widest text-muted-foreground', className)}
 			{...props}
 		/>
 	)

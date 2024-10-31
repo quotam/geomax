@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+
 import { cn } from '../lib/utils'
 import { Input } from './input'
 
@@ -10,10 +11,7 @@ const renderContent = (node: any) => {
 	switch (node.type) {
 		case 'paragraph':
 			return (
-				<p
-					className={node.attrs?.class}
-					style={{ textAlign: node.attrs?.textAlign || 'left' }}
-				>
+				<p className={node.attrs?.class} style={{ textAlign: node.attrs?.textAlign || 'left' }}>
 					{node.content ? (
 						node.content.map((childNode: any, index: number) => (
 							<React.Fragment key={index}>{renderContent(childNode)}</React.Fragment>
@@ -72,7 +70,7 @@ const renderContent = (node: any) => {
 
 		case 'taskList':
 			return (
-				<ul key={Math.random()}>
+				<ul className="list-none" key={Math.random()}>
 					{node.content?.map((childNode: any, index: number) => (
 						<li key={index}>{renderContent(childNode)}</li>
 					))}
@@ -99,11 +97,13 @@ const renderContent = (node: any) => {
 
 		case 'codeBlock':
 			return (
-				<code key={Math.random()}>
-					{node.content?.map((childNode: any, index: number) => (
-						<React.Fragment key={index}>{renderContent(childNode)}</React.Fragment>
-					))}
-				</code>
+				<pre key={Math.random()}>
+					<code>
+						{node.content?.map((childNode: any, index: number) => (
+							<React.Fragment key={index}>{renderContent(childNode)}</React.Fragment>
+						))}
+					</code>
+				</pre>
 			)
 
 		case 'text':
@@ -204,16 +204,7 @@ const parseToNumber = (value: string | number | null): number => {
 }
 
 const RenderNextImage = ({ imageData }: { imageData: ImageData }) => {
-	const {
-		src,
-		alt,
-		width,
-		height,
-		style,
-		title,
-		loading,
-		class: className
-	} = imageData.attrs
+	const { src, alt, width, height, style, title, loading, class: className } = imageData.attrs
 
 	// Пример парсинга стилей, если они в строке
 	const parsedStyle = style ? parseInlineStyles(style) : {}
@@ -245,15 +236,14 @@ const parseInlineStyles = (styleString: string) => {
 }
 
 // Функция для преобразования кебаб-кейсов в camelCase
-const camelize = (str: string) =>
-	str.replace(/-./g, match => match.charAt(1).toUpperCase())
+const camelize = (str: string) => str.replace(/-./g, match => match.charAt(1).toUpperCase())
 
 // Основной компонент для рендеринга всего документа
 const JSONContentRenderer = ({ content }: { content: any }) => {
 	if (!content) return null
 
 	return (
-		<div className=" prose dark:prose-invert w-full max-w-full">
+		<div className="prose dark:prose-invert w-full max-w-full">
 			{typeof content === 'string'
 				? JSON.parse(content)?.content.map((node: any, index: number) => (
 						<React.Fragment key={index}>{renderContent(node)}</React.Fragment>

@@ -1,12 +1,7 @@
 'use client'
+
 import { Button } from '@front/shared/ui/button'
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle
-} from '@front/shared/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@front/shared/ui/card'
 import { Input } from '@front/shared/ui/input'
 import {
 	Select,
@@ -92,9 +87,7 @@ export default function AdminPanel() {
 										outerRadius={80}
 										fill="#8884d8"
 										dataKey="value"
-										label={({ name, percent }) =>
-											`${name} ${(percent * 100).toFixed(0)}%`
-										}
+										label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
 									>
 										{deviceData.map((entry, index) => (
 											<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -122,9 +115,7 @@ export default function AdminPanel() {
 										outerRadius={80}
 										fill="#8884d8"
 										dataKey="value"
-										label={({ name, percent }) =>
-											`${name} ${(percent * 100).toFixed(0)}%`
-										}
+										label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
 									>
 										{locationData.map((entry, index) => (
 											<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

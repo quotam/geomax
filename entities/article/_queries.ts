@@ -1,6 +1,8 @@
 import { ArticleType } from '@prisma/client'
 import { queryOptions, useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+
 import {
 	ArticleCreateAdminAction,
 	ArticleCteateCategoryAction,
@@ -11,7 +13,6 @@ import {
 	ArticleGetOneAction,
 	ArticleUpdateAdminAction
 } from './_action'
-import { useRouter } from 'next/navigation'
 import { ArticleUpdateDto } from './_domain/dto'
 
 const serviceTag = 'article'
@@ -34,8 +35,7 @@ class ArticleQueries {
 		const queryClient = useQueryClient()
 		return {
 			mutationKey: [serviceTag, this.type, 'update'],
-			mutationFn: (dto: ArticleUpdateDto) =>
-				ArticleUpdateAdminAction(this.type, dto),
+			mutationFn: (dto: ArticleUpdateDto) => ArticleUpdateAdminAction(this.type, dto),
 			onSuccess: (id: string) => {
 				queryClient.refetchQueries({
 					queryKey: [this.getAllAdmin.queryKey]

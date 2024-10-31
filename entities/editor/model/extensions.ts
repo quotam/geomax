@@ -1,25 +1,22 @@
+import { Mark, mergeAttributes } from '@tiptap/core'
+import { TextAlign } from '@tiptap/extension-text-align'
+import { cx } from 'class-variance-authority'
+import { clear } from 'console'
 import {
 	//AIHighlight,
 	Color,
+	HighlightExtension,
 	HorizontalRule,
 	Placeholder,
 	StarterKit,
-	HighlightExtension,
 	TaskItem,
 	TaskList,
 	TextStyle,
 	TiptapLink,
 	TiptapUnderline
 } from 'novel/extensions'
-
-import ImageResize from 'tiptap-extension-resize-image'
-
-import { TextAlign } from '@tiptap/extension-text-align'
 import { UploadImagesPlugin } from 'novel/plugins'
-
-import { cx } from 'class-variance-authority'
-
-import { Mark, mergeAttributes } from '@tiptap/core'
+import ImageResize from 'tiptap-extension-resize-image'
 
 interface CustomMarkOptions {
 	HTMLAttributes: Record<string, any>
@@ -65,18 +62,9 @@ export const CustomMark = Mark.create<CustomMarkOptions>({
 	},
 
 	renderHTML({ HTMLAttributes }) {
-		const mergedClassNames = [
-			...this.options.classNames,
-			HTMLAttributes.class || ''
-		]
-			.join(' ')
-			.trim()
+		const mergedClassNames = [...this.options.classNames, HTMLAttributes.class || ''].join(' ').trim()
 
-		return [
-			'span',
-			mergeAttributes(this.options.HTMLAttributes, { class: mergedClassNames }),
-			0
-		]
+		return ['span', mergeAttributes(this.options.HTMLAttributes, { class: mergedClassNames }), 0]
 	}
 })
 
@@ -103,8 +91,15 @@ const tiptapImage = ImageResize.extend({
 	}
 })
 
-const taskList = TaskList.configure({})
+const taskList = TaskList.configure({
+	HTMLAttributes: {
+		clear: 'fle'
+	}
+})
 const taskItem = TaskItem.configure({
+	HTMLAttributes: {
+		class: cx('flex gap-2 items-center')
+	},
 	nested: true
 })
 const horizontalRule = HorizontalRule.configure({})

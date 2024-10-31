@@ -67,8 +67,7 @@ svg.active .hero-6 {
 svg .hero-7 {
 	stroke-dashoffset: 2295px;
 	stroke-dasharray: 2295px;
-	transition: stroke-dashoffset 2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-		1.7199999999999998s;
+	transition: stroke-dashoffset 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.7199999999999998s;
 }
 
 svg.active .hero-7 {
@@ -147,8 +146,7 @@ svg.active .hero-14 {
 svg .hero-15 {
 	stroke-dashoffset: 1303.0001220703125px;
 	stroke-dasharray: 1303.0001220703125px;
-	transition: stroke-dashoffset 2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-		2.6799999999999997s;
+	transition: stroke-dashoffset 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.6799999999999997s;
 }
 
 svg.active .hero-15 {
@@ -198,8 +196,7 @@ svg.active .hero-19 {
 svg .hero-20 {
 	stroke-dashoffset: 1302.9998779296875px;
 	stroke-dasharray: 1302.9998779296875px;
-	transition: stroke-dashoffset 2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-		3.279999999999999s;
+	transition: stroke-dashoffset 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 3.279999999999999s;
 }
 
 svg.active .hero-20 {

@@ -1,13 +1,10 @@
 import { useAppDebounce } from '@front/kernel/hooks/useDebounce'
-import {
-	DefaultError,
-	InfiniteData,
-	QueryKey,
-	useInfiniteQuery
-} from '@tanstack/react-query'
-import { Props, Result } from './model'
-import { useInView } from 'react-intersection-observer'
+import { DefaultError, InfiniteData, QueryKey, useInfiniteQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
+
+import { Props, Result } from './model'
+
 export const useAppInfiniteQuery = <
 	TQueryFnData,
 	TError = DefaultError,

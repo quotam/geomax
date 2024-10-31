@@ -9,10 +9,7 @@ type Target = {
 	friendsPriviteCxt: number
 }
 
-export const canAddFrends = (
-	target: Target,
-	user: Omit<UserEntity, 'email' | 'slug'>
-) => {
+export const canAddFrends = (target: Target, user: Omit<UserEntity, 'email' | 'slug'>) => {
 	if (user.id === target.id) return false
 
 	if (user.role === UserRole.ADMIN) return true

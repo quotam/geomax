@@ -10,9 +10,7 @@ export const metadata: Metadata = {
 const LegalPage = () => {
 	return (
 		<main className="container px-4 py-20">
-			<h1 className="text-3xl font-bold mb-12 text-center">
-				Реквизиты ООО ГЕОМАКС
-			</h1>
+			<h1 className="text-3xl font-bold mb-12 text-center">Реквизиты ООО ГЕОМАКС</h1>
 			<div className="w-[90%] mx-auto">
 				<Card className="mb-8">
 					<CardHeader>
@@ -23,16 +21,12 @@ const LegalPage = () => {
 							<div className="flex items-center space-x-2">
 								<Building2 className="h-5 w-5 text-muted-foreground" />
 								<span>
-									Полное наименование: Общество с ограниченной ответственностью Морские
-									Технологии
+									Полное наименование: Общество с ограниченной ответственностью Морские Технологии
 								</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<MapPin className="h-5 w-5 text-muted-foreground" />
-								<span>
-									Юридический адрес: 199406, г. Санкт-Петербург, ул. Морская, д. 15, офис
-									301
-								</span>
+								<span>Юридический адрес: 199406, г. Санкт-Петербург, ул. Морская, д. 15, офис 301</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<Phone className="h-5 w-5 text-muted-foreground" />
@@ -75,9 +69,8 @@ const LegalPage = () => {
 							<div className="flex items-center space-x-2">
 								<FileText className="h-5 w-5 text-muted-foreground" />
 								<span>
-									ОКВЭД: 46.69.9 (Торговля оптовая прочими машинами, приборами,
-									аппаратурой и оборудованием общепромышленного и специального
-									назначения)
+									ОКВЭД: 46.69.9 (Торговля оптовая прочими машинами, приборами, аппаратурой и оборудованием
+									общепромышленного и специального назначения)
 								</span>
 							</div>
 						</div>

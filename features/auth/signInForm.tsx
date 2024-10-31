@@ -1,15 +1,14 @@
 import Devider from '@front/shared/ui/divider'
+import { getProviders } from 'next-auth/react'
 import Link from 'next/link'
+
 import EmailSignInform from './ui/eimailSignInForm'
 import ProviderButton from './ui/googleProviderButton'
-import { getProviders } from 'next-auth/react'
 
 export const SignInForm = async () => {
 	const providers = await getProviders()
 
-	const oauthProviders = Object.values(providers ?? {}).filter(
-		provider => provider.type === 'oauth'
-	)
+	const oauthProviders = Object.values(providers ?? {}).filter(provider => provider.type === 'oauth')
 
 	return (
 		<section className="p-4">

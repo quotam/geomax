@@ -1,4 +1,5 @@
 import { UserRole } from '@prisma/client'
+
 import { SessionEntity } from './domain/user'
 
 export const appAbility = (session: SessionEntity) => {

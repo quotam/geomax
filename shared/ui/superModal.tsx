@@ -1,4 +1,3 @@
-import { ReactNode } from 'react'
 import { useMediaQuery } from '@front/kernel/hooks/useMediaQuery'
 import { Button } from '@front/shared/ui/button'
 import {
@@ -17,6 +16,8 @@ import {
 	DrawerTitle,
 	DrawerTrigger
 } from '@front/shared/ui/drawer'
+import { ReactNode } from 'react'
+
 import { cn } from '../lib/utils'
 
 export const SuperModal = ({
@@ -66,9 +67,7 @@ export const SuperModal = ({
 	if (customMobileNode) return customMobileNode
 	return (
 		<Drawer open={open} onOpenChange={setOpen}>
-			{trigger && (
-				<DrawerTrigger className={style?.drawerTrigger}>{trigger}</DrawerTrigger>
-			)}
+			{trigger && <DrawerTrigger className={style?.drawerTrigger}>{trigger}</DrawerTrigger>}
 			<DrawerContent className={cn('p-4', style?.drawer)}>
 				{title && (
 					<DrawerHeader className="text-left">
@@ -79,12 +78,7 @@ export const SuperModal = ({
 				{closeButt && (
 					<DrawerFooter className="pt-2">
 						<DrawerClose asChild>
-							<Button
-								aria-label="Close"
-								aria-labelledby="Закрыть"
-								name="close"
-								variant="outline"
-							>
+							<Button aria-label="Close" aria-labelledby="Закрыть" name="close" variant="outline">
 								Закрыть
 							</Button>
 						</DrawerClose>

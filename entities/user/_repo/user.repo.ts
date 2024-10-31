@@ -1,6 +1,7 @@
-import dbClient from '@front/shared/lib/dbClient'
-import { userEntity } from '../_domain/entities'
 import { UserEntity } from '@front/kernel/domain/user'
+import dbClient from '@front/shared/lib/dbClient'
+
+import { userEntity } from '../_domain/entities'
 
 export class UserRepo {
 	async createUser(user: UserEntity): Promise<UserEntity> {

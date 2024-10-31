@@ -1,9 +1,10 @@
 import cacheStrategy from '@front/kernel/lib/cache-strategy'
 import dbClient from '@front/shared/lib/dbClient'
-import { productEntity } from './_entity'
 import { ProductStatus } from '@prisma/client'
+
 import { userEntity } from '../user/_domain/entities'
 import { UpdateProductDto } from './_domain'
+import { productEntity } from './_entity'
 
 const serviceTag = 'product'
 

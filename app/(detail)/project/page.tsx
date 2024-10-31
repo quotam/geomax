@@ -48,9 +48,7 @@ export default async function OfferPage({
 						key={i.category.id}
 						variant={selectedCategory === i.category.id ? 'secondary' : 'outline'}
 					>
-						<Link href={`/project?category=${i.category.id}`}>
-							{i.category.title}
-						</Link>
+						<Link href={`/project?category=${i.category.id}`}>{i.category.title}</Link>
 					</Button>
 				))}
 			</div>
@@ -59,10 +57,7 @@ export default async function OfferPage({
 					cat.article.map(item => (
 						<Card key={item.id} className="flex relative flex-col">
 							{session && articleAbility(session).canUpdate() && (
-								<Link
-									href={`/admin/PROJECT/${item.id}`}
-									className="text-primary absolute top-2 right-2"
-								>
+								<Link href={`/admin/PROJECT/${item.id}`} className="text-primary absolute top-2 right-2">
 									<Settings className="w-4 h-4" />
 								</Link>
 							)}

@@ -1,4 +1,5 @@
 'use client'
+
 import NotFoundPage from '@front/app/not-found'
 import { productQueries } from '@front/entities/product/_queries'
 import UpdateProductForm from '@front/features/cms/updateProductForm'

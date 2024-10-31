@@ -1,9 +1,10 @@
+import { userID } from '@front/kernel/domain/user'
 import cacheStrategy from '@front/kernel/lib/cache-strategy'
 import dbClient from '@front/shared/lib/dbClient'
 import { SliderStatus } from '@prisma/client'
-import { SliderUpdateDto } from './_domain'
-import { userID } from '@front/kernel/domain/user'
+
 import { userEntity } from '../user/_domain/entities'
+import { SliderUpdateDto } from './_domain'
 
 const serviceTag = 'slider'
 

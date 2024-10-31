@@ -1,18 +1,19 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { Search } from 'lucide-react'
-import { Input } from '@front/shared/ui/input'
-import { Button } from '@front/shared/ui/button'
+
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger
 } from '@front/shared/ui/accordion'
+import { Button } from '@front/shared/ui/button'
 import { Checkbox } from '@front/shared/ui/checkbox'
-import { Switch } from '@front/shared/ui/switch'
+import { Input } from '@front/shared/ui/input'
 import { Label } from '@front/shared/ui/label'
+import { Switch } from '@front/shared/ui/switch'
+import { Search } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 export default function SidebarFilter({
 	params
@@ -33,12 +34,8 @@ export default function SidebarFilter({
 
 	const [search, setSearch] = useState(searchParams.get('q') || '')
 
-	const [inStock, setInStock] = useState(
-		searchParams.get('inStock') === 'true' || false
-	)
-	const [category, setCategory] = useState<string[]>(
-		searchParams.get('category')?.split(',') || []
-	)
+	const [inStock, setInStock] = useState(searchParams.get('inStock') === 'true' || false)
+	const [category, setCategory] = useState<string[]>(searchParams.get('category')?.split(',') || [])
 	const [manufacturer, setManufacturer] = useState<string[]>(
 		searchParams.get('manufacturer')?.split(',') || []
 	)
@@ -79,9 +76,7 @@ export default function SidebarFilter({
 											checked={category.includes(cat.id)}
 											onCheckedChange={() =>
 												setCategory(prev =>
-													prev.includes(cat.id)
-														? prev.filter(id => id !== cat.id)
-														: [...prev, cat.id]
+													prev.includes(cat.id) ? prev.filter(id => id !== cat.id) : [...prev, cat.id]
 												)
 											}
 											id={cat.id}

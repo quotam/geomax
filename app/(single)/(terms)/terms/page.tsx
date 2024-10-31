@@ -21,14 +21,11 @@ export default function UserAgreementPage() {
 			<div className="container mx-auto px-4 py-12 max-w-[90rem]">
 				<Card className="mb-8">
 					<CardHeader className="text-center">
-						<CardTitle className="text-4xl font-bold">
-							Пользовательское соглашение
-						</CardTitle>
+						<CardTitle className="text-4xl font-bold">Пользовательское соглашение</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<p className="text-muted-foreground text-center">
-							Пожалуйста, внимательно ознакомьтесь с условиями использования сайта{' '}
-							{siteName}
+							Пожалуйста, внимательно ознакомьтесь с условиями использования сайта {siteName}
 						</p>
 					</CardContent>
 				</Card>
@@ -52,10 +49,9 @@ export default function UserAgreementPage() {
 						content={
 							<>
 								<p>
-									Сайт использует файлы cookie для улучшения пользовательского опыта и
-									функциональности Сайта. Продолжая использовать Сайт, Пользователь
-									соглашается на использование файлов cookie в соответствии с настоящим
-									Соглашением.
+									Сайт использует файлы cookie для улучшения пользовательского опыта и функциональности
+									Сайта. Продолжая использовать Сайт, Пользователь соглашается на использование файлов cookie
+									в соответствии с настоящим Соглашением.
 								</p>
 								<Accordion type="single" collapsible className="mt-4">
 									<AccordionItem value="cookie-details">
@@ -63,17 +59,16 @@ export default function UserAgreementPage() {
 										<AccordionContent>
 											<ul className="list-disc pl-5 space-y-2">
 												<li>
-													Файлы cookie — это небольшие текстовые файлы, которые сохраняются
-													на устройстве Пользователя.
+													Файлы cookie — это небольшие текстовые файлы, которые сохраняются на устройстве
+													Пользователя.
 												</li>
 												<li>
-													Мы используем файлы cookie для анализа трафика, персонализации
-													контента и улучшения работы Сайта.
+													Мы используем файлы cookie для анализа трафика, персонализации контента и улучшения
+													работы Сайта.
 												</li>
 												<li>
-													Пользователь может отключить использование файлов cookie в
-													настройках своего браузера, однако это может повлиять на
-													функциональность Сайта.
+													Пользователь может отключить использование файлов cookie в настройках своего браузера,
+													однако это может повлиять на функциональность Сайта.
 												</li>
 											</ul>
 										</AccordionContent>

@@ -1,10 +1,10 @@
-import React from 'react'
 import { Button } from '@front/shared/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@front/shared/ui/card'
 import { Input } from '@front/shared/ui/input'
 import { Textarea } from '@front/shared/ui/textarea'
-import { Card, CardContent, CardHeader, CardTitle } from '@front/shared/ui/card'
 import { Mail, MapPin, Phone } from 'lucide-react'
 import { Metadata } from 'next'
+import React from 'react'
 
 export const metadata: Metadata = {
 	title: 'Контакты',
@@ -48,8 +48,7 @@ const ContactPage = () => {
 
 						<div className="mt-20 w-2/3 space-y-4">
 							<span>
-								Если вам нужна консультация по интересующему вас вопросу, обратитесь к
-								нашим специалистам.
+								Если вам нужна консультация по интересующему вас вопросу, обратитесь к нашим специалистам.
 							</span>
 							<Button variant="secondary">Заявка на консультацию</Button>
 						</div>

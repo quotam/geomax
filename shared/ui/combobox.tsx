@@ -1,7 +1,7 @@
+import { CaretSortIcon } from '@radix-ui/react-icons'
 import { Check, Plus } from 'lucide-react'
 import * as React from 'react'
 
-import { CaretSortIcon } from '@radix-ui/react-icons'
 import { cn } from '../lib/utils'
 import { Button } from './button'
 import {
@@ -72,17 +72,13 @@ export function Combobox({
 				<Command className={style?.command}>
 					<CommandInput
 						icon={
-							values?.length === 0 ? (
-								<Plus className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-							) : undefined
+							values?.length === 0 ? <Plus className="mr-2 h-4 w-4 shrink-0 opacity-50" /> : undefined
 						}
 						onValueChange={onSearchValueChange}
 						placeholder={values?.length === 0 ? 'Нзвание..' : 'Поиск...'}
 					/>
 					<CommandList>
-						<CommandEmpty>
-							{emptyContent ? emptyContent : 'Ничего не найдено'}
-						</CommandEmpty>
+						<CommandEmpty>{emptyContent ? emptyContent : 'Ничего не найдено'}</CommandEmpty>
 						<CommandGroup>
 							{values?.map(
 								customRender
@@ -97,10 +93,7 @@ export function Combobox({
 												}}
 											>
 												<Check
-													className={cn(
-														'mr-2 h-4 w-4',
-														defaultValue === e.value ? 'opacity-100' : 'opacity-0'
-													)}
+													className={cn('mr-2 h-4 w-4', defaultValue === e.value ? 'opacity-100' : 'opacity-0')}
 												/>
 												{e.label}
 											</CommandItem>

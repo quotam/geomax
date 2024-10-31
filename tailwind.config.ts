@@ -129,25 +129,39 @@ const config: Config = {
 					css: {
 						color: 'inherit', // Наследуемый цвет текста
 						fontSize: '1.6rem', // Наследуемый размер текста
-						code: {
-							color: 'inherit' // Наследуемый цвет текста
-						},
-						lineHeight: 'inherit', // Наследуемая высота строки
-						p: {
-							color: 'inherit' // Наследуемый цвет текста
-						},
-						span: {
-							color: 'inherit' // Наследуемый цвет текста
-						},
-						ul: {
-							color: 'inherit' // Наследуемый цвет текста
-						},
-						h1: {
-							color: 'inherit', // Наследуемый цвет текста
-							fontSize: '3.4rem',
-							fontWeight: 'bold',
-							lineHeight: '3.6rem'
-						}
+						'--tw-prose-body': 'hsl(var(--foreground))',
+						'--tw-prose-headings': 'hsl(var(--primary-foreground))',
+						'--tw-prose-lead': 'hsl(var(--secondary))',
+						'--tw-prose-links': 'hsl(var(--primary-foreground))',
+						'--tw-prose-bold': 'hsl(var(--primary-foreground))',
+						'--tw-prose-counters': 'hsl(var(--muted-foreground))',
+						'--tw-prose-bullets': 'hsl(var(--accent))',
+						'--tw-prose-hr': 'hsl(var(--border))',
+						'--tw-prose-quotes': 'hsl(var(--foreground))',
+						'--tw-prose-quote-borders': 'hsl(var(--border))',
+						'--tw-prose-captions': 'hsl(var(--muted-foreground))',
+						'--tw-prose-code': 'hsl(var(--foreground))',
+						'--tw-prose-pre-code': 'hsl(var(--muted))',
+						'--tw-prose-pre-bg': 'hsl(var(--foreground))',
+						'--tw-prose-th-borders': 'hsl(var(--border))',
+						'--tw-prose-td-borders': 'hsl(var(--input))',
+						'--tw-prose-invert-body': 'hsl(var(--foreground))',
+						'--tw-prose-invert-headings': 'hsl(var(--background))',
+						'--tw-prose-invert-lead': 'hsl(var(--muted-foreground))',
+						'--tw-prose-invert-links': 'hsl(var(--background))',
+						'--tw-prose-invert-bold': 'hsl(var(--background))',
+						'--tw-prose-invert-counters': 'hsl(var(--accent))',
+						'--tw-prose-invert-bullets': 'hsl(var(--accent-foreground))',
+						'--tw-prose-invert-hr': 'hsl(var(--border))',
+						'--tw-prose-invert-quotes': 'hsl(var(--muted))',
+						'--tw-prose-invert-quote-borders': 'hsl(var(--muted-foreground))',
+						'--tw-prose-invert-captions': 'hsl(var(--muted-foreground))',
+						'--tw-prose-invert-code': 'hsl(var(--background))',
+						'--tw-prose-invert-pre-code': 'hsl(var(--muted-foreground))',
+						'--tw-prose-invert-pre-bg': 'rgba(0, 0, 0, 0.5)', // RGB fallback для прозрачного фона
+						'--tw-prose-invert-th-borders': 'hsl(var(--border))',
+						'--tw-prose-invert-td-borders': 'hsl(var(--border))',
+						lineHeight: 'inherit' // Наследуемая высота строки
 					}
 				}
 			},
@@ -156,10 +170,6 @@ const config: Config = {
 			)
 		}
 	},
-	plugins: [
-		require('tailwindcss-animate'),
-		require('@tailwindcss/typography'),
-		theme
-	]
+	plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography'), theme]
 }
 export default config

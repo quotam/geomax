@@ -1,11 +1,13 @@
 'use client'
+
 import { Button } from '@front/shared/ui/button'
 import { CommandDialog } from '@front/shared/ui/command'
 import { Sheet, SheetContent } from '@front/shared/ui/sheet'
 import { SuperModal } from '@front/shared/ui/superModal'
-import React from 'react'
-import SearchCommand from './command'
 import { Search } from 'lucide-react'
+import React from 'react'
+
+import SearchCommand from './command'
 
 export function SearchLayout() {
 	const [open, setOpen] = React.useState(false)

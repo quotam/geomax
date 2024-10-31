@@ -94,7 +94,7 @@
 	}
 
 	body {
-		@apply bg-background text-foreground text-base;
+		@apply bg-background text-base text-foreground;
 		overflow-x: hidden;
 		overflow-y: overlay;
 		scrollbar-face-color: hsl(var(--foreground));
@@ -105,7 +105,7 @@
 		@apply relative;
 	}
 	.rating:before {
-		@apply content-[""] block text-0 absolute z-10 top-[5.2rem] -left-[.48rem] mt-[1.4rem] w-0 h-0;
+		@apply absolute -left-[.48rem] top-[5.2rem] z-10 mt-[1.4rem] block h-0 w-0 text-0 content-[""];
 		border-top: 0.7rem solid hsl(var(--primary));
 		border-left: 0.4rem solid transparent;
 	}
@@ -121,20 +121,20 @@
 
 	.rating__inner:after,
 	.rating__inner:before {
-		@apply content-[""] w-[13.2rem] h-7 absolute top-[3.8rem] -left-[.48rem] z-10 box-border;
+		@apply absolute -left-[.48rem] top-[3.8rem] z-10 box-border h-7 w-[13.2rem] content-[""];
 		border-right: 0.6rem solid transparent;
 	}
 
 	.rating__value {
-		@apply flex text-destructive-foreground justify-center top-[4rem] absolute z-20  h-6  font-bold shadow-[0_0_1rem_hsl(var(--primary))];
+		@apply absolute top-[4rem] z-20 flex h-6 justify-center font-bold text-destructive-foreground shadow-[0_0_1rem_hsl(var(--primary))];
 	}
 
 	::-webkit-scrollbar {
-		@apply w-[0.3rem] h-[0.3rem];
+		@apply h-[0.3rem] w-[0.3rem];
 	}
 
 	::-webkit-scrollbar-thumb {
-		@apply bg-foreground rounded-lg;
+		@apply rounded-lg bg-foreground;
 	}
 
 	::-webkit-scrollbar-track {

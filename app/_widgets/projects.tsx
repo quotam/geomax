@@ -26,10 +26,7 @@ const Projects = async () => {
 				</h4>
 				<span className="text-center block mb-20">
 					Откройте для себя наши достижения и успешные решения. <br />
-					<Button
-						variant="outline"
-						className="mt-4 border-secondary text-muted-foreground"
-					>
+					<Button variant="outline" className="mt-4 border-secondary text-muted-foreground">
 						<Link href="/projects">Архив проектов</Link>
 						<ArrowRight className="ml-2 h-4 w-4" />
 					</Button>
@@ -55,9 +52,7 @@ const Projects = async () => {
 								</div>
 								<CardDescription className="flex gap-2 items-center">
 									<Calendar className="h-4 w-4" />
-									<span>
-										Выполнено: {new Date(project.createdAt).toLocaleDateString()}
-									</span>
+									<span>Выполнено: {new Date(project.createdAt).toLocaleDateString()}</span>
 								</CardDescription>
 							</CardHeader>
 							<CardContent className="flex-grow">

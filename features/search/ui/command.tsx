@@ -1,4 +1,5 @@
 'use client'
+
 import { useAppDebounce } from '@front/kernel/hooks/useDebounce'
 import {
 	Command,
@@ -10,15 +11,10 @@ import {
 } from '@front/shared/ui/command'
 import { Input } from '@front/shared/ui/input'
 import { useQuery } from '@tanstack/react-query'
-import {
-	BadgeRussianRuble,
-	Box,
-	CircleCheck,
-	NewspaperIcon,
-	TableOfContents
-} from 'lucide-react'
+import { BadgeRussianRuble, Box, CircleCheck, NewspaperIcon, TableOfContents } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+
 import { searchAction } from '../_action'
 
 const SearchCommand = ({ close }: { close: () => void }) => {

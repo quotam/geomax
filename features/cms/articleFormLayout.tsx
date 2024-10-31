@@ -1,20 +1,16 @@
 'use client'
+
+import NotFoundPage from '@front/app/not-found'
 import { articleQueries } from '@front/entities/article/_queries'
 import { Button } from '@front/shared/ui/button'
 import { ArticleType } from '@prisma/client'
 import { useQuery } from '@tanstack/react-query'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
-import UpdateArticleForm from './ui/updateArticleForm'
-import NotFoundPage from '@front/app/not-found'
 
-const FormLayout = ({
-	entityType,
-	id
-}: {
-	entityType: ArticleType
-	id: string
-}) => {
+import UpdateArticleForm from './ui/updateArticleForm'
+
+const FormLayout = ({ entityType, id }: { entityType: ArticleType; id: string }) => {
 	const { data, isPending } = useQuery({
 		...articleQueries(entityType).getOne(id)
 	})

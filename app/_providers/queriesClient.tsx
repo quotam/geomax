@@ -1,9 +1,5 @@
 import { errorCatcher } from '@front/kernel/lib/axios/helpers'
-import {
-	QueryCache,
-	QueryClient,
-	QueryClientProvider
-} from '@tanstack/react-query'
+import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { ReactNode, useState } from 'react'
 import { toast } from 'sonner'
@@ -32,8 +28,6 @@ const QueriesClient = ({ children }: { children: ReactNode }) => {
 			})
 	)
 
-	return (
-		<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-	)
+	return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 }
 export default QueriesClient

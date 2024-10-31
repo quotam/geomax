@@ -3,6 +3,7 @@
 import { getAppSessionStrictServer } from '@front/kernel/lib/next-auth/getAppSessionStrictServer'
 import { schemaParse } from '@front/kernel/lib/zod/shemaParse'
 import { AccessDeniedError } from '@front/shared/lib/errors'
+
 import { sliderAbility } from './_ability'
 import { SliderUpdateDto, SliderUpdateSchema } from './_domain'
 import { sliderService } from './_service'

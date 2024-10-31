@@ -1,4 +1,6 @@
 'use client'
+
+import { cn } from '@front/shared/lib/utils'
 import { Separator } from '@front/shared/ui/separator'
 import {
 	EditorBubble,
@@ -13,6 +15,7 @@ import {
 import { handleCommandNavigation } from 'novel/extensions'
 import { handleImageDrop, handleImagePaste } from 'novel/plugins'
 import { useState } from 'react'
+
 import { defaultExtensions } from './model/extensions'
 import { slashCommand, suggestionItems } from './model/suggestionItems'
 import { ColorSelector } from './ui/colorSelector'
@@ -20,7 +23,6 @@ import { LinkSelector } from './ui/linkSelector'
 import { NodeSelector } from './ui/nodeSelector'
 import { TextButtons } from './ui/text-buttons'
 import { uploadFn } from './vm/uploadImage'
-import { cn } from '@front/shared/lib/utils'
 
 const extensions = [...defaultExtensions, slashCommand]
 
@@ -46,8 +48,7 @@ const Editor = ({ initialValue, onChange, className }: EditorProp) => {
 						keydown: (_view, event) => handleCommandNavigation(event)
 					},
 					handlePaste: (view, event) => handleImagePaste(view, event, uploadFn),
-					handleDrop: (view, event, _slice, moved) =>
-						handleImageDrop(view, event, moved, uploadFn),
+					handleDrop: (view, event, _slice, moved) => handleImageDrop(view, event, moved, uploadFn),
 					attributes: {
 						class: `prose dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full rounded-md min-h-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 p-4`
 					}
@@ -57,9 +58,7 @@ const Editor = ({ initialValue, onChange, className }: EditorProp) => {
 				}}
 			>
 				<EditorCommand className="z-50 h-auto max-h-[330px] overflow-y-auto rounded-md border border-muted bg-background px-1 py-2 shadow-md transition-all">
-					<EditorCommandEmpty className="px-2 text-muted-foreground">
-						No results
-					</EditorCommandEmpty>
+					<EditorCommandEmpty className="px-2 text-muted-foreground">No results</EditorCommandEmpty>
 					<EditorCommandList>
 						{suggestionItems.map(item => (
 							<EditorCommandItem

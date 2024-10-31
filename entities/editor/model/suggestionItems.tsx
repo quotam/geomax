@@ -11,6 +11,7 @@ import {
 	TextQuote
 } from 'lucide-react'
 import { Command, createSuggestionItems, renderItems } from 'novel/extensions'
+
 import { uploadFn } from '../vm/uploadImage'
 
 export const suggestionItems = createSuggestionItems([
@@ -20,12 +21,7 @@ export const suggestionItems = createSuggestionItems([
 		searchTerms: ['p', 'paragraph'],
 		icon: <Text size={18} />,
 		command: ({ editor, range }) => {
-			editor
-				.chain()
-				.focus()
-				.deleteRange(range)
-				.toggleNode('paragraph', 'paragraph')
-				.run()
+			editor.chain().focus().deleteRange(range).toggleNode('paragraph', 'paragraph').run()
 		}
 	},
 	{
@@ -43,12 +39,7 @@ export const suggestionItems = createSuggestionItems([
 		searchTerms: ['название', 'большой', 'крупный'],
 		icon: <Heading1 size={18} />,
 		command: ({ editor, range }) => {
-			editor
-				.chain()
-				.focus()
-				.deleteRange(range)
-				.setNode('heading', { level: 1 })
-				.run()
+			editor.chain().focus().deleteRange(range).setNode('heading', { level: 1 }).run()
 		}
 	},
 	{
@@ -57,12 +48,7 @@ export const suggestionItems = createSuggestionItems([
 		searchTerms: ['подзаголовок', 'средний'],
 		icon: <Heading2 size={18} />,
 		command: ({ editor, range }) => {
-			editor
-				.chain()
-				.focus()
-				.deleteRange(range)
-				.setNode('heading', { level: 2 })
-				.run()
+			editor.chain().focus().deleteRange(range).setNode('heading', { level: 2 }).run()
 		}
 	},
 	{
@@ -71,12 +57,7 @@ export const suggestionItems = createSuggestionItems([
 		searchTerms: ['подзаголовок', 'маленький'],
 		icon: <Heading3 size={18} />,
 		command: ({ editor, range }) => {
-			editor
-				.chain()
-				.focus()
-				.deleteRange(range)
-				.setNode('heading', { level: 3 })
-				.run()
+			editor.chain().focus().deleteRange(range).setNode('heading', { level: 3 }).run()
 		}
 	},
 	{
@@ -116,8 +97,7 @@ export const suggestionItems = createSuggestionItems([
 		description: 'Запишите фрагмент кода.',
 		searchTerms: ['codeblock'],
 		icon: <Code size={18} />,
-		command: ({ editor, range }) =>
-			editor.chain().focus().deleteRange(range).toggleCodeBlock().run()
+		command: ({ editor, range }) => editor.chain().focus().deleteRange(range).toggleCodeBlock().run()
 	},
 	{
 		title: 'Изображение',

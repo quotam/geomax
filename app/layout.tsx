@@ -1,11 +1,12 @@
+import Modal from '@front/features/modal/pub'
 import { getAppSessionServer } from '@front/kernel/lib/next-auth/getAppSessionServer'
 import type { Metadata, Viewport } from 'next'
 import { Nunito } from 'next/font/google'
+
 import AppProvider from './_providers/appPrivider'
-import './globals.css'
-import Header from './_widgets/header'
 import Footer from './_widgets/footer'
-import Modal from '@front/features/modal/pub'
+import Header from './_widgets/header'
+import './globals.css'
 
 const nunito = Nunito({
 	subsets: ['cyrillic'],
@@ -21,8 +22,7 @@ export const metadata: Metadata = {
 	manifest: '/manifest.json',
 	description:
 		'Установка, настройка и ввод в эксплуатацию систем точного земледелия - курсоуказателей, автопилотов, GPS-навигации. Подключение корректирующего сигнала для сельскохозяйственной техники',
-	keywords:
-		'агронавигаторы, автопилоты, RTK сигнал, GNSS, подрульки, подруливающие устройства'
+	keywords: 'агронавигаторы, автопилоты, RTK сигнал, GNSS, подрульки, подруливающие устройства'
 }
 
 export const viewport: Viewport = {

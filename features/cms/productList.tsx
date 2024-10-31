@@ -9,11 +9,7 @@ import {
 	TableHeader,
 	TableRow
 } from '@front/shared/ui/table'
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger
-} from '@front/shared/ui/tooltip'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@front/shared/ui/tooltip'
 import { ProductStatus } from '@prisma/client'
 import {
 	Calendar,
@@ -27,6 +23,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+
 import { Product } from './domain/type'
 
 type props = {
@@ -92,11 +89,7 @@ export default function ProductList({
 					defaultValue={searchTerm}
 					onChange={handleSearch}
 				/>
-				<Button
-					onClick={createProduct}
-					disabled={isPendingCreate}
-					variant="secondary"
-				>
+				<Button onClick={createProduct} disabled={isPendingCreate} variant="secondary">
 					<PlusSquare className="mr-2 h-4 w-4" /> Добавить продукт
 				</Button>
 			</div>
@@ -164,9 +157,7 @@ export default function ProductList({
 					<TableBody>
 						{filteredProducts?.map(product => (
 							<TableRow key={product.id}>
-								<TableCell className="max-w-50 truncate">
-									{product.title || '[Без названия]'}
-								</TableCell>
+								<TableCell className="max-w-50 truncate">{product.title || '[Без названия]'}</TableCell>
 								<TableCell>{product.status}</TableCell>
 								<TableCell>
 									<UserToolTip profile={product.user} />
@@ -183,20 +174,14 @@ export default function ProductList({
 										</TooltipTrigger>
 										<TooltipContent className="text-center">
 											<Pen className="mr-2 h-3 w-3 inline" /> Последнее изменение <br />
-											{product.updatedAt.toLocaleDateString()} -
-											{product.updatedAt.toLocaleTimeString()}
+											{product.updatedAt.toLocaleDateString()} -{product.updatedAt.toLocaleTimeString()}
 										</TooltipContent>
 									</Tooltip>
 								</TableCell>
 
 								<TableCell>{product.price?.toFixed(2) || '[Без цены]'}</TableCell>
 								<TableCell className="text-right">
-									<Button
-										className="mr-2"
-										variant="outline"
-										title="Просмотр"
-										size="icon"
-									>
+									<Button className="mr-2" variant="outline" title="Просмотр" size="icon">
 										<Link href={'/catalog/' + product.id}>
 											<Eye className="h-4 w-4" />
 										</Link>
@@ -212,8 +197,7 @@ export default function ProductList({
 										variant="destructive"
 										onClick={() =>
 											product.status === ProductStatus.PUBLISHED
-												? confirm('Вы уверены? Статус записи ' + product.status) &&
-													deleteProduct(product.id)
+												? confirm('Вы уверены? Статус записи ' + product.status) && deleteProduct(product.id)
 												: deleteProduct(product.id)
 										}
 										size="icon"

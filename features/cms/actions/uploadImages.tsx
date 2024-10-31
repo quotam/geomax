@@ -15,9 +15,7 @@ export const UploadimagesAction = async (data: FormData) => {
 		for (let [key, value] of data.entries()) {
 			const file = data.get(key)
 			if (file instanceof File) {
-				stored.push(
-					await fileStorage.uploadImage(file, IMAGE_KEY).then(res => res.path)
-				)
+				stored.push(await fileStorage.uploadImage(file, IMAGE_KEY).then(res => res.path))
 			}
 		}
 		return stored

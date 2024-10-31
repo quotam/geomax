@@ -1,11 +1,7 @@
 'use client'
 
 import AppEditor from '@front/entities/editor'
-import {
-	sliderQueries,
-	SliderUpdateDto,
-	SliderUpdateSchema
-} from '@front/entities/slider'
+import { SliderUpdateDto, SliderUpdateSchema, sliderQueries } from '@front/entities/slider'
 import { Button } from '@front/shared/ui/button'
 import {
 	Form,
@@ -40,9 +36,7 @@ const UpdateSliderForm = ({
 		resolver: zodResolver(SliderUpdateSchema)
 	})
 
-	const { mutateAsync, isPending: isPendingUpdate } = useMutation(
-		sliderQueries.update()
-	)
+	const { mutateAsync, isPending: isPendingUpdate } = useMutation(sliderQueries.update())
 
 	React.useEffect(() => {
 		if (data) form.reset(data)

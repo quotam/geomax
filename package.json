@@ -7,8 +7,10 @@
 		"build": "next build",
 		"start": "next start",
 		"storage": "ts-node --project tsconfig.script.json storage",
+		"format": "prettier --write .",
 		"lint": "next lint",
-		"lint:types": "tsc --noEmit"
+		"lint:types": "tsc --noEmit",
+		"lint:format": "prettier --check ."
 	},
 	"dependencies": {
 		"@aws-sdk/client-s3": "^3.658.1",
@@ -77,6 +79,7 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/typography": "^0.5.15",
+		"@trivago/prettier-plugin-sort-imports": "^4.3.0",
 		"@types/express": "^5.0.0",
 		"@types/lodash-es": "^4.17.12",
 		"@types/node": "^20",
@@ -86,6 +89,8 @@
 		"eslint": "^8",
 		"eslint-config-next": "14.2.15",
 		"postcss": "^8",
+		"prettier-plugin-svelte": "^3.2.7",
+		"prettier-plugin-tailwindcss": "^0.6.8",
 		"tailwindcss": "^3.4.1",
 		"ts-node": "^10.9.2",
 		"typescript": "^5"

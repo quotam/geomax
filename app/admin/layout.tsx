@@ -1,4 +1,5 @@
 'use client'
+
 import { createCmsAbility } from '@front/features/cms/domain/ability'
 import CmsSidebar from '@front/features/cms/sidebar'
 import { useAbility } from '@front/kernel/lib/next-auth/useAbility'

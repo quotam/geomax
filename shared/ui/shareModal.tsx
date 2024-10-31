@@ -1,4 +1,5 @@
 'use client'
+
 import { Button } from '@front/shared/ui/button'
 import { Input } from '@front/shared/ui/input'
 import { Label } from '@front/shared/ui/label'

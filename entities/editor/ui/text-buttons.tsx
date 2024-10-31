@@ -1,18 +1,19 @@
-import { EditorBubbleItem, useEditor } from 'novel'
+import { cn } from '@front/shared/lib/utils'
+import { Button } from '@front/shared/ui/button'
 import {
-	BoldIcon,
-	ItalicIcon,
-	UnderlineIcon,
-	StrikethroughIcon,
-	CodeIcon,
-	AlignLeftIcon,
 	AlignCenterIcon,
+	AlignLeftIcon,
 	AlignRightIcon,
+	BoldIcon,
+	CodeIcon,
+	ItalicIcon,
+	StrikethroughIcon,
+	UnderlineIcon,
 	Zap
 } from 'lucide-react'
-import { Button } from '@front/shared/ui/button'
+import { EditorBubbleItem, useEditor } from 'novel'
+
 import { SelectorItem } from './nodeSelector'
-import { cn } from '@front/shared/lib/utils'
 
 export const TextButtons = () => {
 	const { editor } = useEditor()
@@ -88,12 +89,7 @@ export const TextButtons = () => {
 						item.command(editor)
 					}}
 				>
-					<Button
-						size="sm"
-						className="rounded-none"
-						onClick={e => e.preventDefault()}
-						variant="ghost"
-					>
+					<Button size="sm" className="rounded-none" onClick={e => e.preventDefault()} variant="ghost">
 						<item.icon
 							className={cn('h-4 w-4', {
 								'text-primary': item.isActive(editor)

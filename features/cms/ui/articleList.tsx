@@ -1,8 +1,7 @@
 'use client'
-import { useState } from 'react'
+
 import UserToolTip from '@front/entities/user/_ui/userToolTip'
 import { getProfileDisplayName } from '@front/entities/user/profile'
-import Link from 'next/link'
 import { Button } from '@front/shared/ui/button'
 import { Input } from '@front/shared/ui/input'
 import {
@@ -13,6 +12,8 @@ import {
 	TableHeader,
 	TableRow
 } from '@front/shared/ui/table'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@front/shared/ui/tooltip'
+import { ArticleStatus, ArticleType } from '@prisma/client'
 import {
 	Calendar,
 	ChevronDownIcon,
@@ -24,12 +25,9 @@ import {
 	PlusSquare,
 	Trash2
 } from 'lucide-react'
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger
-} from '@front/shared/ui/tooltip'
-import { ArticleStatus, ArticleType } from '@prisma/client'
+import Link from 'next/link'
+import { useState } from 'react'
+
 import { Article } from '../domain/type'
 
 type props = {
@@ -55,13 +53,9 @@ const ArticleList = ({
 
 	const sortedArticles = [...articles]
 		.filter(article => {
-			const titleMatches = article.title
-				.toLowerCase()
-				.includes(searchTerm.toLowerCase())
+			const titleMatches = article.title.toLowerCase().includes(searchTerm.toLowerCase())
 			const userNameMatches = article.user
-				? getProfileDisplayName(article.user)
-						.toLowerCase()
-						.includes(searchTerm.toLowerCase())
+				? getProfileDisplayName(article.user).toLowerCase().includes(searchTerm.toLowerCase())
 				: false
 
 			return titleMatches || userNameMatches
@@ -93,11 +87,7 @@ const ArticleList = ({
 					onChange={e => setSearchTerm(e.target.value)}
 					className="max-w-100"
 				/>
-				<Button
-					onClick={createArticle}
-					disabled={isPendingCreate}
-					variant="secondary"
-				>
+				<Button onClick={createArticle} disabled={isPendingCreate} variant="secondary">
 					<PlusCircle className="mr-2 h-4 w-4" /> Добавить {entityType.toLowerCase()}
 				</Button>
 			</div>
@@ -105,10 +95,7 @@ const ArticleList = ({
 				<Table>
 					<TableHeader>
 						<TableRow>
-							<TableHead
-								onClick={() => handleSort('title')}
-								className="cursor-pointer"
-							>
+							<TableHead onClick={() => handleSort('title')} className="cursor-pointer">
 								Название
 								{sortColumn === 'title' &&
 									(sortDirection === 'asc' ? (
@@ -117,10 +104,7 @@ const ArticleList = ({
 										<ChevronDownIcon className="inline ml-1" />
 									))}
 							</TableHead>
-							<TableHead
-								onClick={() => handleSort('status')}
-								className="cursor-pointer"
-							>
+							<TableHead onClick={() => handleSort('status')} className="cursor-pointer">
 								Статус
 								{sortColumn === 'status' &&
 									(sortDirection === 'asc' ? (
@@ -138,10 +122,7 @@ const ArticleList = ({
 										<ChevronDownIcon className="inline ml-1" />
 									))}
 							</TableHead>
-							<TableHead
-								onClick={() => handleSort('category')}
-								className="cursor-pointer"
-							>
+							<TableHead onClick={() => handleSort('category')} className="cursor-pointer">
 								Категории
 								{sortColumn === 'category' &&
 									(sortDirection === 'asc' ? (
@@ -151,10 +132,7 @@ const ArticleList = ({
 									))}
 							</TableHead>
 
-							<TableHead
-								onClick={() => handleSort('createdAt')}
-								className="cursor-pointer"
-							>
+							<TableHead onClick={() => handleSort('createdAt')} className="cursor-pointer">
 								Дата создания
 								{sortColumn === 'createdAt' &&
 									(sortDirection === 'asc' ? (
@@ -185,19 +163,13 @@ const ArticleList = ({
 										</TooltipTrigger>
 										<TooltipContent className="text-center">
 											<Pen className="mr-2 h-3 w-3 inline" /> Последнее изменение <br />
-											{article.updatedAt.toLocaleDateString()} -
-											{article.updatedAt.toLocaleTimeString()}
+											{article.updatedAt.toLocaleDateString()} -{article.updatedAt.toLocaleTimeString()}
 										</TooltipContent>
 									</Tooltip>
 								</TableCell>
 								<TableCell className="text-right">
 									{link && (
-										<Button
-											className="mr-2"
-											variant="outline"
-											title="Просмотр"
-											size="icon"
-										>
+										<Button className="mr-2" variant="outline" title="Просмотр" size="icon">
 											<Link href={link(article.id)}>
 												<Eye className="h-4 w-4" />
 											</Link>
@@ -213,8 +185,7 @@ const ArticleList = ({
 										variant="destructive"
 										onClick={() =>
 											article.status === ArticleStatus.PUBLISHED
-												? confirm('Вы уверены? Статус записи ' + article.status) &&
-													deleteArticle(article.id)
+												? confirm('Вы уверены? Статус записи ' + article.status) && deleteArticle(article.id)
 												: deleteArticle(article.id)
 										}
 										size="icon"
@@ -235,8 +206,7 @@ const ArticleList = ({
 							onClick={createArticle}
 							disabled={isPendingCreate}
 						>
-							Добавить {entityType.toLowerCase()}{' '}
-							<PlusSquare className="ml-2 h-4 w-4" />
+							Добавить {entityType.toLowerCase()} <PlusSquare className="ml-2 h-4 w-4" />
 						</Button>
 					</div>
 				)}

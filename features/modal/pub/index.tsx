@@ -1,4 +1,5 @@
 'use client'
+
 import { Button } from '@front/shared/ui/button'
 import { Checkbox } from '@front/shared/ui/checkbox'
 import { Input } from '@front/shared/ui/input'
@@ -46,21 +47,14 @@ export default function Modal({ trigger }: { trigger?: ReactNode }) {
 			title={
 				<div className="flex items-center gap-3">
 					<LogoIcon className="text-primary mx-auto w-15 h-15" />
-					<span className="font-bold text-left">
-						Заявка на консультацию и подбор оборудования
-					</span>
+					<span className="font-bold text-left">Заявка на консультацию и подбор оборудования</span>
 				</div>
 			}
 			content={
 				<form onSubmit={handleSubmit} className="space-y-6">
 					<div className="space-y-2">
 						<Label htmlFor="name">Как к Вам обращаться?</Label>
-						<Input
-							id="name"
-							value={name}
-							onChange={e => setName(e.target.value)}
-							required
-						/>
+						<Input id="name" value={name} onChange={e => setName(e.target.value)} required />
 					</div>
 					<div className="space-y-2">
 						<Label htmlFor="phone">Ваш номер телефона для связи</Label>
@@ -80,8 +74,7 @@ export default function Modal({ trigger }: { trigger?: ReactNode }) {
 							required
 						/>
 						<Label htmlFor="terms" className="text-xs text-muted-foreground">
-							Я прочитал, ознакомился и согласен с условиями Политики
-							конфиденциальности
+							Я прочитал, ознакомился и согласен с условиями Политики конфиденциальности
 						</Label>
 					</div>
 					<Button type="submit" className="w-full">

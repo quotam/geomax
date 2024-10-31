@@ -1,14 +1,14 @@
-import React from 'react'
+import { articleService } from '@front/entities/article/_service'
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger
 } from '@front/shared/ui/accordion'
-import Link from 'next/link'
-import { articleService } from '@front/entities/article/_service'
-import { ArticleType } from '@prisma/client'
 import JSONContentRenderer from '@front/shared/ui/contentRender'
+import { ArticleType } from '@prisma/client'
+import Link from 'next/link'
+import React from 'react'
 
 const Faq = async () => {
 	const data = await articleService(ArticleType.FAQ).getPreview()
@@ -22,9 +22,9 @@ const Faq = async () => {
 							Часто задаваемые вопросы FAQ{' '}
 						</h4>
 						<span className="text-muted-foreground">
-							Если вы не нашли ответа на свой вопрос или у вас возникли дополнительные
-							уточнения, не стесняйтесь обращаться в нашу службу поддержки. Мы всегда
-							готовы помочь вам и ответить на любые ваши вопросы!
+							Если вы не нашли ответа на свой вопрос или у вас возникли дополнительные уточнения, не
+							стесняйтесь обращаться в нашу службу поддержки. Мы всегда готовы помочь вам и ответить на
+							любые ваши вопросы!
 						</span>
 						<Link
 							className="bg-secondary font-medium text-secondary-foreground py-3 rounded-sm px-8 shadow-sm hover:bg-secondary/80"

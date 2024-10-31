@@ -1,6 +1,6 @@
 import NotFound from '@front/app/not-found'
 import { productService } from '@front/entities/product/_service'
-import { cn, PriceToRub } from '@front/shared/lib/utils'
+import { PriceToRub, cn } from '@front/shared/lib/utils'
 import { Badge } from '@front/shared/ui/badge'
 import { Button } from '@front/shared/ui/button'
 import { Card, CardContent } from '@front/shared/ui/card'
@@ -15,11 +15,7 @@ import JSONContentRenderer from '@front/shared/ui/contentRender'
 import AppShareModal from '@front/shared/ui/shareModal'
 import Image from 'next/image'
 
-export const generateMetadata = async ({
-	params
-}: {
-	params: { id: string }
-}) => {
+export const generateMetadata = async ({ params }: { params: { id: string } }) => {
 	const data = await productService.getOnce(params.id)
 	if (!data) return { title: 'Страница не найдена' }
 
@@ -36,11 +32,7 @@ export const generateStaticParams = async () => {
 	}))
 }
 
-export default async function ProductPages({
-	params
-}: {
-	params: { id: string }
-}) {
+export default async function ProductPages({ params }: { params: { id: string } }) {
 	const data = await productService.getOnce(params.id)
 	if (!data) return <NotFound />
 
@@ -88,10 +80,7 @@ export default async function ProductPages({
 									<span className="text-3xl font-bold">{PriceToRub(data.price)}</span>
 								</div>
 							)}
-							<Badge
-								variant={data.availability ? 'default' : 'secondary'}
-								className="mb-2"
-							>
+							<Badge variant={data.availability ? 'default' : 'secondary'} className="mb-2">
 								{data.availability ? 'В наличии' : 'Нет в наличии'}
 							</Badge>
 						</div>

@@ -15,10 +15,7 @@ export default async function EnhancedNewsSection() {
 
 					<div className="grid gap-8 md:px-4 sm:grid-cols-1 md:grid-cols-2 grid-cols-3">
 						{data.map(news => (
-							<Card
-								key={news.id}
-								className="overflow-hidden relative transition-all hover:shadow-lg"
-							>
+							<Card key={news.id} className="overflow-hidden relative transition-all hover:shadow-lg">
 								<CardContent className="p-6">
 									<h3 className="text-xl font-bold mb-2 line-clamp-2">{news.title}</h3>
 									<div className="text-muted-foreground line-clamp-3">

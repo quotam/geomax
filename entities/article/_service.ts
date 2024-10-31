@@ -2,6 +2,7 @@ import { userID } from '@front/kernel/domain/user'
 import cacheStrategy from '@front/kernel/lib/cache-strategy'
 import dbClient from '@front/shared/lib/dbClient'
 import { ArticleStatus, ArticleType } from '@prisma/client'
+
 import { ArticleUpdateDto } from './_domain/dto'
 import { articleEntity } from './_domain/entity'
 
@@ -80,9 +81,7 @@ class ArticleService {
 	}
 
 	async getCatFiltered() {
-		return await cacheStrategy.fetch([this.cacheTags.list], () =>
-			this._getCatFiltered()
-		)
+		return await cacheStrategy.fetch([this.cacheTags.list], () => this._getCatFiltered())
 	}
 
 	createCategory(title: string) {

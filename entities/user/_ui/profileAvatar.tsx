@@ -1,6 +1,7 @@
 import { cn } from '@front/shared/lib/utils'
 import { Avatar, AvatarFallback } from '@front/shared/ui/avatar'
 import Image from 'next/image'
+
 import { Profile } from '../_domain/types'
 import { getProfileLetters } from '../profile'
 
