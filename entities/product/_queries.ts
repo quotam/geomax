@@ -71,7 +71,7 @@ class ProductQueryes {
 					queryKey: [this.getAllAdmin.queryKey]
 				})
 				queryClient.resetQueries({
-					queryKey: this.getOnce(id).queryKey
+					queryKey: this.getOnceAdmin(id).queryKey
 				})
 				toast.success('Продукт обновлен')
 			}
