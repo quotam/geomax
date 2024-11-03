@@ -22,7 +22,7 @@ const ListLayout = ({ entityType }: { entityType: ArticleType }) => {
 				entityType={entityType}
 				isPendingCreate={isPendingCreate}
 				link={(id: string) =>
-					`/${entityType.toLowerCase()}/${entityType === ArticleType.FAQ && '#'}${id}`
+					`/${entityType.toLowerCase()}/${entityType === ArticleType.FAQ ? '#' : ''}${id}`
 				}
 				articles={data || []}
 				createArticle={() => create()}

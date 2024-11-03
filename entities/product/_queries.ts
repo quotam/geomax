@@ -12,6 +12,7 @@ import {
 	ProductDeleteFacturerAdminAction,
 	ProductGetAdminCategoryes,
 	ProductGetAdminFactureres,
+	ProductGetOnceAdminQuery,
 	ProductGetOnceQuery,
 	ProductUpdateAction
 } from './_action'
@@ -27,6 +28,12 @@ class ProductQueryes {
 			refetch?.()
 		}
 	})
+
+	getOnceAdmin = (id: string) =>
+		queryOptions({
+			queryKey: [serviceTag, 'getOnceAdmin', id],
+			queryFn: () => ProductGetOnceAdminQuery(id)
+		})
 
 	getOnce = (id: string) =>
 		queryOptions({

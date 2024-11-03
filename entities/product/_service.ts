@@ -141,10 +141,19 @@ class ProductService {
 		)
 	}
 
-	async getOnce(id: string) {
+	async getOnceAdmin(id: string) {
 		return await cacheStrategy.fetch([this.cacheTags.once(id)], () =>
 			dbClient.product.findUnique({
 				where: { id },
+				select: productEntity.once
+			})
+		)
+	}
+
+	async getOnce(id: string) {
+		return await cacheStrategy.fetch([this.cacheTags.once(id)], () =>
+			dbClient.product.findUnique({
+				where: { id, status: ProductStatus.PUBLISHED },
 				select: productEntity.once
 			})
 		)

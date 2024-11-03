@@ -64,6 +64,14 @@ export const ProductAdminGetAllAction = async () => {
 	throw new AccessDeniedError()
 }
 
+export const ProductGetOnceAdminQuery = async (id: string) => {
+	const session = await getAppSessionStrictServer()
+	if (productAbility(session).canViewAll()) {
+		return await productService.getOnceAdmin(id)
+	}
+	throw new AccessDeniedError()
+}
+
 export const ProductGetOnceQuery = async (id: string) => {
 	return await productService.getOnce(id)
 }

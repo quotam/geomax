@@ -10,7 +10,7 @@ import Link from 'next/link'
 import React from 'react'
 
 const EditeAdminPage = ({ params }: { params: { id: string } }) => {
-	const { data, isPending } = useQuery(productQueries.getOnce(params.id))
+	const { data, isPending } = useQuery(productQueries.getOnceAdmin(params.id))
 	if (!data && !isPending) return <NotFoundPage />
 
 	return (
