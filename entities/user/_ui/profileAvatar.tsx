@@ -18,7 +18,7 @@ export const ProfileAvatar = ({
 }) => {
 	const lat = getProfileLetters(profile)
 	return (
-		<Avatar className={cn(className, 'flex justify-center items-center')}>
+		<Avatar className={cn(className, 'flex font-bold text-primary justify-center items-center')}>
 			{profile.image ? (
 				<Image
 					width={width}
