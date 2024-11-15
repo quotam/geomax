@@ -19,7 +19,7 @@ function calculateReadingTime(text: string): string {
 
 export const generateMetadata = async ({ params }: { params: { id: string } }) => {
 	const data = await articleService('NEWS').getOne(params.id)
-	if (!data) return { title: 'Страница не найдена' }
+	if (!data) return { title: 'Страница не найдена.' }
 
 	return {
 		title: data.title,
