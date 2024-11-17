@@ -1,5 +1,6 @@
 import NotFound from '@front/app/not-found'
 import { articleService } from '@front/entities/article/_service'
+import { privateConfig } from '@front/shared/config/privateConfig'
 import { cn } from '@front/shared/lib/utils'
 import { Card, CardContent, CardFooter, CardHeader } from '@front/shared/ui/card'
 import JSONContentRenderer from '@front/shared/ui/contentRender'
@@ -11,13 +12,17 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 	const data = await articleService('OFFER').getOne(params.id)
 	if (!data || data.status !== 'PUBLISHED') return { title: 'Страница не найдена' }
 
+	const images = data.image
+		? `${privateConfig.NEXTAUTH_URL}/${data.image}`
+		: privateConfig.NEXTAUTH_URL + '/placeholder.svg'
+
 	return {
 		title: data.title,
 		keywords: data.meta,
 		twitter: {
 			card: 'summary_large_image',
 			title: data.title,
-			images: data.image || '/placeholder.svg'
+			images
 		}
 	}
 }

@@ -1,5 +1,6 @@
 import NotFound from '@front/app/not-found'
 import { productService } from '@front/entities/product/_service'
+import { privateConfig } from '@front/shared/config/privateConfig'
 import { PriceToRub, cn } from '@front/shared/lib/utils'
 import { Badge } from '@front/shared/ui/badge'
 import { Button } from '@front/shared/ui/button'
@@ -19,6 +20,10 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 	const data = await productService.getOnce(params.id)
 	if (!data || data.status !== 'PUBLISHED') return { title: 'Страница не найдена' }
 
+	const images = data.images.map((image: string) => `${privateConfig.NEXTAUTH_URL}/${image}`) || [
+		`${privateConfig.NEXTAUTH_URL}/placeholder.svg`
+	]
+
 	return {
 		title: data.title,
 		keywords: data.meta,
@@ -27,7 +32,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 			card: 'summary_large_image',
 			title: data.title,
 			description: data.mataDesc,
-			images: data.images && data.images.length > 0 ? data.images[0] : '/placeholder.svg'
+			images
 		}
 	}
 }
