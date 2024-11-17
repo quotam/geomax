@@ -3,6 +3,7 @@ import { z } from 'zod'
 const privateConfigSchema = z.object({
 	GOOGLE_CLIENT_ID: z.string(),
 	GOOGLE_SECRET: z.string(),
+	BASE_URL: z.string(),
 	ADMIN_EMAILS: z.string().optional(),
 	MAILER: z.object({
 		host: z.string(),

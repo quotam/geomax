@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 			card: 'summary_large_image',
 			title: data.title,
 			description: data.mataDesc,
-			images: data.images
+			images: data.images && data.images.length > 0 ? data.images[0] : '/placeholder.svg'
 		}
 	}
 }

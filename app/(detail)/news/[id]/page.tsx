@@ -7,13 +7,18 @@ import AppShareModal from '@front/shared/ui/shareModal'
 import { Calendar } from 'lucide-react'
 import Image from 'next/image'
 
-export const generateMetadata = async ({ params }: { params: { id: string } }) => {
+export async function generateMetadata({ params }: { params: { id: string } }) {
 	const data = await articleService('NEWS').getOne(params.id)
 	if (!data || data.status !== 'PUBLISHED') return { title: 'Страница не найдена.' }
 
 	return {
 		title: data.title,
-		keywords: data.meta
+		keywords: data.meta,
+		twitter: {
+			card: 'summary_large_image',
+			title: data.title,
+			images: data.image || '/placeholder.svg'
+		}
 	}
 }
 export const generateStaticParams = async () => {
