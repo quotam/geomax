@@ -28,6 +28,11 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 		title: data.title,
 		keywords: data.meta,
 		description: data.mataDesc,
+		openGraph: {
+			title: data.title,
+			description: data.mataDesc,
+			images
+		},
 		twitter: {
 			card: 'summary_large_image',
 			title: data.title,

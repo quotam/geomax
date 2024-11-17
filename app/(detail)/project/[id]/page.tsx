@@ -19,6 +19,10 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 	return {
 		title: data.title,
 		keywords: data.meta,
+		openGraph: {
+			title: data.title,
+			images
+		},
 		twitter: {
 			card: 'summary_large_image',
 			title: data.title,
