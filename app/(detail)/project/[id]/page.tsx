@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 	if (!data || data.status !== 'PUBLISHED') return { title: 'Страница не найдена' }
 
 	const images = data.image
-		? `${privateConfig.NEXTAUTH_URL}/${data.image}`
+		? `${privateConfig.NEXTAUTH_URL}${data.image}`
 		: privateConfig.NEXTAUTH_URL + '/placeholder.svg'
 
 	return {

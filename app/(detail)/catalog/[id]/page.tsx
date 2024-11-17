@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 	const data = await productService.getOnce(params.id)
 	if (!data || data.status !== 'PUBLISHED') return { title: 'Страница не найдена' }
 
-	const images = data.images.map((image: string) => `${privateConfig.NEXTAUTH_URL}/${image}`) || [
+	const images = data.images.map((image: string) => `${privateConfig.NEXTAUTH_URL}${image}`) || [
 		`${privateConfig.NEXTAUTH_URL}/placeholder.svg`
 	]
 
