@@ -24,7 +24,12 @@ export const UpdateProdcutSchema = z.object({
 			message: 'текст должен содержать не менее 2 символов.'
 		})
 		.optional(),
-
+	mataDesc: z
+		.string()
+		.min(2, {
+			message: 'текст должен содержать не менее 2 символов.'
+		})
+		.optional(),
 	body: z.string().min(2, {
 		message: 'текст должен содержать не менее 2 символов.'
 	})

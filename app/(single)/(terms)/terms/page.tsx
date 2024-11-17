@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 }
 
 export default function UserAgreementPage() {
-	const siteName = '{переменная}'
+	const siteName = 'agro-nav.ru'
 
 	return (
 		<main className="min-h-screen bg-gradient-to-b from-background to-secondary/20">

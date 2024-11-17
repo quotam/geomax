@@ -195,12 +195,26 @@ const UpdateProductForm = ({
 
 				<FormField
 					control={form.control}
+					name="mataDesc"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Мета description</FormLabel>
+							<FormControl>
+								<Textarea placeholder="Мета описание" onChange={field.onChange} value={field.value} />
+							</FormControl>
+							<FormDescription>Введите дополнительный текст.</FormDescription>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
 					name="meta"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Мета информация</FormLabel>
+							<FormLabel>Мета keywords</FormLabel>
 							<FormControl>
-								<Textarea placeholder="Мета" onChange={field.onChange} value={field.value} />
+								<Textarea placeholder="Мета keywords" onChange={field.onChange} value={field.value} />
 							</FormControl>
 							<FormDescription>Ключевые слова, нужные при поиске (через запятую)</FormDescription>
 							<FormMessage />

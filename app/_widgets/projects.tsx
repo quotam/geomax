@@ -60,7 +60,7 @@ const Projects = async () => {
 							</CardContent>
 							<CardFooter>
 								<Button variant="outline" className="w-full">
-									<Link href={`/projects/${project.id}`} className="flex items-center">
+									<Link href={`/project/${project.id}`} className="flex items-center">
 										Подробнее
 										<ArrowRight className="ml-2 h-4 w-4" />
 									</Link>

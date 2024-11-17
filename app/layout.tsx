@@ -1,5 +1,6 @@
 import Modal from '@front/features/modal/pub'
 import { getAppSessionServer } from '@front/kernel/lib/next-auth/getAppSessionServer'
+import ScrollToTopButton from '@front/shared/ui/scrollUpBut'
 import type { Metadata, Viewport } from 'next'
 import { Nunito } from 'next/font/google'
 
@@ -49,6 +50,7 @@ export default async function RootLayout({
 					</div>
 					<Modal />
 				</AppProvider>
+				<ScrollToTopButton />
 			</body>
 		</html>
 	)

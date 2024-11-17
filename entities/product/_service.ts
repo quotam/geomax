@@ -1,36 +1,31 @@
-import cacheStrategy from '@front/kernel/lib/cache-strategy'
 import dbClient from '@front/shared/lib/dbClient'
 import { ProductStatus } from '@prisma/client'
+import { revalidatePath } from 'next/cache'
 
 import { userEntity } from '../user/_domain/entities'
 import { UpdateProductDto } from './_domain'
 import { productEntity } from './_entity'
 
-const serviceTag = 'product'
+function invalidate(id?: string) {
+	revalidatePath('/')
+	revalidatePath('catalog/')
+	if (id) revalidatePath(`/catalog/${id}`)
+}
 
 class ProductService {
-	cacheTags = {
-		list: serviceTag,
-		once: (id: string) => id + serviceTag,
-		category: serviceTag + 'cat',
-		search: serviceTag + 'search'
-	}
-
 	getCategories() {
-		return cacheStrategy.fetch([this.cacheTags.category], () =>
-			dbClient.productCategory.findMany({
-				select: {
-					id: true,
-					title: true,
-					desc: true
-				},
-				where: {
-					Product: {
-						some: {}
-					}
+		return dbClient.productCategory.findMany({
+			select: {
+				id: true,
+				title: true,
+				desc: true
+			},
+			where: {
+				Product: {
+					some: {}
 				}
-			})
-		)
+			}
+		})
 	}
 
 	async createFacturer(title: string) {
@@ -40,8 +35,7 @@ class ProductService {
 			},
 			select: { id: true, title: true }
 		})
-
-		cacheStrategy.invalidate(this.cacheTags.search)
+		invalidate()
 		return data
 	}
 
@@ -54,8 +48,7 @@ class ProductService {
 				title: true
 			}
 		})
-
-		cacheStrategy.invalidate(this.cacheTags.search)
+		invalidate()
 		return data
 	}
 	async getAdminFactureres() {
@@ -75,8 +68,7 @@ class ProductService {
 			},
 			select: { id: true, title: true }
 		})
-		cacheStrategy.invalidate(this.cacheTags.category)
-		cacheStrategy.invalidate(this.cacheTags.search)
+		invalidate()
 		return cat
 	}
 
@@ -89,8 +81,7 @@ class ProductService {
 				title: true
 			}
 		})
-		cacheStrategy.invalidate(this.cacheTags.category)
-		cacheStrategy.invalidate(this.cacheTags.search)
+		invalidate()
 		return cat
 	}
 
@@ -112,9 +103,7 @@ class ProductService {
 			data: { ...data, categoryID: categoryId, facturerID: facturerId },
 			select: { id: true }
 		})
-		cacheStrategy.invalidate(this.cacheTags.list)
-		cacheStrategy.invalidate(this.cacheTags.category)
-		cacheStrategy.invalidate(this.cacheTags.once(id))
+		invalidate(id)
 		return id
 	}
 
@@ -131,32 +120,26 @@ class ProductService {
 		})
 	}
 	async getAll() {
-		return await cacheStrategy.fetch([this.cacheTags.list], () =>
-			dbClient.product.findMany({
-				where: {
-					status: ProductStatus.PUBLISHED
-				},
-				select: productEntity.list
-			})
-		)
+		return await dbClient.product.findMany({
+			where: {
+				status: ProductStatus.PUBLISHED
+			},
+			select: productEntity.list
+		})
 	}
 
 	async getOnceAdmin(id: string) {
-		return await cacheStrategy.fetch([this.cacheTags.once(id)], () =>
-			dbClient.product.findUnique({
-				where: { id },
-				select: productEntity.once
-			})
-		)
+		return await dbClient.product.findUnique({
+			where: { id },
+			select: productEntity.once
+		})
 	}
 
 	async getOnce(id: string) {
-		return await cacheStrategy.fetch([this.cacheTags.once(id)], () =>
-			dbClient.product.findUnique({
-				where: { id, status: ProductStatus.PUBLISHED },
-				select: productEntity.once
-			})
-		)
+		return await dbClient.product.findUnique({
+			where: { id, status: ProductStatus.PUBLISHED },
+			select: productEntity.once
+		})
 	}
 
 	async create(userID: string) {
@@ -172,8 +155,6 @@ class ProductService {
 			}
 		})
 
-		cacheStrategy.invalidate(this.cacheTags.list)
-		cacheStrategy.invalidate(this.cacheTags.once(id))
 		return id
 	}
 
@@ -183,37 +164,33 @@ class ProductService {
 				id
 			}
 		})
-		cacheStrategy.invalidate(this.cacheTags.list)
-		cacheStrategy.invalidate(this.cacheTags.search)
-		cacheStrategy.invalidate(this.cacheTags.once(id))
+		invalidate(id)
 		return id
 	}
 	async getSearchParams() {
-		return await cacheStrategy.fetch([this.cacheTags.search], async () => {
-			const categories = await dbClient.productCategory.findMany({
-				where: {
-					Product: {
-						some: {}
-					}
-				},
-				select: {
-					id: true,
-					title: true
+		const categories = await dbClient.productCategory.findMany({
+			where: {
+				Product: {
+					some: {}
 				}
-			})
-			const facturers = await dbClient.facturer.findMany({
-				where: {
-					Product: {
-						some: {}
-					}
-				},
-				select: {
-					id: true,
-					title: true
-				}
-			})
-			return { categories, facturers }
+			},
+			select: {
+				id: true,
+				title: true
+			}
 		})
+		const facturers = await dbClient.facturer.findMany({
+			where: {
+				Product: {
+					some: {}
+				}
+			},
+			select: {
+				id: true,
+				title: true
+			}
+		})
+		return { categories, facturers }
 	}
 }
 

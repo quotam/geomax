@@ -8,6 +8,7 @@ class ProductEntity {
 		availability: true,
 		price: true,
 		desc: true,
+		mataDesc: true,
 		category: {
 			select: {
 				id: true,

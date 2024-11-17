@@ -1,4 +1,5 @@
 import { ThemeSwither } from '@front/kernel/lib/next-theme/themeSwither'
+import LogoIcon from '@front/shared/ui/logoIcon'
 import { MapPin, Phone } from 'lucide-react'
 import Link from 'next/link'
 
@@ -42,7 +43,8 @@ const Footer = () => {
 				</div>
 				<div className="flex items-center gap-2 text-xs">
 					<ThemeSwither />
-					<span className="text-muted-foreground">
+					<span className="text-muted-foreground flex items-center gap-1">
+						<LogoIcon className="h-4 w-4" />
 						gpsagro.ru &copy; {new Date().getFullYear().toString()}
 					</span>
 				</div>

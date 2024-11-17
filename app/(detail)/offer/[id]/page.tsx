@@ -9,7 +9,7 @@ import Image from 'next/image'
 
 export const generateMetadata = async ({ params }: { params: { id: string } }) => {
 	const data = await articleService('OFFER').getOne(params.id)
-	if (!data) return { title: 'Страница не найдена' }
+	if (!data || data.status !== 'PUBLISHED') return { title: 'Страница не найдена' }
 
 	return {
 		title: data.title,
@@ -25,7 +25,7 @@ export const generateStaticParams = async () => {
 
 export default async function NewsPage({ params }: { params: { id: string } }) {
 	const data = await articleService('OFFER').getOne(params.id)
-	if (!data) return <NotFound />
+	if (!data || data.status !== 'PUBLISHED') return <NotFound />
 
 	return (
 		<div className="container py-12 px-4">

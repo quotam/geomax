@@ -15,13 +15,20 @@ import JSONContentRenderer from '@front/shared/ui/contentRender'
 import AppShareModal from '@front/shared/ui/shareModal'
 import Image from 'next/image'
 
-export const generateMetadata = async ({ params }: { params: { id: string } }) => {
+export async function generateMetadata({ params }: { params: { id: string } }) {
 	const data = await productService.getOnce(params.id)
-	if (!data) return { title: 'Страница не найдена' }
+	if (!data || data.status !== 'PUBLISHED') return { title: 'Страница не найдена' }
 
 	return {
 		title: data.title,
-		keywords: data.meta
+		keywords: data.meta,
+		description: data.mataDesc,
+		twitter: {
+			card: 'summary_large_image',
+			title: data.title,
+			description: data.mataDesc,
+			images: data.images
+		}
 	}
 }
 
@@ -34,7 +41,7 @@ export const generateStaticParams = async () => {
 
 export default async function ProductPages({ params }: { params: { id: string } }) {
 	const data = await productService.getOnce(params.id)
-	if (!data) return <NotFound />
+	if (!data || data.status !== 'PUBLISHED') return <NotFound />
 
 	return (
 		<main className="container py-12 px-4">

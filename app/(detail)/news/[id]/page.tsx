@@ -1,25 +1,15 @@
 import NotFound from '@front/app/not-found'
 import { articleService } from '@front/entities/article/_service'
-import { cn } from '@front/shared/lib/utils'
+import { calculateReadingTime, cn } from '@front/shared/lib/utils'
 import { Card, CardContent, CardFooter, CardHeader } from '@front/shared/ui/card'
 import JSONContentRenderer from '@front/shared/ui/contentRender'
 import AppShareModal from '@front/shared/ui/shareModal'
 import { Calendar } from 'lucide-react'
 import Image from 'next/image'
 
-function calculateReadingTime(text: string): string {
-	const wordsPerMinute = 200
-	const wordCount = text.trim().split(/\s+/).length // Подсчет слов в тексте
-	const minutes = Math.ceil(wordCount / wordsPerMinute)
-
-	if (minutes < 1) return 'меньше минуты'
-	if (minutes === 1) return '1 минута'
-	return `${minutes} минут`
-}
-
 export const generateMetadata = async ({ params }: { params: { id: string } }) => {
 	const data = await articleService('NEWS').getOne(params.id)
-	if (!data) return { title: 'Страница не найдена.' }
+	if (!data || data.status !== 'PUBLISHED') return { title: 'Страница не найдена.' }
 
 	return {
 		title: data.title,
@@ -35,7 +25,7 @@ export const generateStaticParams = async () => {
 
 export default async function NewsPage({ params }: { params: { id: string } }) {
 	const data = await articleService('NEWS').getOne(params.id)
-	if (!data) return <NotFound />
+	if (!data || data.status !== 'PUBLISHED') return <NotFound />
 
 	return (
 		<div className="container py-12 px-4">

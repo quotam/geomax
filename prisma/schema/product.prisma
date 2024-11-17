@@ -9,12 +9,13 @@ model Product {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  title  String
-  price  Float?
-  body   String
-  desc   String?
-  meta   String
-  images String[]
+  title    String
+  price    Float?
+  body     String
+  desc     String?
+  meta     String
+  mataDesc String   @default("")
+  images   String[]
 
   status       ProductStatus @default(DRAFT)
   availability Boolean       @default(true)

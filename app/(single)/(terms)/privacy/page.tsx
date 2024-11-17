@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 }
 
 export default function PrivacyPolicyPage() {
-	const siteName = '{переменная}'
+	const siteName = 'agro-nav.ru'
 
 	return (
 		<main className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
@@ -27,8 +27,8 @@ export default function PrivacyPolicyPage() {
 					</CardHeader>
 					<CardContent>
 						<p className="text-muted-foreground text-center">
-							Мы ценим вашу конфиденциальность и стремимся защитить ваши данные при использовании сайта{' '}
-							{siteName}
+							Мы ценим вашу конфиденциальность и стремимся защитить ваши данные <br /> при использовании
+							сайта {siteName}
 						</p>
 					</CardContent>
 				</Card>
