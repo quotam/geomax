@@ -3,7 +3,6 @@ import { z } from 'zod'
 const privateConfigSchema = z.object({
 	GOOGLE_CLIENT_ID: z.string(),
 	GOOGLE_SECRET: z.string(),
-	BASE_URL: z.string(),
 	ADMIN_EMAILS: z.string().optional(),
 	MAILER: z.object({
 		host: z.string(),
@@ -14,6 +13,7 @@ const privateConfigSchema = z.object({
 			pass: z.string()
 		})
 	}),
+	NEXTAUTH_URL: z.string(),
 	S3_ACCESS_KEY_ID: z.string(),
 	S3_SECRET_ACCESS_KEY: z.string(),
 	S3_IMAGES_BUCKET: z.string(),

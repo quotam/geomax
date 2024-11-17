@@ -1,8 +1,9 @@
 import { articleService } from '@front/entities/article/_service'
 import { productService } from '@front/entities/product/_service'
+import { privateConfig } from '@front/shared/config/privateConfig'
 import { MetadataRoute } from 'next'
 
-const baseUrl = 'https://agro-nav.ru'
+const baseUrl = privateConfig.NEXTAUTH_URL
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const article = await articleService('NEWS').prepareStatic()

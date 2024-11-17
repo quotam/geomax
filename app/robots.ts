@@ -1,3 +1,4 @@
+import { privateConfig } from '@front/shared/config/privateConfig'
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
@@ -9,7 +10,6 @@ export default function robots(): MetadataRoute.Robots {
 				disallow: ['/admin', '/auth', '/signup', '/verify', '/privacy', '/terms']
 			}
 		],
-		//TODO: change sitemap url
-		sitemap: 'https://geomax.by/sitemap.xml'
+		sitemap: privateConfig.NEXTAUTH_URL + '/sitemap.xml'
 	}
 }
