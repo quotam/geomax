@@ -27,7 +27,7 @@ export default function FeedbackForm() {
 		resolver: zodResolver(FeedbackSchema),
 		defaultValues: {
 			name: '',
-			phone: '',
+			email: '',
 			agreed: false
 		}
 	})
