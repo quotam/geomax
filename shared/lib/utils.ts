@@ -5,6 +5,9 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
 }
 
+export const PhoneNumber = (phone: string) =>
+	phone.replace('(', '').replace(')', '').replace('-', '').replace(/\s/g, '').replace('+7', '8')
+
 export function calculateReadingTime(text: string): string {
 	const wordsPerMinute = 200
 	const wordCount = text.trim().split(/\s+/).length // Подсчет слов в тексте

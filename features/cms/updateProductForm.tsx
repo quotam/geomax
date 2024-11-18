@@ -56,7 +56,11 @@ const UpdateProductForm = ({
 	}, [data, form])
 
 	function onSubmit(values: UpdateProductDto) {
-		mutateAsync(values)
+		mutateAsync({
+			...values,
+			categoryId: values.categoryId !== '' ? values.categoryId : null,
+			facturerId: values.facturerId !== '' ? values.facturerId : null
+		})
 	}
 
 	return (

@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
 			{
 				userAgent: '*',
 				allow: '/',
-				disallow: ['/admin', '/auth', '/signup', '/verify', '/privacy', '/terms']
+				disallow: ['/admin', 'legal/', '/auth', '/signup', '/verify', '/privacy', '/terms']
 			}
 		],
 		sitemap: privateConfig.NEXTAUTH_URL + '/sitemap.xml'

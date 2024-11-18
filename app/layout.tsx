@@ -1,4 +1,4 @@
-import Modal from '@front/features/modal/pub'
+import Modal from '@front/features/modal'
 import { getAppSessionServer } from '@front/kernel/lib/next-auth/getAppSessionServer'
 import { privateConfig } from '@front/shared/config/privateConfig'
 import MetrikaFallback from '@front/shared/ui/metrikaFallback'
@@ -68,9 +68,7 @@ export default async function RootLayout({
 				}}
 			/>
 			<body className={nunito.className}>
-				<noscript>
-					<MetrikaFallback id={privateConfig.METRIKA_ID} />
-				</noscript>
+				<MetrikaFallback id={privateConfig.METRIKA_ID} />
 				<AppProvider session={session}>
 					<div className="min-h-screen flex flex-col">
 						<Header />

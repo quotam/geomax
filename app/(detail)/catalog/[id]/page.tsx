@@ -1,9 +1,9 @@
 import NotFound from '@front/app/not-found'
 import { productService } from '@front/entities/product/_service'
+import OrderButt from '@front/features/orderButt'
 import { privateConfig } from '@front/shared/config/privateConfig'
 import { PriceToRub, cn } from '@front/shared/lib/utils'
 import { Badge } from '@front/shared/ui/badge'
-import { Button } from '@front/shared/ui/button'
 import { Card, CardContent } from '@front/shared/ui/card'
 import {
 	Carousel,
@@ -56,7 +56,7 @@ export default async function ProductPages({ params }: { params: { id: string } 
 	return (
 		<main className="container py-12 px-4">
 			<Card className="mx-auto shadow-xl max-w-[120rem]">
-				<div className="flex justify-between sm:flex-col-reverse p-6">
+				<div className="flex relative justify-between sm:flex-col-reverse p-6">
 					{data.images.length > 0 ? (
 						<Carousel className="relative w-3/5 sm:w-full rounded-lg overflow-hidden">
 							<CarouselContent>
@@ -86,9 +86,10 @@ export default async function ProductPages({ params }: { params: { id: string } 
 							alt="presentation"
 							width={800}
 							height={400}
-							className={cn('w-3/5 h-100 object-cover sm:w-full rounded-lg')}
+							className="w-3/5 h-100 object-cover sm:w-full rounded-lg"
 						/>
 					)}
+
 					<div className="w-2/5 ml-6 sm:ml-0 sm:mb-6 sm:w-full">
 						<h1 className="text-2xl font-bold mb-2">{data.title}</h1>
 						<div className="border-b pb-4 my-4">
@@ -116,7 +117,7 @@ export default async function ProductPages({ params }: { params: { id: string } 
 						</div>
 						<div className="flex justify-end gap-4 mt-6">
 							<AppShareModal />
-							<Button>Заказать</Button>
+							<OrderButt product={`${data.title} - артикул: ${data.id}`} />
 						</div>
 					</div>
 				</div>

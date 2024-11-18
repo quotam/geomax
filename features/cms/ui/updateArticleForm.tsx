@@ -50,9 +50,7 @@ const UpdateArticleForm = ({
 
 	const options = useArticleCat(entityType)
 
-	const { mutateAsync, isPending: isPendingUpdate } = useMutation(
-		articleQueries(entityType).update()
-	)
+	const { mutate, isPending: isPendingUpdate } = useMutation(articleQueries(entityType).update())
 
 	React.useEffect(() => {
 		if (data) form.reset(data)
@@ -61,7 +59,9 @@ const UpdateArticleForm = ({
 	return (
 		<Form {...form}>
 			<form
-				onSubmit={form.handleSubmit(values => mutateAsync(values))}
+				onSubmit={form.handleSubmit(values => {
+					mutate({ ...values, categoryId: values.categoryId === '' ? null : values.categoryId })
+				})}
 				className={`space-y-4 border bg-card mx-auto p-6 bg-white rounded-lg shadow-md ${isPending && 'animate-pulse bg-secondary/5'}`}
 			>
 				<h1 className="text-2xl font-bold mb-10">Редактирование {entityType.toLowerCase()}</h1>

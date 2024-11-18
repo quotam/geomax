@@ -198,9 +198,7 @@ class ArticleService {
 				status: dto.status,
 				meta: dto.meta,
 				desc: dto.desc,
-				...(dto.categoryId && {
-					articleCategoryId: dto.categoryId
-				}),
+				articleCategoryId: dto.categoryId,
 				...(dto.body && {
 					body: dto.body
 				})

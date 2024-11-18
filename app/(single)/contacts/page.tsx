@@ -1,11 +1,9 @@
+import FeedbackForm from '@front/features/feedback'
 import { Button } from '@front/shared/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@front/shared/ui/card'
-import { Input } from '@front/shared/ui/input'
-import { Textarea } from '@front/shared/ui/textarea'
 import { Mail, MapPin, Phone } from 'lucide-react'
 import { Metadata } from 'next'
 import Link from 'next/link'
-import React from 'react'
 
 export const metadata: Metadata = {
 	title: 'Контакты',
@@ -23,29 +21,7 @@ const ContactPage = () => {
 						<CardTitle>Отправьте нам сообщение</CardTitle>
 					</CardHeader>
 					<CardContent>
-						<form className="space-y-4">
-							<div>
-								<label htmlFor="name" className="block text-sm font-medium mb-1">
-									Имя
-								</label>
-								<Input id="name" placeholder="Ваше имя" />
-							</div>
-							<div>
-								<label htmlFor="email" className="block text-sm font-medium mb-1">
-									Электронная почта
-								</label>
-								<Input id="email" type="email" placeholder="ваш@почта.com" />
-							</div>
-							<div>
-								<label htmlFor="message" className="block text-sm font-medium mb-1">
-									Сообщение
-								</label>
-								<Textarea id="message" placeholder="Ваше сообщение" rows={4} />
-							</div>
-							<Button type="submit" className="w-full">
-								Отправить сообщение
-							</Button>
-						</form>
+						<FeedbackForm />
 
 						<div className="mt-20 w-2/3 space-y-4">
 							<span>
@@ -67,6 +43,10 @@ const ContactPage = () => {
 							<div className="flex items-center space-x-2">
 								<MapPin className="text-muted-foreground" />
 								<span>123 Деловая улица, Город, Страна</span>
+							</div>
+							<div className="flex items-center space-x-2">
+								<Phone className="text-muted-foreground" />
+								<span>+1 (555) 123-4567</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<Phone className="text-muted-foreground" />

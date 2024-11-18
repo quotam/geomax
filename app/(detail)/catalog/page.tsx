@@ -1,5 +1,6 @@
 import { productAbility } from '@front/entities/product/_ability'
 import { productService } from '@front/entities/product/_service'
+import OrderButt from '@front/features/orderButt'
 import SidebarFilter from '@front/features/sidebar/pub/sidebar'
 import { getAppSessionServer } from '@front/kernel/lib/next-auth/getAppSessionServer'
 import { PriceToRub } from '@front/shared/lib/utils'
@@ -7,14 +8,22 @@ import { Badge } from '@front/shared/ui/badge'
 import { Button } from '@front/shared/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@front/shared/ui/card'
 import JSONContentRenderer from '@front/shared/ui/contentRender'
-import { Settings, ShoppingCart, Tag } from 'lucide-react'
+import { Settings, Tag } from 'lucide-react'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
 	title: 'Каталог продуктов',
-	description: 'Каталог продуктов'
+	description:
+		'В нашем каталоге Вы найдете все необходимые системы точного земледелия для оснащения своей сельскохозяйственной техники системами автопилотирования',
+	keywords:
+		'каталог автопилотов, автопилоты для сельского хозяйства, купить автопилоты, купить подруливающие устройства, купить RTK, купить GNSS, купить Trimble, купить CHCNAV',
+	openGraph: {
+		title: 'Каталог продуктов',
+		description:
+			'Каталог - Купить автопилот, подруливающие устройства и RTK станции для сельского хозяйства - ООО ГЕОМАКС - GPSArgo'
+	}
 }
 
 export default async function CatalogPage({
@@ -109,9 +118,8 @@ export default async function CatalogPage({
 								<Button variant="outline">
 									<Link href={`/catalog/${product.id}`}>Подробнее</Link>
 								</Button>
-								<Button>
-									Заказать <ShoppingCart className="ml-2 h-4 w-4" />
-								</Button>
+
+								<OrderButt product={`${product.title} - артикул: ${product.id}`} />
 							</CardFooter>
 						</Card>
 					))}

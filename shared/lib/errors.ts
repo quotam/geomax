@@ -1,5 +1,12 @@
 export class SafeError extends Error {}
 
+export class SendMailError extends SafeError {
+	constructor(message = 'Send mail error..') {
+		super(message)
+		this.name = message
+	}
+}
+
 export class AuthError extends SafeError {
 	constructor(message = 'Authorization error..') {
 		super(message)
