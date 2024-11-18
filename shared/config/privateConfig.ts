@@ -4,6 +4,7 @@ const privateConfigSchema = z.object({
 	GOOGLE_CLIENT_ID: z.string(),
 	GOOGLE_SECRET: z.string(),
 	ADMIN_EMAILS: z.string().optional(),
+	METRIKA_ID: z.string(),
 	MAILER: z.object({
 		host: z.string(),
 		port: z.number(),
