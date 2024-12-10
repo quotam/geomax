@@ -14,7 +14,7 @@ const LegalPage = () => {
 			<div className="w-[90%] mx-auto">
 				<Card className="mb-8">
 					<CardHeader>
-						<CardTitle className="text-2xl">ООО &quot;Геомакс&quot; </CardTitle>
+						<CardTitle className="text-2xl">ООО &quot; Геомакс &quot; </CardTitle>
 					</CardHeader>
 					<CardContent>
 						<div className="grid gap-4">
@@ -86,7 +86,8 @@ const LegalPage = () => {
 								<span className="font-bold">Расчетный счет:</span> 40702810523320001871{' '}
 							</div>
 							<div>
-								<span className="font-bold">Банк:</span> ФИЛИАЛ "НОВОСИБИРСКИЙ" АО "АЛЬФА-БАНК"
+								<span className="font-bold">Банк:</span> ФИЛИАЛ &quot;НОВОСИБИРСКИЙ&quot; АО
+								&quot;ЛЬФА-БАНК&quot;
 							</div>
 							<div>
 								<span className="font-bold">БИК:</span>045004774
