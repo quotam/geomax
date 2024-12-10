@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@front/shared/ui/card'
-import { Building2, FileText, Globe, Mail, MapPin, Phone } from 'lucide-react'
+import { Building2, FileText, Mail, MapPin, Phone } from 'lucide-react'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -14,31 +14,27 @@ const LegalPage = () => {
 			<div className="w-[90%] mx-auto">
 				<Card className="mb-8">
 					<CardHeader>
-						<CardTitle className="text-2xl">ООО &quot; МорТех &quot; </CardTitle>
+						<CardTitle className="text-2xl">ООО &quot;Геомакс&quot; </CardTitle>
 					</CardHeader>
 					<CardContent>
 						<div className="grid gap-4">
 							<div className="flex items-center space-x-2">
 								<Building2 className="h-5 w-5 text-muted-foreground" />
-								<span>
-									Полное наименование: Общество с ограниченной ответственностью Морские Технологии
-								</span>
+								<span>Общество с ограниченной ответственностью «Геомакс»</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<MapPin className="h-5 w-5 text-muted-foreground" />
-								<span>Юридический адрес: 199406, г. Санкт-Петербург, ул. Морская, д. 15, офис 301</span>
+								<span>644034, Омская область, г. Омск, ул. Тарская 300 пом. 6</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<Phone className="h-5 w-5 text-muted-foreground" />
-								<span>Телефон: +7 (812) 123-45-67</span>
+								<span>+7 903 981 18 62</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<Mail className="h-5 w-5 text-muted-foreground" />
-								<span>Email: info@mortech.ru</span>
-							</div>
-							<div className="flex items-center space-x-2">
-								<Globe className="h-5 w-5 text-muted-foreground" />
-								<span>Сайт: www.mortech.ru</span>
+								<span>
+									<a href="mailto:info@gpsagro.ru">Info@gpsagro.ru</a>
+								</span>
 							</div>
 						</div>
 					</CardContent>
@@ -52,26 +48,29 @@ const LegalPage = () => {
 						<div className="grid gap-4">
 							<div className="flex items-center space-x-2">
 								<FileText className="h-5 w-5 text-muted-foreground" />
-								<span>ИНН: 7801234567</span>
+								<span>ИНН/КПП: 5503257876/550301001</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<FileText className="h-5 w-5 text-muted-foreground" />
-								<span>КПП: 780101001</span>
+								<span>ОГРН: 1225500004773</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<FileText className="h-5 w-5 text-muted-foreground" />
-								<span>ОГРН: 1157847123456</span>
+								<span>Руководитель: Дурманов Максим Борисович</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<FileText className="h-5 w-5 text-muted-foreground" />
-								<span>ОКПО: 12345678</span>
+								<span>Главный бухгалтер: Дурманов Максим Борисович</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<FileText className="h-5 w-5 text-muted-foreground" />
 								<span>
-									ОКВЭД: 46.69.9 (Торговля оптовая прочими машинами, приборами, аппаратурой и оборудованием
-									общепромышленного и специального назначения)
+									Лицо, уполномоченное подписывать договоры по доверенности: Дурманов Максим Борисович
 								</span>
+							</div>
+							<div className="flex items-center space-x-2">
+								<FileText className="h-5 w-5 text-muted-foreground" />
+								<span>ОКВЭД: 63.11</span>
 							</div>
 						</div>
 					</CardContent>
@@ -84,16 +83,16 @@ const LegalPage = () => {
 					<CardContent>
 						<div className="grid gap-4">
 							<div>
-								<span className="font-bold">Расчетный счет:</span> 40702810123450000001
+								<span className="font-bold">Расчетный счет:</span> 40702810523320001871{' '}
 							</div>
 							<div>
-								<span className="font-bold">Банк:</span> ПАО Сбербанк
+								<span className="font-bold">Банк:</span> ФИЛИАЛ "НОВОСИБИРСКИЙ" АО "АЛЬФА-БАНК"
 							</div>
 							<div>
-								<span className="font-bold">БИК:</span> 044030653
+								<span className="font-bold">БИК:</span>045004774
 							</div>
 							<div>
-								<span className="font-bold">Корр. счет:</span> 30101810500000000653
+								<span className="font-bold">Корр. счет:</span> 30101810600000000774
 							</div>
 						</div>
 					</CardContent>

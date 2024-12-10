@@ -67,7 +67,7 @@ export default async function ProductPages({ params }: { params: { id: string } 
 									>
 										<Image
 											src={img || '/placeholder.svg'}
-											alt="presentation"
+											alt={data.title}
 											width={800}
 											height={400}
 											className={cn('w-full h-auto rounded-lg object-cover')}
@@ -83,7 +83,7 @@ export default async function ProductPages({ params }: { params: { id: string } 
 					) : (
 						<Image
 							src="/placeholder.svg"
-							alt="presentation"
+							alt="placeholder"
 							width={800}
 							height={400}
 							className="w-3/5 h-100 object-cover sm:w-full rounded-lg"

@@ -2,6 +2,7 @@
 
 import { Button } from '@front/shared/ui/button'
 import { CommandDialog } from '@front/shared/ui/command'
+import { navigationMenuTriggerStyle } from '@front/shared/ui/navigation-menu'
 import { Sheet, SheetContent } from '@front/shared/ui/sheet'
 import { SuperModal } from '@front/shared/ui/superModal'
 import { Search } from 'lucide-react'
@@ -29,13 +30,16 @@ export function SearchLayout() {
 			<Button
 				aria-label="Open Search"
 				aria-labelledby="Open Search"
-				variant="ghost"
+				variant="secondary"
 				size="lg"
 				onClick={() => setOpen(true)}
-				className="border-[.1rem] border-foreground/10 text-secondary-foreground/70 hover:bg-secondary hover:text-secondary-foreground cursor-pointer transition-colors flex items-center justify-between rounded-lg bg-secondary/60 lg:w-38 md:w-52  w-52 py-2 text-left px-4"
+				className={
+					navigationMenuTriggerStyle() +
+					' xs:border-none border w-30 lg:w-20 xs:w-12 md:w-40 justify-between'
+				}
 			>
-				<span>Поиск..</span>
-				<Search className="h-4 w-4" />
+				<span className="xs:sr-only">Поиск..</span>
+				<Search className="h-4 w-4 lg:hidden md:flex xs:w-6" />
 			</Button>
 			<SuperModal
 				open={open}

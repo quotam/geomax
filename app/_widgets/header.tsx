@@ -14,7 +14,7 @@ import {
 	navigationMenuTriggerStyle
 } from '@front/shared/ui/navigation-menu'
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTrigger } from '@front/shared/ui/sheet'
-import { ChevronDown, Menu } from 'lucide-react'
+import { ChevronDown, HeartHandshake, Menu } from 'lucide-react'
 import Link from 'next/link'
 
 export const menuItems = [
@@ -90,14 +90,14 @@ const Header = async () => {
 	return (
 		<header className="sticky top-0 z-50 w-full pt-1 backdrop-blur supports-[backdrop-filter]:bg-transparent">
 			<div className="container flex justify-between items-center text-secondary-foreground">
-				<Logo className="md:hidden w-52 lg:w-auto" />
+				<Logo className="md:hidden w-40 lg:w-auto" />
 				<Sheet>
 					<SheetTrigger asChild>
 						<Button
 							aria-label="Меню"
 							aria-labelledby="Меню"
-							className="hidden bg-secondary/70 md:flex  border-foreground/10 hover:text-foreground border"
-							variant="ghost"
+							className="hidden h-10 w-10 bg-secondary/70 md:flex  border-foreground/10 border"
+							variant="secondary"
 							size="icon"
 						>
 							<Menu className="h-5 w-5" />
@@ -110,7 +110,7 @@ const Header = async () => {
 								<Logo />
 							</SheetClose>
 						</SheetHeader>
-						<ul className="flex flex-col gap-3">
+						<ul className="flex flex-col gap-5">
 							{items.map((item, i) => {
 								if (item.subMenu && !item.href)
 									return (
@@ -118,12 +118,16 @@ const Header = async () => {
 											<span className="text-sm text-muted-foreground  flex items-center gap-2">
 												{item.title} <ChevronDown className="h-4 w-4 inline" />
 											</span>
-											<ul className="p-2 flex flex-col gap-3">
+											<ul className="p-5 flex flex-col gap-5">
 												{item.subMenu.map((subItem, i) => (
 													<li key={i}>
-														<Link href={subItem.href} className="text-sm">
-															{subItem.title}
-														</Link>
+														<SheetClose asChild>
+															<Button variant="secondary" className="flex w-full h-13 items-center gap-2" asChild>
+																<Link href={subItem.href} className="text-sm">
+																	{subItem.title}
+																</Link>
+															</Button>
+														</SheetClose>
 													</li>
 												))}
 											</ul>
@@ -131,19 +135,21 @@ const Header = async () => {
 									)
 								return (
 									<li key={i}>
-										<Link href={item.href}>{item.title}</Link>
+										<Button variant="secondary" className="flex w-full items-center h-13 gap-2" asChild>
+											<Link href={item.href}>{item.title}</Link>
+										</Button>
 									</li>
 								)
 							})}
 						</ul>
 					</SheetContent>
 				</Sheet>
-				<NavigationMenu className="bg-secondary/70 md:hidden p-1 border-[.1rem] border-foreground/10 rounded-lg">
+				<NavigationMenu className="bg-secondary/70 p-1 border-[.1rem] border-foreground/10 rounded-lg">
 					<NavigationMenuList>
 						{items.map((item, i) => {
 							if (item.subMenu)
 								return (
-									<NavigationMenuItem key={i}>
+									<NavigationMenuItem className="md:hidden" key={i}>
 										<NavigationMenuTrigger>
 											{item.href ? (
 												<Link href={item.href} legacyBehavior passHref>
@@ -162,7 +168,7 @@ const Header = async () => {
 															href="/"
 														>
 															<LogoIcon className="text-primary h-16 w-16" />
-															<div className="mb-2 mt-4 text-lg font-medium mt-6 uppercase">Геомакс</div>
+															<div className="mb-2 text-lg font-medium mt-6 uppercase">Геомакс</div>
 															<p className="text-sm leading-tight text-muted-foreground">
 																Сельское хозяйство нового поколения.
 															</p>
@@ -172,7 +178,7 @@ const Header = async () => {
 											)}
 											<ul
 												className={cn(
-													'p-6 flex flex-wrap gap-3 justify-between items-start',
+													'p-6 flex flex-wrap gap-3 justify-between items-start md:hidden',
 													item.main ? 'flex-col' : 'flex-row'
 												)}
 											>
@@ -186,7 +192,7 @@ const Header = async () => {
 									</NavigationMenuItem>
 								)
 							return (
-								<NavigationMenuItem key={i}>
+								<NavigationMenuItem key={i} className="md:hidden">
 									<Link href={item.href} legacyBehavior passHref>
 										<NavigationMenuLink className={navigationMenuTriggerStyle()}>
 											{item.title}
@@ -195,9 +201,26 @@ const Header = async () => {
 								</NavigationMenuItem>
 							)
 						})}
+						<NavigationMenuItem>
+							<AppSearch />
+						</NavigationMenuItem>
 					</NavigationMenuList>
 				</NavigationMenu>
-				<AppSearch />
+				<div className="text-xs gap-4 border-[.1rem] border-foreground/10 hover:bg-secondary text-secondary-foreground cursor-pointer transition-colors flex items-center justify-between rounded-lg bg-secondary/60 py-1 text-left px-4">
+					<HeartHandshake strokeWidth={1.6} className="w-8 h-8" />
+					<ul className="flex flex-col font-bold">
+						<li>
+							<Link className="hover:underline" href="tel:89039811862">
+								8 <span className="text-primary">(903)</span> 981 1862
+							</Link>{' '}
+						</li>
+						<li>
+							<Link className="hover:underline" href="tel:83812208401">
+								8 <span className="text-primary">(381)</span> 220 8401
+							</Link>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</header>
 	)

@@ -1,5 +1,6 @@
 'use server'
 
+import { crmService } from '@front/kernel/lib/crm/crmService'
 import { mailService } from '@front/kernel/lib/mail/mailService'
 import { schemaParse } from '@front/kernel/lib/zod/shemaParse'
 
@@ -7,6 +8,9 @@ import { FeedbackDto, FeedbackSchema } from './dto'
 
 export const SendModalAction = async (dto: FeedbackDto) => {
 	const resulst = schemaParse(FeedbackSchema, dto)
+
+	await crmService.leadCreate(resulst)
+
 	return await mailService.FeedBack({
 		name: resulst.name,
 		subject: 'Заказ товара',

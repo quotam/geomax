@@ -5,6 +5,8 @@ import { Mail, MapPin, Phone } from 'lucide-react'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
+import MapWidget from './map'
+
 export const metadata: Metadata = {
 	title: 'Контакты',
 	description: 'Контакты'
@@ -42,19 +44,19 @@ const ContactPage = () => {
 						<CardContent className="space-y-4">
 							<div className="flex items-center space-x-2">
 								<MapPin className="text-muted-foreground" />
-								<span>123 Деловая улица, Город, Страна</span>
+								<span>644034 Омск ул. Тарская 300</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<Phone className="text-muted-foreground" />
-								<span>+1 (555) 123-4567</span>
+								<span>+7 (903) 981-18-62</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<Phone className="text-muted-foreground" />
-								<span>+1 (555) 123-4567</span>
+								<span>+7 (381) 220-84-01</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<Mail className="text-muted-foreground" />
-								<span>contact@acmecorp.com</span>
+								<a href="mailto:info@gpsagro.ru">info@gpsagro.ru</a>
 							</div>
 						</CardContent>
 					</Card>
@@ -65,7 +67,7 @@ const ContactPage = () => {
 						</CardHeader>
 						<CardContent>
 							<div className="bg-muted aspect-video flex items-center justify-center">
-								<span className="text-muted-foreground">Заглушка карты</span>
+								<MapWidget />
 							</div>
 						</CardContent>
 					</Card>

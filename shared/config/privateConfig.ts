@@ -5,6 +5,7 @@ const privateConfigSchema = z.object({
 	GOOGLE_SECRET: z.string(),
 	ADMIN_EMAILS: z.string().optional(),
 	METRIKA_ID: z.string(),
+	LEAD_CREATE_WEBHOOK: z.string(),
 	MAILER: z.object({
 		host: z.string(),
 		port: z.number(),
