@@ -111,7 +111,7 @@ export default async function CatalogPage({
 								</CardTitle>
 								<JSONContentRenderer content={product.desc} />
 								{product.price && (
-									<p className="text-2xl mt-2 font-bold text-primary">{PriceToRub(product.price)}</p>
+									<p className="text-2xl mt-2 font-bold text-primary">от: {PriceToRub(product.price)}</p>
 								)}
 							</CardContent>
 							<CardFooter className="flex justify-end gap-2">

@@ -95,7 +95,7 @@ export default async function ProductPages({ params }: { params: { id: string } 
 						<div className="border-b pb-4 my-4">
 							{data.price && (
 								<div className="flex items-baseline mb-2">
-									<span className="text-3xl font-bold">{PriceToRub(data.price)}</span>
+									<span className="text-3xl font-bold">от: {PriceToRub(data.price)}</span>
 								</div>
 							)}
 							<Badge variant={data.availability ? 'default' : 'secondary'} className="mb-2">
