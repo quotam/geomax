@@ -42,7 +42,7 @@ export default function OrderButt({ product }: { product: string }) {
 	const { mutate, isPending } = useMutation({
 		mutationFn: async (dto: FeedbackDto) => SendModalAction(dto),
 		onSuccess: () => {
-			toast.success('Сообщение отправлено')
+			toast.success('Заявка сформирована.')
 			setOpen(false)
 		},
 		onError: () => toast.error('Произошла ошибка')
