@@ -11,11 +11,11 @@ export const SendModalAction = async (dto: FeedbackDto) => {
 
 	await crmService.leadCreate(resulst)
 
-	return await mailService.FeedBack({
-		name: resulst.name,
-		subject: 'Заказ товара',
-		phone: resulst.phone,
-		email: resulst.email,
-		message: 'Заказ товара ' + resulst.product
-	})
+	//return await mailService.FeedBack({
+	//	name: resulst.name,
+	//	subject: 'Заказ товара',
+	//	phone: resulst.phone,
+	//	email: resulst.email,
+	//	message: 'Заказ товара ' + resulst.product
+	//})
 }
