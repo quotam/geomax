@@ -170,7 +170,7 @@ const Header = async () => {
 															<LogoIcon className="text-primary h-16 w-16" />
 															<div className="mb-2 text-lg font-medium mt-6 uppercase">Геомакс</div>
 															<p className="text-sm leading-tight text-muted-foreground">
-																Сельское хозяйство нового поколения.
+																Цифровые технологии на службе земледелия
 															</p>
 														</a>
 													</NavigationMenuLink>

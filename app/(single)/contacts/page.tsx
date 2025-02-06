@@ -44,11 +44,13 @@ const ContactPage = () => {
 						<CardContent className="space-y-4">
 							<div className="flex items-center space-x-2">
 								<MapPin className="text-muted-foreground" />
-								<span>644034 Омск ул. Тарская 300</span>
+								<span>г.Омск, ул 22 Партсъезда 98В второй </span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<Phone className="text-muted-foreground" />
-								<span>+7 (903) 981-18-62</span>
+								<a href="89659701899">
+									<span>+7 (965) 970-18-99</span>
+								</a>
 							</div>
 							<div className="flex items-center space-x-2">
 								<Phone className="text-muted-foreground" />

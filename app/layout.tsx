@@ -1,7 +1,6 @@
 import Modal from '@front/features/modal'
 import { getAppSessionServer } from '@front/kernel/lib/next-auth/getAppSessionServer'
 import { privateConfig } from '@front/shared/config/privateConfig'
-import MetrikaFallback from '@front/shared/ui/metrikaFallback'
 import ScrollToTopButton from '@front/shared/ui/scrollUpBut'
 import type { Metadata, Viewport } from 'next'
 import { Nunito } from 'next/font/google'
@@ -68,7 +67,6 @@ export default async function RootLayout({
 				}}
 			/>
 			<body className={nunito.className}>
-				<MetrikaFallback id={privateConfig.METRIKA_ID} />
 				<AppProvider session={session}>
 					<div className="min-h-screen flex flex-col">
 						<Header />

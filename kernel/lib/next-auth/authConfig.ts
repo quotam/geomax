@@ -60,7 +60,6 @@ export const authConfig: NextAuthOptions = {
 	pages: {
 		signIn: '/auth',
 		verifyRequest: '/auth/verify',
-		newUser: '/auth/signup',
 		error: '/auth'
 	}
 }

@@ -1,7 +1,6 @@
 'use server'
 
 import { crmService } from '@front/kernel/lib/crm/crmService'
-import { mailService } from '@front/kernel/lib/mail/mailService'
 import { schemaParse } from '@front/kernel/lib/zod/shemaParse'
 
 import { FeedbackDto, FeedbackSchema } from './dto'
