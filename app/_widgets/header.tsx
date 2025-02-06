@@ -1,5 +1,6 @@
 import { productService } from '@front/entities/product/_service'
 import AppSearch from '@front/features/search/pub/search'
+import { publicConfig } from '@front/shared/config/publicConfig'
 import { cn } from '@front/shared/lib/utils'
 import { Button } from '@front/shared/ui/button'
 import LogoIcon from '@front/shared/ui/logoIcon'
@@ -209,16 +210,13 @@ const Header = async () => {
 				<div className="text-xs gap-4 border-[.1rem] border-foreground/10 hover:bg-secondary text-secondary-foreground cursor-pointer transition-colors flex items-center justify-between rounded-lg bg-secondary/60 py-1 text-left px-4">
 					<HeartHandshake strokeWidth={1.6} className="w-8 h-8" />
 					<ul className="flex flex-col font-bold">
-						<li>
-							<Link className="hover:underline" href="tel:89039811862">
-								8 <span className="text-primary">(903)</span> 981 1862
-							</Link>{' '}
-						</li>
-						<li>
-							<Link className="hover:underline" href="tel:83812208401">
-								8 <span className="text-primary">(381)</span> 220 8401
-							</Link>
-						</li>
+						{publicConfig.contacts.phones.map(p => (
+							<li key={p.phone}>
+								<Link className="hover:underline" href={`tel:${p.phone}`}>
+									{p.label}
+								</Link>
+							</li>
+						))}
 					</ul>
 				</div>
 			</div>

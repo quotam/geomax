@@ -1,4 +1,5 @@
 import FeedbackForm from '@front/features/feedback'
+import { publicConfig } from '@front/shared/config/publicConfig'
 import { Button } from '@front/shared/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@front/shared/ui/card'
 import { Mail, MapPin, Phone } from 'lucide-react'
@@ -46,19 +47,17 @@ const ContactPage = () => {
 								<MapPin className="text-muted-foreground" />
 								<span>г.Омск, ул 22 Партсъезда 98В второй </span>
 							</div>
-							<div className="flex items-center space-x-2">
-								<Phone className="text-muted-foreground" />
-								<a href="89659701899">
-									<span>+7 (965) 970-18-99</span>
-								</a>
-							</div>
-							<div className="flex items-center space-x-2">
-								<Phone className="text-muted-foreground" />
-								<span>+7 (381) 220-84-01</span>
-							</div>
+							{publicConfig.contacts.phones.map(p => (
+								<div key={p.phone} className="flex items-center space-x-2">
+									<Phone className="text-muted-foreground" />
+									<a href={`tel:${p.phone}`}>
+										<span>{p.label}</span>
+									</a>
+								</div>
+							))}
 							<div className="flex items-center space-x-2">
 								<Mail className="text-muted-foreground" />
-								<a href="mailto:info@gpsagro.ru">info@gpsagro.ru</a>
+								<a href={`mailto:${publicConfig.contacts.email}`}>{publicConfig.contacts.email}</a>
 							</div>
 						</CardContent>
 					</Card>

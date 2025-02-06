@@ -24,7 +24,7 @@ const LegalPage = () => {
 							</div>
 							<div className="flex items-center space-x-2">
 								<MapPin className="h-5 w-5 text-muted-foreground" />
-								<span>644034, Омская область, г. Омск, ул. Тарская 300 пом. 6</span>
+								<span>644109 г. Омск, ул. Моторная 11, кв. 3</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<Phone className="h-5 w-5 text-muted-foreground" />

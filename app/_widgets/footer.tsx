@@ -1,4 +1,5 @@
 import { ThemeSwither } from '@front/kernel/lib/next-theme/themeSwither'
+import { publicConfig } from '@front/shared/config/publicConfig'
 import LogoIcon from '@front/shared/ui/logoIcon'
 import { MapPin, Phone } from 'lucide-react'
 import Link from 'next/link'
@@ -23,29 +24,26 @@ const Footer = () => {
 					<div className="flex items-center gap-4">
 						<Phone className="w-4 h-4 text-primary" />
 						<ul className="flex gap-4">
-							<li>
-								<Link className="hover:underline" href="tel:89039811862">
-									8 <span className="text-primary">(903)</span> 981 1862
-								</Link>{' '}
-							</li>
-							<li>
-								<Link className="hover:underline" href="tel:83812208401">
-									8 <span className="text-primary">(381)</span> 220 8401
-								</Link>
-							</li>
+							{publicConfig.contacts.phones.map(p => (
+								<li key={p.phone}>
+									<Link className="hover:underline" href={`tel:${p.phone}`}>
+										{p.label}
+									</Link>
+								</li>
+							))}
 						</ul>
 					</div>
 
 					<div className="flex items-center gap-4">
 						<MapPin className="w-4 h-4 text-primary" />
-						<span className="text-muted-foreground">г. Омск, ул. Тарская, 300</span>
+						<span className="text-muted-foreground">{publicConfig.contacts.address.label}</span>
 					</div>
 				</div>
 				<div className="flex items-center gap-2 text-xs">
 					<ThemeSwither />
 					<span className="text-muted-foreground flex items-center gap-1">
 						<LogoIcon className="h-4 w-4" />
-						gpsagro.ru &copy; {new Date().getFullYear().toString()}
+						agro-nav.ru &copy; {new Date().getFullYear().toString()}
 					</span>
 				</div>
 			</div>
