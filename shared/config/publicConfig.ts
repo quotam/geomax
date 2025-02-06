@@ -1,4 +1,5 @@
 export const userWithOutName = 'NoName'
+
 export const publicConfig = {
 	contacts: {
 		phones: [
