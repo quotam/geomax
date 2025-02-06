@@ -1,5 +1,5 @@
 import InfoBlock from '@front/shared/ui/infoBlock'
-import { Headphones, Headset, MapPin, MousePointer2, TagIcon } from 'lucide-react'
+import { Headset, MapPin, MousePointer2, TagIcon } from 'lucide-react'
 
 const InfoBlocks = () => {
 	return (
