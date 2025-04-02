@@ -2,6 +2,8 @@ import type { Config } from 'tailwindcss'
 import { fontFamily } from 'tailwindcss/defaultTheme'
 import plugin from 'tailwindcss/plugin'
 
+const calcFontSize = (base: number, width: number) => `calc(100vw / ${width} * ${base})`
+
 const theme = plugin(function ({ addComponents }) {
 	addComponents({
 		'.container': {
@@ -55,6 +57,11 @@ const config: Config = {
 			bold: '700'
 		},
 		fontSize: {
+			media: calcFontSize(10, 1920),
+			'media-lg': calcFontSize(10, 1366),
+			'media-md': calcFontSize(10, 768),
+			'media-sm': calcFontSize(10, 500),
+			'media-xs': calcFontSize(10, 375),
 			'0': ['0', '0'],
 			xs: ['clamp(1.2rem, 0.875vw, 1.4rem)', '2rem'],
 			base: ['clamp(1.4rem, 1vw, 1.6rem)', '2.4rem'],
