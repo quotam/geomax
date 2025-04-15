@@ -1,0 +1,5 @@
+### Ревалидация кэша 
+
+POST {{SITE_URL}}/api/d2hhdCBhcmUgdSBkbz8
+Content-Type: application/json
+X-Secret-Token: {{SECRET_TOKEN}}

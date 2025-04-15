@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["id", "title", "description", "body"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "#/definitions/cuid"
+    },
+    "metaDescription": {
+      "type": "string"
+    },
+    "avability": {
+      "type": "boolean",
+      "$comment": "Есть в наличии"
+    },
+    "metaKeywords": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "price": {
+      "type": "number",
+      "$comment": "Примерная цена продукта"
+    },
+    "description": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "facturer": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "$comment": "Group name"
+      }
+    },
+    "thumbnail": {
+      "type": "string",
+      "$comment": "url to image sizes 600x300"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "comment": "url to image."
+      }
+    },
+    "videos": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/video"
+      }
+    }
+  },
+
+  "definitions": {
+    "cuid": {
+      "type": "string",
+      "title": "cuid"
+    },
+    "video": {
+      "required": ["type", "url"],
+      "properties": {
+        "type": {
+          "oneOf": [
+            {
+              "const": "youtube"
+            },
+            {
+              "const": "tiktok"
+            },
+            {
+              "const": "rutube"
+            }
+          ]
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["id", "title"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "#/definitions/cuid"
+    },
+    "title": {
+      "type": "string"
+    },
+    "shortDescription": {
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "cuid": {
+      "type": "string",
+      "title": "cuid"
+    }
+  }
+}
