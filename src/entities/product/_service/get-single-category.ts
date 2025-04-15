@@ -2,7 +2,13 @@ import { productRepo } from '../_repo/product'
 
 export class GetSingleCategoryService {
 	async exec(slug: string) {
-		return productRepo.getSingleCategory(slug)
+		try {
+			const cat = await productRepo.getSingleCategory(slug)
+			return cat
+		} catch (error) {
+			console.error(error)
+			return null
+		}
 	}
 }
 

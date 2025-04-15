@@ -2,7 +2,13 @@ import { offerRepo } from '../_repo/offer'
 
 export class GetDetailOfferService {
 	async exec(offerSlug: string) {
-		return offerRepo.getDetailOffer(offerSlug)
+		try {
+			const offer = await offerRepo.getDetailOffer(offerSlug)
+			return offer
+		} catch (error) {
+			console.error(error)
+			return null
+		}
 	}
 }
 

@@ -35,14 +35,29 @@ class ProductRepository {
 
 	getFactureList = cache(async (): Promise<FactureEntity[]> => {
 		const products = await this.getProductList()
-		return Array.from(
-			new Set(products.flatMap(product => (product.facturer ? [product.facturer] : [])))
-		)
+		const manufacturerMap = new Map<string, FactureEntity>()
+
+		for (const product of products) {
+			if (product.facturer && !manufacturerMap.has(product.facturer.id)) {
+				manufacturerMap.set(product.facturer.id, product.facturer)
+			}
+		}
+
+		return Array.from(manufacturerMap.values())
 	})
 
 	getCategoryList = cache(async (): Promise<CategotyEntity[]> => {
 		const products = await this.getProductList()
-		return Array.from(new Set(products.flatMap(product => product.categories ?? [])))
+
+		const uniqueCategories = new Map<string, CategotyEntity>()
+
+		products.forEach(product => {
+			product.categories?.forEach(category => {
+				uniqueCategories.set(category.id, category)
+			})
+		})
+
+		return Array.from(uniqueCategories.values())
 	})
 
 	getProductList = cache(async (): Promise<ProductEntity[]> => {

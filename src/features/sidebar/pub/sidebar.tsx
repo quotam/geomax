@@ -1,6 +1,10 @@
 import Link from 'next/link'
 
-import { getProductListService } from '@front/entities/product/server'
+import {
+	getCategoriesListService,
+	getFacturerListService,
+	getProductListService
+} from '@front/entities/product/server'
 import { cn } from '@front/shared/lib/utils'
 import {
 	Accordion,
@@ -14,8 +18,8 @@ import AvabilityFilter from './filter'
 
 export default async function Sidebar() {
 	const products = await getProductListService.exec()
-	const categories = Array.from(new Set(products.flatMap(product => product.categories ?? [])))
-	const factures = Array.from(new Set(products.flatMap(product => product.facturer ?? [])))
+	const categories = await getCategoriesListService.exec()
+	const factures = await getFacturerListService.exec()
 
 	return (
 		<div className="w-full max-w-80 p-4 overflow-y-auto md:hidden">

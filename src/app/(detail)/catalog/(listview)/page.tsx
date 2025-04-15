@@ -68,12 +68,11 @@ export default async function CatalogPage({ searchParams }: { searchParams: Cata
 				<h1 className="text-3xl sm:text-2xl font-bold ">Каталог продуктов</h1>
 				<SortWidget search={params} />
 			</div>
-
-			<div className="grid sm:grid-cols-1 md:grid-cols-2  grid-cols-3 gap-6">
+			<div className="grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 gap-6 items-start">
 				{compiled.map(product => (
 					<ProductCard key={product.id} product={product} link={`/catalog/${product.slug}`} />
 				))}
-			</div>
+			</div>{' '}
 		</div>
 	)
 }

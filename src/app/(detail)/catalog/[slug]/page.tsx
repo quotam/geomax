@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import NotFoundPage from '@front/app/not-found'
 import { getDetailProductService, getProductListService } from '@front/entities/product/server'
 import { Gallery } from '@front/features/imageGallery/pub/Gallery'
 import OrderButt from '@front/features/orderButt'
@@ -93,6 +94,8 @@ export const generateStaticParams = async () => {
 export default async function ProductPage({ params }: { params: PageParams }) {
 	const { slug } = await params
 	const product = await getDetailProductService.exec(slug)
+
+	if (!product) return <NotFoundPage />
 
 	const compiled = {
 		...product,

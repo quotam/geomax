@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 
+import NotFoundPage from '@front/app/not-found'
 import { getProductListService, getSingleCategoryService } from '@front/entities/product/server'
 import { ProductCard } from '@front/features/productCard/pub/productCard'
 import { CatalogSearchParams, SortWidget } from '@front/features/sidebar/pub/filter'
@@ -41,6 +42,9 @@ export default async function CatalogCategoryPage({
 	const search = await searchParams
 
 	const data = await getSingleCategoryService.exec(slug)
+
+	if (!data) return <NotFoundPage />
+
 	const products = await getProductListService.exec()
 
 	// Фильтрация по наличию в наличии
