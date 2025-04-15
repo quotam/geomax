@@ -95,7 +95,7 @@ export default async function Sidebar() {
 			<div className="mt-12">
 				<span>Не нашли нужное или нужна помощь? Пишите или звоните — поможем с выбором! 😊 </span>
 				<Button asChild className="mt-4">
-					<Link href="/?modal#faq">Заявка на консультацию</Link>
+					<Link href="?modal#faq">Заявка на консультацию</Link>
 				</Button>
 			</div>
 		</div>
