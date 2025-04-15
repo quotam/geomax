@@ -227,10 +227,6 @@
 
 	html {
 		@apply text-media lg:text-media-lg md:text-media-md sm:text-media-sm xs:text-media-xs;
-
-		header {
-			@apply xs:before:content-['xs'] before:fixed before:text-xl before:font-bold sm:before:content-['sm'] md:before:content-['md'] lg:before:content-['lg'];
-		}
 	}
 
 	body {

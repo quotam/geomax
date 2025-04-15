@@ -111,7 +111,7 @@ const Header = async () => {
 							<span className="sr-only">Меню</span>
 						</Button>
 					</SheetTrigger>
-					<SheetContent side="left">
+					<SheetContent side="left" className="overflow-y-auto">
 						<SheetHeader className="border-b pb-5 mb-5">
 							<SheetClose asChild>
 								<Logo />
