@@ -45,7 +45,8 @@ export const searchAction = async (rawQuery: z.infer<typeof schema>) => {
 				title,
 				slug,
 				entityType
-			})),
-		products: createSearchResult(products, 'product')
+			}))
+			.slice(0, 5),
+		products: createSearchResult(products, 'product').slice(0, 5)
 	}
 }

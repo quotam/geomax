@@ -12,7 +12,7 @@ import Hero from '@front/shared/ui/heroBg'
 
 const HeroSlider = async () => {
 	const data = await getSliderContentService.exec()
-	console.log(data.imagePath)
+
 	const compileData = await Promise.all(
 		data.slids.map(async e => ({
 			...e,
