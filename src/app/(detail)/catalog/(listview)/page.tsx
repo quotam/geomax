@@ -23,13 +23,11 @@ export default async function CatalogPage({ searchParams }: { searchParams: Cata
 
 	const data = await getProductListService.exec()
 
-	// Фильтрация по наличию в наличии
 	let filteredData = [...data]
 	if (params.inStock) {
 		filteredData = filteredData.filter(product => product.avability !== false)
 	}
 
-	// Сортировка данных
 	if (params.sort) {
 		switch (params.sort) {
 			case 'PriceAsc':
@@ -54,7 +52,6 @@ export default async function CatalogPage({ searchParams }: { searchParams: Cata
 		}
 	}
 
-	// Компилируем описания только для отфильтрованных данных
 	const compiled = await Promise.all(
 		filteredData.map(async e => ({
 			...e,
@@ -68,11 +65,11 @@ export default async function CatalogPage({ searchParams }: { searchParams: Cata
 				<h1 className="text-3xl sm:text-2xl font-bold ">Каталог продуктов</h1>
 				<SortWidget search={params} />
 			</div>
-			<div className="grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 gap-6 items-start">
+			<div className="grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 gap-6">
 				{compiled.map(product => (
 					<ProductCard key={product.id} product={product} link={`/catalog/${product.slug}`} />
 				))}
-			</div>{' '}
+			</div>
 		</div>
 	)
 }

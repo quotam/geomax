@@ -76,6 +76,7 @@ export function useMdxComponent(code: string, imagePath?: string, components?: C
 							...components,
 							a: Link,
 							ModalButton: ModalButton,
+							Button: Button,
 							Image: ({ ...props }: ImageProps) => <NextImage imagePath={imagePath} {...props} />
 						}}
 					/>

@@ -8,6 +8,7 @@ import { Gallery } from '@front/features/imageGallery/pub/Gallery'
 import OrderButt from '@front/features/orderButt'
 import VideoCarousel from '@front/features/videoCarusel/pub/videoCarusel'
 import { convertVideosToOGFormat } from '@front/kernel/lib/metaHelpers'
+import { privateConfig } from '@front/shared/config/privateConfig'
 import { MdxCode } from '@front/shared/lib/mdx'
 import { compileMDX } from '@front/shared/lib/mdx/server'
 import { PriceToRub } from '@front/shared/lib/utils'
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: { params: PageParams }): Prom
 		}
 	}
 
-	const siteUrl = process.env.SITE_URL || 'http://localhost:3000'
+	const siteUrl = privateConfig.SITE_URL
 	const metaTitle = product.title
 	const metaDescription = product.metaDescription || product.description
 	const metaKeywords = product.metaKeywords || ''
@@ -59,7 +60,6 @@ export async function generateMetadata({ params }: { params: PageParams }): Prom
 					]
 				: [],
 			videos: ogVideos,
-			// Check for both undefined and null
 			...(product.price != null && {
 				product: {
 					price: {

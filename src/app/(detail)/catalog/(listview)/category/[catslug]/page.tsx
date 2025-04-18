@@ -7,7 +7,7 @@ import { CatalogSearchParams, SortWidget } from '@front/features/sidebar/pub/fil
 import { compileMDX } from '@front/shared/lib/mdx/server'
 
 type PageParams = Promise<{
-	slug: string
+	catslug: string
 }>
 
 export async function generateMetadata({
@@ -15,7 +15,7 @@ export async function generateMetadata({
 }: {
 	params: PageParams
 }): Promise<Metadata> {
-	const { slug } = await pageParams
+	const { catslug: slug } = await pageParams
 	const category = await getSingleCategoryService.exec(slug)
 
 	if (!category) {
@@ -38,7 +38,7 @@ export default async function CatalogCategoryPage({
 	params: PageParams
 	searchParams: CatalogSearchParams
 }) {
-	const { slug } = await params
+	const { catslug: slug } = await params
 	const search = await searchParams
 
 	const data = await getSingleCategoryService.exec(slug)
@@ -47,8 +47,8 @@ export default async function CatalogCategoryPage({
 
 	const products = await getProductListService.exec()
 
-	// Фильтрация по наличию в наличии
-	let filteredData = [...products]
+	let filteredData = products.map(e => e).filter(e => e.categories?.some(c => c.id === data.id))
+
 	if (search.inStock) {
 		filteredData = filteredData.filter(product => product.avability !== false)
 	}

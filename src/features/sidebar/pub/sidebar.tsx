@@ -16,6 +16,8 @@ import { Button } from '@front/shared/ui/button'
 
 import AvabilityFilter from './filter'
 
+const H2_CLASSNAME = 'text-base font-bold mb-2 uppercase'
+
 export default async function Sidebar() {
 	const products = await getProductListService.exec()
 	const categories = await getCategoriesListService.exec()
@@ -23,13 +25,13 @@ export default async function Sidebar() {
 
 	return (
 		<div className="w-full max-w-80 p-4 overflow-y-auto md:hidden">
-			<div className="mb-6">
-				<h2 className="text-lg font-bold mb-2">Фильтры</h2>
+			<div className="mb-10">
+				<h2 className={H2_CLASSNAME}>Фильтры</h2>
 				<AvabilityFilter />
 			</div>
 
-			<div className="mb-6">
-				<h2 className="text-lg font-bold mb-2">Категории</h2>
+			<div className="mb-10">
+				<h2 className={H2_CLASSNAME}>Категории</h2>
 				<Accordion type="multiple" className="w-full">
 					{categories.map(category => {
 						const items = products.filter(e => e.categories?.some(c => c.id === category.id))
@@ -63,7 +65,7 @@ export default async function Sidebar() {
 			</div>
 
 			<div>
-				<h2 className="text-lg font-bold mb-2">Производители</h2>
+				<h2 className={H2_CLASSNAME}>Производители</h2>
 				<Accordion type="multiple" className="w-full">
 					{factures.map(manufacturer => {
 						const items = products.filter(e => e.facturer?.id === manufacturer.id)

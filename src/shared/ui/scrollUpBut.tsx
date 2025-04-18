@@ -1,9 +1,9 @@
 'use client'
 
-import { ArrowUp } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { cn } from '../lib/utils'
+import { ArrowUp } from 'lucide-react'
+
 import { Button } from './button'
 
 const ScrollToTopButton = () => {
@@ -33,7 +33,10 @@ const ScrollToTopButton = () => {
 	return (
 		<div>
 			{isVisible && (
-				<Button onClick={scrollToTop} className={cn(`fixed bottom-10 right-10 p-3 animate-fadeIn`)}>
+				<Button
+					onClick={scrollToTop}
+					className="fixed bottom-10 right-10 sm:bottom-5 z-50 sm:right-5 p-3 animate-fadeIn"
+				>
 					Наверх <ArrowUp className="w-4 h-4 ml-2" />
 				</Button>
 			)}
