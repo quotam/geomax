@@ -1,9 +1,6 @@
-import Image from 'next/image'
-
 import { getSliderContentService } from '@front/entities/slider/server'
 import { MdxCode } from '@front/shared/lib/mdx'
 import { compileMDX } from '@front/shared/lib/mdx/server'
-import { Button } from '@front/shared/ui/button'
 import {
 	Carousel,
 	CarouselContent,
